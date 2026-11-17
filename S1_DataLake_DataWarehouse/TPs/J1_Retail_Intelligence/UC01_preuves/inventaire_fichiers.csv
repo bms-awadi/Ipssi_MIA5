@@ -1,0 +1,37 @@
+﻿fichier;jeu;domaine;chemin;format;taille_octets;taille_mo;lignes;colonnes;schema_attendu;lignes_mal_formees;cle_candidate;unicite_cle;colonnes_avec_vides
+customer;data;Clients;data/customer/customer.dat;"texte delimite ""|"", sans en-tete, UTF-8";13279063;12.66;99000;18;18;0;c_customer_sk;unique;14
+customer_address;data;Clients;data/customer_address/customer_address.dat;"texte delimite ""|"", sans en-tete, UTF-8";5387229;5.14;49500;13;13;0;ca_address_sk;unique;5
+customer_demographics;data;Clients;data/customer_demographics/customer_demographics.dat;"texte delimite ""|"", sans en-tete, UTF-8";77753083;74.15;1920800;9;9;0;cd_demo_sk;unique;8
+date_dim;data;Temps;data/date_dim/date_dim.dat;"texte delimite ""|"", sans en-tete, UTF-8";15395800;14.68;109573;28;28;0;d_date_sk;unique;0
+household_demographics;data;Clients;data/household_demographics/household_demographics.dat;"texte delimite ""|"", sans en-tete, UTF-8";155100;0.15;7200;5;5;0;hd_demo_sk;unique;4
+income_band;data;Clients;data/income_band/income_band.dat;"texte delimite ""|"", sans en-tete, UTF-8";327;0.0;20;3;3;0;ib_income_band_sk;unique;0
+inventory;data;Stocks;data/inventory/inventory.dat;"texte delimite ""|"", sans en-tete, UTF-8";424943678;405.26;23255100;4;4;0;inv_date_sk+inv_item_sk+inv_warehouse_sk;controle separe (sort);1
+item;data;Produits;data/item/item.dat;"texte delimite ""|"", sans en-tete, UTF-8";6799286;6.48;17820;22;22;0;i_item_sk;unique;4
+item_marketprices;data;Produits / prix concurrents;data/item_marketprices/item_marketprices.dat;"texte delimite ""|"", sans en-tete, UTF-8";4201170;4.01;89100;6;6;0;imp_sk;unique;2
+product_reviews;data;Avis produits;data/product_reviews/product_reviews.dat;"texte delimite ""|"", sans en-tete, UTF-8";56355389;53.74;89991;8;8;0;pr_review_sk;unique;1
+promotion;data;Promotions;data/promotion/promotion.dat;"texte delimite ""|"", sans en-tete, UTF-8";46396;0.04;300;19;19;0;p_promo_sk;unique;1
+reason;data;Retours (motifs);data/reason/reason.dat;"texte delimite ""|"", sans en-tete, UTF-8";3105;0.0;35;3;3;0;r_reason_sk;unique;0
+ship_mode;data;Logistique;data/ship_mode/ship_mode.dat;"texte delimite ""|"", sans en-tete, UTF-8";1220;0.0;20;6;6;0;sm_ship_mode_sk;unique;0
+store;data;Magasins;data/store/store.dat;"texte delimite ""|"", sans en-tete, UTF-8";3386;0.0;12;29;29;0;s_store_sk;unique;1
+store_returns;data;Retours magasin;data/store_returns/store_returns.dat;"texte delimite ""|"", sans en-tete, UTF-8";4337400;4.14;37902;20;20;0;sr_ticket_number+sr_item_sk;158 doublons;4
+store_sales;data;Ventes magasin;data/store_sales/store_sales.dat;"texte delimite ""|"", sans en-tete, UTF-8";92764700;88.47;667579;23;23;0;ss_ticket_number+ss_item_sk;4136 doublons;4
+time_dim;data;Temps;data/time_dim/time_dim.dat;"texte delimite ""|"", sans en-tete, UTF-8";5107780;4.87;86400;10;10;0;t_time_sk;unique;1
+warehouse;data;Entrepots;data/warehouse/warehouse.dat;"texte delimite ""|"", sans en-tete, UTF-8";584;0.0;5;14;14;0;w_warehouse_sk;unique;0
+web_clickstreams;data;Navigation web;data/web_clickstreams/web_clickstreams.dat;"texte delimite ""|"", sans en-tete, UTF-8";178722140;170.44;6770550;6;6;0;;aucune cle (evenements);3
+web_page;data;Web (pages);data/web_page/web_page.dat;"texte delimite ""|"", sans en-tete, UTF-8";8040;0.01;60;14;14;0;wp_web_page_sk;unique;1
+web_returns;data;Retours web;data/web_returns/web_returns.dat;"texte delimite ""|"", sans en-tete, UTF-8";5383513;5.13;38487;24;24;0;wr_order_number+wr_item_sk;150 doublons;8
+web_sales;data;Ventes web;data/web_sales/web_sales.dat;"texte delimite ""|"", sans en-tete, UTF-8";133790574;127.59;668052;34;34;0;ws_order_number+ws_item_sk;4076 doublons;11
+web_site;data;Web (sites);data/web_site/web_site.dat;"texte delimite ""|"", sans en-tete, UTF-8";8838;0.01;30;26;26;0;web_site_sk;unique;1
+customer;data_refresh;Clients;data_refresh/customer/customer.dat;"texte delimite ""|"", sans en-tete, UTF-8";134360;0.13;1000;18;18;0;c_customer_sk;unique;0
+customer_address;data_refresh;Clients;data_refresh/customer_address/customer_address.dat;"texte delimite ""|"", sans en-tete, UTF-8";54587;0.05;500;13;13;0;ca_address_sk;unique;0
+inventory;data_refresh;Stocks;data_refresh/inventory/inventory.dat;"texte delimite ""|"", sans en-tete, UTF-8";4292915;4.09;234900;4;4;0;inv_date_sk+inv_item_sk+inv_warehouse_sk;controle separe (sort);1
+item;data_refresh;Produits;data_refresh/item/item.dat;"texte delimite ""|"", sans en-tete, UTF-8";69173;0.07;180;22;22;0;i_item_sk;unique;1
+item_marketprices;data_refresh;Produits / prix concurrents;data_refresh/item_marketprices/item_marketprices.dat;"texte delimite ""|"", sans en-tete, UTF-8";42547;0.04;900;6;6;0;imp_sk;unique;0
+product_reviews;data_refresh;Avis produits;data_refresh/product_reviews/product_reviews.dat;"texte delimite ""|"", sans en-tete, UTF-8";573685;0.55;909;8;8;0;pr_review_sk;unique;0
+store_returns;data_refresh;Retours magasin;data_refresh/store_returns/store_returns.dat;"texte delimite ""|"", sans en-tete, UTF-8";48825;0.05;426;20;20;0;sr_ticket_number+sr_item_sk;unique;0
+store_sales;data_refresh;Ventes magasin;data_refresh/store_sales/store_sales.dat;"texte delimite ""|"", sans en-tete, UTF-8";922171;0.88;6632;23;23;0;ss_ticket_number+ss_item_sk;46 doublons;4
+web_clickstreams;data_refresh;Navigation web;data_refresh/web_clickstreams/web_clickstreams.dat;"texte delimite ""|"", sans en-tete, UTF-8";1821864;1.74;68988;6;6;0;;aucune cle (evenements);3
+web_returns;data_refresh;Retours web;data_refresh/web_returns/web_returns.dat;"texte delimite ""|"", sans en-tete, UTF-8";55952;0.05;400;24;24;0;wr_order_number+wr_item_sk;1 doublons;0
+web_sales;data_refresh;Ventes web;data_refresh/web_sales/web_sales.dat;"texte delimite ""|"", sans en-tete, UTF-8";1378425;1.31;6879;34;34;0;ws_order_number+ws_item_sk;39 doublons;9
+item_marketprices_audit.csv;data;Rapport de generation (audit);data/item_marketprices/item_marketprices_audit.csv;CSV avec en-tete (rapport, pas une table);273;0.0003;5;8;;;;;
+item_marketprices_audit.csv;data_refresh;Rapport de generation (audit);data_refresh/item_marketprices/item_marketprices_audit.csv;CSV avec en-tete (rapport, pas une table);151009;0.144;17986;8;;;;;

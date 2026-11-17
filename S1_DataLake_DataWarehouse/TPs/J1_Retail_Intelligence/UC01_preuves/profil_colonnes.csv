@@ -1,0 +1,523 @@
+﻿fichier;jeu;position;nom_deduit;type_observe;vides;pct_vides;distincts;min;max;exemple;type_sur
+customer;data;1;c_customer_sk;entier;0;0.0;99000;0;98999;0;toutes les lignes
+customer;data;2;c_customer_id;texte;0;0.0;99000;;;AAAAAAAAAAAAAAAA;toutes les lignes
+customer;data;3;c_current_cdemo_sk;entier;18;0.02;96438;18;1920796;1824793;toutes les lignes
+customer;data;4;c_current_hdemo_sk;entier;29;0.03;7200;0;7199;3203;toutes les lignes
+customer;data;5;c_current_addr_sk;entier;22;0.02;42734;0;49499;2555;toutes les lignes
+customer;data;6;c_first_shipto_date_sk;entier;25;0.03;65121;3;109570;28776;toutes les lignes
+customer;data;7;c_first_sales_date_sk;entier;18;0.02;65187;1;109568;14690;toutes les lignes
+customer;data;8;c_salutation;texte;28;0.03;6;;;Ms.;toutes les lignes
+customer;data;9;c_first_name;texte;0;0.0;4115;;;Marisa;toutes les lignes
+customer;data;10;c_last_name;texte;0;0.0;4981;;;Harrington;toutes les lignes
+customer;data;11;c_preferred_cust_flag;texte;27;0.03;2;;;N;toutes les lignes
+customer;data;12;c_birth_day;entier;18;0.02;31;1;31;17;toutes les lignes
+customer;data;13;c_birth_month;entier;25;0.03;12;1;12;4;toutes les lignes
+customer;data;14;c_birth_year;entier;30;0.03;69;1924;1992;1988;toutes les lignes
+customer;data;15;c_birth_country;texte;16;0.02;212;;;UNITED ARAB EMIRATES;toutes les lignes
+customer;data;16;c_login;texte/entier;26;0.03;87102;0;53134;RRCyuY3XfE3a;toutes les lignes
+customer;data;17;c_email_address;texte;23;0.02;98655;;;Marisa.Harrington@lawyer.com;toutes les lignes
+customer;data;18;c_last_review_date;texte/entier;28;0.03;82657;0;64893;gdMmGdU9;toutes les lignes
+customer_address;data;1;ca_address_sk;entier;0;0.0;49500;0;49499;0;toutes les lignes
+customer_address;data;2;ca_address_id;texte;0;0.0;49500;;;AAAAAAAAAAAAAAAA;toutes les lignes
+customer_address;data;3;ca_street_number;entier;14;0.03;1000;1;1000;561;toutes les lignes
+customer_address;data;4;ca_street_name;texte;10;0.02;6893;;;Cedar 12th;toutes les lignes
+customer_address;data;5;ca_street_type;texte;13;0.03;20;;;Road;toutes les lignes
+customer_address;data;6;ca_suite_number;texte/entier;23;0.05;42232;0;6222;J5jix6JEFD;toutes les lignes
+customer_address;data;7;ca_city;texte;0;0.0;986;;;Genoa;toutes les lignes
+customer_address;data;8;ca_county;texte;0;0.0;1846;;;Tuscarawas County;toutes les lignes
+customer_address;data;9;ca_state;texte;0;0.0;51;;;OH;toutes les lignes
+customer_address;data;10;ca_zip;entier;14;0.03;38050;10002;99998;64453;toutes les lignes
+customer_address;data;11;ca_country;texte;0;0.0;1;;;United States;toutes les lignes
+customer_address;data;12;ca_gmt_offset;entier;0;0.0;6;-10;-5;-5;toutes les lignes
+customer_address;data;13;ca_location_type;texte;0;0.0;3;;;single family;toutes les lignes
+customer_demographics;data;1;cd_demo_sk;entier;0;0.0;1920800;0;1920799;0;toutes les lignes
+customer_demographics;data;2;cd_gender;texte;486;0.03;2;;;F;toutes les lignes
+customer_demographics;data;3;cd_marital_status;texte;485;0.03;5;;;U;toutes les lignes
+customer_demographics;data;4;cd_education_status;texte;506;0.03;7;;;Primary;toutes les lignes
+customer_demographics;data;5;cd_purchase_estimate;entier;507;0.03;20;500;10000;6000;toutes les lignes
+customer_demographics;data;6;cd_credit_rating;texte;506;0.03;4;;;Good;toutes les lignes
+customer_demographics;data;7;cd_dep_count;entier;544;0.03;10;0;9;0;toutes les lignes
+customer_demographics;data;8;cd_dep_employed_count;entier;488;0.03;10;0;9;5;toutes les lignes
+customer_demographics;data;9;cd_dep_college_count;entier;500;0.03;10;0;9;0;toutes les lignes
+date_dim;data;1;d_date_sk;entier;0;0.0;109573;0;109572;0;toutes les lignes
+date_dim;data;2;d_date_id;texte;0;0.0;109573;;;AAAAAAAAAAAAAAAA;toutes les lignes
+date_dim;data;3;d_date;date;0;0.0;109573;1900-01-01;2199-12-31;1900-01-01;toutes les lignes
+date_dim;data;4;d_month_seq;entier;0;0.0;3600;0;3599;0;toutes les lignes
+date_dim;data;5;d_week_seq;entier;0;0.0;15654;0;15653;0;toutes les lignes
+date_dim;data;6;d_quarter_seq;entier;0;0.0;1200;0;1199;0;toutes les lignes
+date_dim;data;7;d_year;entier;0;0.0;300;1900;2199;1900;toutes les lignes
+date_dim;data;8;d_dow;entier;0;0.0;7;1;7;1;toutes les lignes
+date_dim;data;9;d_moy;entier;0;0.0;12;1;12;1;toutes les lignes
+date_dim;data;10;d_dom;entier;0;0.0;31;1;31;1;toutes les lignes
+date_dim;data;11;d_qoy;entier;0;0.0;4;1;4;1;toutes les lignes
+date_dim;data;12;d_fy_year;entier;0;0.0;300;1900;2199;1900;toutes les lignes
+date_dim;data;13;d_fy_quarter_seq;entier;0;0.0;1200;0;1199;0;toutes les lignes
+date_dim;data;14;d_fy_week_seq;entier;0;0.0;15654;0;15653;0;toutes les lignes
+date_dim;data;15;d_day_name;texte;0;0.0;7;;;Monday;toutes les lignes
+date_dim;data;16;d_quarter_name;texte;0;0.0;1200;;;1900Q1;toutes les lignes
+date_dim;data;17;d_holiday;texte;0;0.0;1;;;Y;toutes les lignes
+date_dim;data;18;d_weekend;texte;0;0.0;2;;;N;toutes les lignes
+date_dim;data;19;d_following_holiday;texte;0;0.0;2;;;N;toutes les lignes
+date_dim;data;20;d_first_dom;entier;0;0.0;56753;2415021;2488069;2448812;toutes les lignes
+date_dim;data;21;d_last_dom;entier;0;0.0;56970;2415020;2488370;2458802;toutes les lignes
+date_dim;data;22;d_same_day_ly;entier;0;0.0;56725;2414657;2487705;2472542;toutes les lignes
+date_dim;data;23;d_same_day_lq;entier;0;0.0;56778;2414930;2487977;2420941;toutes les lignes
+date_dim;data;24;d_current_day;texte;0;0.0;2;;;N;toutes les lignes
+date_dim;data;25;d_current_week;texte;0;0.0;2;;;N;toutes les lignes
+date_dim;data;26;d_current_month;texte;0;0.0;2;;;N;toutes les lignes
+date_dim;data;27;d_current_quarter;texte;0;0.0;2;;;N;toutes les lignes
+date_dim;data;28;d_current_year;texte;0;0.0;2;;;N;toutes les lignes
+household_demographics;data;1;hd_demo_sk;entier;0;0.0;7200;0;7199;0;toutes les lignes
+household_demographics;data;2;hd_income_band_sk;entier;2;0.03;20;0;19;3;toutes les lignes
+household_demographics;data;3;hd_buy_potential;texte;1;0.01;6;;;1001-5000;toutes les lignes
+household_demographics;data;4;hd_dep_count;entier;2;0.03;10;0;9;0;toutes les lignes
+household_demographics;data;5;hd_vehicle_count;entier;2;0.03;6;-1;4;0;toutes les lignes
+income_band;data;1;ib_income_band_sk;entier;0;0.0;20;0;19;0;toutes les lignes
+income_band;data;2;ib_lower_bound;entier;0;0.0;20;1;190001;1;toutes les lignes
+income_band;data;3;ib_upper_bound;entier;0;0.0;20;10000;200000;10000;toutes les lignes
+inventory;data;1;inv_date_sk;entier;0;0.0;non calcule;36890;36904;36890;200000 premieres lignes
+inventory;data;2;inv_item_sk;entier;0;0.0;non calcule;0;17999;0;200000 premieres lignes
+inventory;data;3;inv_warehouse_sk;entier;0;0.0;non calcule;0;4;0;200000 premieres lignes
+inventory;data;4;inv_quantity_on_hand;entier;5999;0.03;non calcule;0;1000;503;200000 premieres lignes
+item;data;1;i_item_sk;entier;0;0.0;17820;0;17819;0;toutes les lignes
+item;data;2;i_item_id;texte;0;0.0;17820;;;AAAAAAAAAAAAAAAA;toutes les lignes
+item;data;3;i_rec_start_date;date;0;0.0;364;2000-01-03;2000-12-31;2000-01-14;toutes les lignes
+item;data;4;i_rec_end_date;(vide);17820;100.0;0;;;;toutes les lignes
+item;data;5;i_item_desc;texte;4;0.02;17816;;;quickly even dinos beneath the frays must have to boost bold;toutes les lignes
+item;data;6;i_current_price;decimal;0;0.0;8343;0.1;99.98;72.29;toutes les lignes
+item;data;7;i_wholesale_cost;decimal;0;0.0;7598;0.02;87.35;64.96;toutes les lignes
+item;data;8;i_brand_id;entier;8;0.04;17797;1001703;10015586;3898712;toutes les lignes
+item;data;9;i_brand;texte/entier;6;0.03;17554;0;98;71TS7NSbvH1YbdiQMG6ttBHKAljiNoIRB;toutes les lignes
+item;data;10;i_class_id;entier;0;0.0;16;1;16;1;toutes les lignes
+item;data;11;i_class;texte;0;0.0;74;;;Fan Shop;toutes les lignes
+item;data;12;i_category_id;entier;0;0.0;9;1;9;9;toutes les lignes
+item;data;13;i_category;texte;0;0.0;9;;;Sports & Outdoors;toutes les lignes
+item;data;14;i_manufact_id;entier;0;0.0;1000;1;1000;995;toutes les lignes
+item;data;15;i_manufact;texte/entier;0;0.0;17481;0;82123;2VOxvrIWwlJQTSk6;toutes les lignes
+item;data;16;i_size;texte;0;0.0;7;;;small;toutes les lignes
+item;data;17;i_formulation;texte/entier;0;0.0;16916;0;80;99Ee1r6uFbZSSClAX3;toutes les lignes
+item;data;18;i_color;texte;0;0.0;92;;;dodger;toutes les lignes
+item;data;19;i_units;texte;0;0.0;21;;;Oz;toutes les lignes
+item;data;20;i_container;texte;0;0.0;1;;;Unknown;toutes les lignes
+item;data;21;i_manager_id;entier;0;0.0;100;1;100;18;toutes les lignes
+item;data;22;i_product_name;texte/entier;0;0.0;17820;2367;2367;8m9n5Q7T33DNWidoA6nWlg6ydmpA1SKOoOJLXiLVb;toutes les lignes
+item_marketprices;data;1;imp_sk;entier;0;0.0;89100;0;89099;0;toutes les lignes
+item_marketprices;data;2;imp_item_sk;entier;0;0.0;17820;0;17819;5810;toutes les lignes
+item_marketprices;data;3;imp_competitor;texte;0;0.0;1000;;;AAAAAAAAAAAAAANN;toutes les lignes
+item_marketprices;data;4;imp_competitor_price;decimal;29;0.03;9989;0.09;99.98;95.41;toutes les lignes
+item_marketprices;data;5;imp_start_date;entier;0;0.0;1808;36890;38697;36890;toutes les lignes
+item_marketprices;data;6;imp_end_date;entier;30;0.03;1794;36897;38717;38405;toutes les lignes
+product_reviews;data;1;pr_review_sk;entier;0;0.0;89991;0;89990;0;toutes les lignes
+product_reviews;data;2;pr_review_date;date;0;0.0;1827;2001-01-01;2006-01-01;2002-08-06;toutes les lignes
+product_reviews;data;3;pr_review_time;heure;0;0.0;10100;00:00:00;23:59:51;09:16:45;toutes les lignes
+product_reviews;data;4;pr_review_rating;entier;0;0.0;5;1;5;5;toutes les lignes
+product_reviews;data;5;pr_item_sk;entier;0;0.0;16742;0;17819;8612;toutes les lignes
+product_reviews;data;6;pr_user_sk;entier;0;0.0;39376;2;98998;20019;toutes les lignes
+product_reviews;data;7;pr_order_sk;entier;0;0.0;89098;0;89097;62441;toutes les lignes
+product_reviews;data;8;pr_review_content;texte;5;0.01;0;;;Catch Without Arms, Zebraskin, Tanbark, Planting Seeds, and ;toutes les lignes
+promotion;data;1;p_promo_sk;entier;0;0.0;300;0;299;0;toutes les lignes
+promotion;data;2;p_promo_id;texte;0;0.0;300;;;AAAAAAAAAAAAAAAA;toutes les lignes
+promotion;data;3;p_start_date_sk;entier;0;0.0;300;560;109404;61336;toutes les lignes
+promotion;data;4;p_end_date_sk;entier;0;0.0;299;2268;109558;94523;toutes les lignes
+promotion;data;5;p_item_sk;entier;0;0.0;298;9;17812;14434;toutes les lignes
+promotion;data;6;p_cost;decimal;0;0.0;298;12.63;995.16;445.17;toutes les lignes
+promotion;data;7;p_response_target;entier;0;0.0;1;1;1;1;toutes les lignes
+promotion;data;8;p_promo_name;texte;0;0.0;9;;;pri;toutes les lignes
+promotion;data;9;p_channel_dmail;texte;0;0.0;2;;;Y;toutes les lignes
+promotion;data;10;p_channel_email;texte;0;0.0;2;;;N;toutes les lignes
+promotion;data;11;p_channel_catalog;texte;0;0.0;2;;;N;toutes les lignes
+promotion;data;12;p_channel_tv;texte;0;0.0;2;;;N;toutes les lignes
+promotion;data;13;p_channel_radio;texte;1;0.33;2;;;N;toutes les lignes
+promotion;data;14;p_channel_press;texte;0;0.0;2;;;N;toutes les lignes
+promotion;data;15;p_channel_event;texte;0;0.0;2;;;N;toutes les lignes
+promotion;data;16;p_channel_demo;texte;0;0.0;2;;;N;toutes les lignes
+promotion;data;17;p_channel_details;texte;0;0.0;300;;;always bold warthogs despite the dugouts will play closely;toutes les lignes
+promotion;data;18;p_purpose;texte;0;0.0;1;;;Unknown;toutes les lignes
+promotion;data;19;p_discount_active;texte;0;0.0;2;;;N;toutes les lignes
+reason;data;1;r_reason_sk;entier;0;0.0;35;0;34;0;toutes les lignes
+reason;data;2;r_reason_id;texte;0;0.0;35;;;59h3KawhwK;toutes les lignes
+reason;data;3;r_reason_desc;texte;0;0.0;35;;;slyly thin dugouts on the ironically enticing realms woul;toutes les lignes
+ship_mode;data;1;sm_ship_mode_sk;entier;0;0.0;20;0;19;0;toutes les lignes
+ship_mode;data;2;sm_ship_mode_id;texte;0;0.0;20;;;GX9qF2bN;toutes les lignes
+ship_mode;data;3;sm_type;texte;0;0.0;20;;;0k0a5LMf;toutes les lignes
+ship_mode;data;4;sm_code;texte/entier;0;0.0;20;425;425;9DPuF6E;toutes les lignes
+ship_mode;data;5;sm_carrier;texte;0;0.0;20;;;JpQUqCDAHAO5n7I;toutes les lignes
+ship_mode;data;6;sm_contract;texte;0;0.0;20;;;86kCyujyVunz3EGDYCRE;toutes les lignes
+store;data;1;s_store_sk;entier;0;0.0;12;0;11;0;toutes les lignes
+store;data;2;s_store_id;texte;0;0.0;12;;;AAAAAAAAAAAAAAAA;toutes les lignes
+store;data;3;s_rec_start_date;date;0;0.0;7;2000-01-03;2000-11-01;2000-08-02;toutes les lignes
+store;data;4;s_rec_end_date;(vide);12;100.0;0;;;;toutes les lignes
+store;data;5;s_closed_date_sk;entier;0;0.0;12;6235;88139;71238;toutes les lignes
+store;data;6;s_store_name;texte;0;0.0;12;;;Forest;toutes les lignes
+store;data;7;s_number_employees;entier;0;0.0;9;213;298;217;toutes les lignes
+store;data;8;s_floor_space;entier;0;0.0;12;5777026;8891512;8891512;toutes les lignes
+store;data;9;s_hours;texte;0;0.0;3;;;8AM-12AM;toutes les lignes
+store;data;10;s_manager;texte;0;0.0;12;;;Joshua Watson;toutes les lignes
+store;data;11;s_market_id;entier;0;0.0;6;2;8;6;toutes les lignes
+store;data;12;s_geography_class;texte;0;0.0;1;;;Unknown;toutes les lignes
+store;data;13;s_market_desc;texte;0;0.0;12;;;"realms sublate quickly outside the epitaphs; evenly silent p";toutes les lignes
+store;data;14;s_market_manager;texte;0;0.0;12;;;Randy King;toutes les lignes
+store;data;15;s_division_id;entier;0;0.0;1;1;1;1;toutes les lignes
+store;data;16;s_division_name;texte;0;0.0;1;;;Unknown;toutes les lignes
+store;data;17;s_company_id;entier;0;0.0;1;1;1;1;toutes les lignes
+store;data;18;s_company_name;texte;0;0.0;1;;;Unknown;toutes les lignes
+store;data;19;s_street_number;entier;0;0.0;12;132;993;916;toutes les lignes
+store;data;20;s_street_name;texte;0;0.0;12;;;1st;toutes les lignes
+store;data;21;s_street_type;texte;0;0.0;12;;;Boulevard;toutes les lignes
+store;data;22;s_suite_number;texte;0;0.0;12;;;XF;toutes les lignes
+store;data;23;s_city;texte;0;0.0;12;;;Post Oak;toutes les lignes
+store;data;24;s_county;texte;0;0.0;12;;;Hinsdale County;toutes les lignes
+store;data;25;s_state;texte;0;0.0;8;;;CO;toutes les lignes
+store;data;26;s_zip;entier;0;0.0;12;40988;97832;47562;toutes les lignes
+store;data;27;s_country;texte;0;0.0;1;;;United States;toutes les lignes
+store;data;28;s_gmt_offset;entier;0;0.0;4;-8;-5;-7;toutes les lignes
+store;data;29;s_tax_precentage;decimal;0;0.0;7;0.03;0.1;0.06;toutes les lignes
+store_returns;data;1;sr_returned_date_sk;entier;0;0.0;2221;36914;39398;38806;toutes les lignes
+store_returns;data;2;sr_return_time_sk;entier;0;0.0;30697;2;86399;37121;toutes les lignes
+store_returns;data;3;sr_item_sk;entier;0;0.0;12551;0;17819;15784;toutes les lignes
+store_returns;data;4;sr_customer_sk;entier;0;0.0;6226;2;98991;5206;toutes les lignes
+store_returns;data;5;sr_cdemo_sk;entier;21;0.06;6277;226;1920352;647228;toutes les lignes
+store_returns;data;6;sr_hdemo_sk;entier;15;0.04;4215;1;7197;4483;toutes les lignes
+store_returns;data;7;sr_addr_sk;entier;42;0.11;5913;8;49493;7207;toutes les lignes
+store_returns;data;8;sr_store_sk;entier;0;0.0;12;0;11;5;toutes les lignes
+store_returns;data;9;sr_reason_sk;entier;11;0.03;35;0;34;17;toutes les lignes
+store_returns;data;10;sr_ticket_number;entier;0;0.0;8910;7;89096;64537;toutes les lignes
+store_returns;data;11;sr_return_quantity;entier;0;0.0;100;1;100;9;toutes les lignes
+store_returns;data;12;sr_return_amt;decimal;0;0.0;29163;0;15441.3;142.38;toutes les lignes
+store_returns;data;13;sr_return_tax;decimal;0;0.0;11617;0;1159.19;2.85;toutes les lignes
+store_returns;data;14;sr_return_amt_inc_tax;decimal;0;0.0;32024;0;16522.19;145.23;toutes les lignes
+store_returns;data;15;sr_fee;decimal;0;0.0;9712;0.5;100;39.94;toutes les lignes
+store_returns;data;16;sr_return_ship_cost;decimal;0;0.0;32264;0;15089.41;554.44;toutes les lignes
+store_returns;data;17;sr_refunded_cash;decimal;0;0.0;26912;0;12818.84;101.09;toutes les lignes
+store_returns;data;18;sr_reversed_charge;decimal;0;0.0;21080;0;7473.37;8.26;toutes les lignes
+store_returns;data;19;sr_store_credit;decimal;0;0.0;20717;0;8846.21;33.03;toutes les lignes
+store_returns;data;20;sr_net_loss;decimal;0;0.0;32952;0;15089.41;560.14;toutes les lignes
+store_sales;data;1;ss_sold_date_sk;entier;0;0.0;1808;36890;38697;36890;toutes les lignes
+store_sales;data;2;ss_sold_time_sk;entier;0;0.0;55645;0;86399;71480;toutes les lignes
+store_sales;data;3;ss_item_sk;entier;0;0.0;17820;0;17819;10001;toutes les lignes
+store_sales;data;4;ss_customer_sk;entier;0;0.0;37336;2;98999;44404;toutes les lignes
+store_sales;data;5;ss_cdemo_sk;entier;238;0.04;36953;18;1920742;493944;toutes les lignes
+store_sales;data;6;ss_hdemo_sk;entier;295;0.04;7161;0;7199;2898;toutes les lignes
+store_sales;data;7;ss_addr_sk;entier;448;0.07;26286;0;49499;44093;toutes les lignes
+store_sales;data;8;ss_store_sk;entier;0;0.0;12;0;11;10;toutes les lignes
+store_sales;data;9;ss_promo_sk;entier;158;0.02;300;0;299;294;toutes les lignes
+store_sales;data;10;ss_ticket_number;entier;0;0.0;89100;0;89099;0;toutes les lignes
+store_sales;data;11;ss_quantity;entier;0;0.0;100;1;100;31;toutes les lignes
+store_sales;data;12;ss_wholesale_cost;decimal;0;0.0;9901;1;100;18.00;toutes les lignes
+store_sales;data;13;ss_list_price;decimal;0;0.0;19524;1;200;30.78;toutes les lignes
+store_sales;data;14;ss_sales_price;decimal;0;0.0;17199;0;199.3;23.08;toutes les lignes
+store_sales;data;15;ss_ext_discount_amt;decimal;0;0.0;238093;0;18984;238.70;toutes les lignes
+store_sales;data;16;ss_ext_sales_price;decimal;0;0.0;237770;0;18745;715.48;toutes les lignes
+store_sales;data;17;ss_ext_wholesale_cost;decimal;0;0.0;264513;1;9997;558.00;toutes les lignes
+store_sales;data;18;ss_ext_list_price;decimal;0;0.0;328908;1.2;19814;954.18;toutes les lignes
+store_sales;data;19;ss_ext_tax;decimal;0;0.0;53387;0;1637.8;21.46;toutes les lignes
+store_sales;data;20;ss_coupon_amt;decimal;0;0.0;87123;0;14371.66;0.00;toutes les lignes
+store_sales;data;21;ss_net_paid;decimal;0;0.0;255026;0;18745;715.48;toutes les lignes
+store_sales;data;22;ss_net_paid_inc_tax;decimal;0;0.0;315642;0;19869.7;736.94;toutes les lignes
+store_sales;data;23;ss_net_profit;decimal;0;0.0;288874;-9866.6;9134;157.48;toutes les lignes
+time_dim;data;1;t_time_sk;entier;0;0.0;86400;0;86399;0;toutes les lignes
+time_dim;data;2;t_time_id;texte;0;0.0;86400;;;AAAAAAAAAAAAAAAA;toutes les lignes
+time_dim;data;3;t_time;entier;0;0.0;86400;0;86399;0;toutes les lignes
+time_dim;data;4;t_hour;entier;0;0.0;24;0;23;0;toutes les lignes
+time_dim;data;5;t_minute;entier;0;0.0;60;0;59;0;toutes les lignes
+time_dim;data;6;t_second;entier;0;0.0;60;0;59;0;toutes les lignes
+time_dim;data;7;t_am_pm;texte;0;0.0;2;;;AM;toutes les lignes
+time_dim;data;8;t_shift;texte;0;0.0;3;;;third;toutes les lignes
+time_dim;data;9;t_sub_shift;texte;0;0.0;4;;;night;toutes les lignes
+time_dim;data;10;t_meal_time;texte;50400;58.33;3;;;breakfast;toutes les lignes
+warehouse;data;1;w_warehouse_sk;entier;0;0.0;5;0;4;0;toutes les lignes
+warehouse;data;2;w_warehouse_id;texte;0;0.0;5;;;AAAAAAAAAAAAAAAA;toutes les lignes
+warehouse;data;3;w_warehouse_name;texte;0;0.0;5;;;somas between the ho;toutes les lignes
+warehouse;data;4;w_warehouse_sq_ft;entier;0;0.0;5;339122;845707;467315;toutes les lignes
+warehouse;data;5;w_street_number;entier;0;0.0;5;181;738;738;toutes les lignes
+warehouse;data;6;w_street_name;texte;0;0.0;5;;;Main Smith;toutes les lignes
+warehouse;data;7;w_street_type;texte;0;0.0;5;;;Cir.;toutes les lignes
+warehouse;data;8;w_suite_number;texte;0;0.0;5;;;Y5;toutes les lignes
+warehouse;data;9;w_city;texte;0;0.0;5;;;Bethel;toutes les lignes
+warehouse;data;10;w_county;texte;0;0.0;5;;;Scott County;toutes les lignes
+warehouse;data;11;w_state;texte;0;0.0;5;;;KY;toutes les lignes
+warehouse;data;12;w_zip;entier;0;0.0;5;16496;87891;52585;toutes les lignes
+warehouse;data;13;w_country;texte;0;0.0;1;;;United States;toutes les lignes
+warehouse;data;14;w_gmt_offset;entier;0;0.0;3;-7;-5;-5;toutes les lignes
+web_clickstreams;data;1;wcs_click_date_sk;entier;0;0.0;non calcule;36890;36943;36890;200000 premieres lignes
+web_clickstreams;data;2;wcs_click_time_sk;entier;0;0.0;non calcule;0;86399;71470;200000 premieres lignes
+web_clickstreams;data;3;wcs_sales_sk;entier;6102498;90.13;non calcule;0;2634;0;200000 premieres lignes
+web_clickstreams;data;4;wcs_item_sk;entier;0;0.0;non calcule;0;17819;4867;200000 premieres lignes
+web_clickstreams;data;5;wcs_web_page_sk;entier;164;0.0;non calcule;0;59;28;200000 premieres lignes
+web_clickstreams;data;6;wcs_user_sk;entier;2853461;42.15;non calcule;2;98987;85457;200000 premieres lignes
+web_page;data;1;wp_web_page_sk;entier;0;0.0;60;0;59;0;toutes les lignes
+web_page;data;2;wp_web_page_id;texte;0;0.0;60;;;AAAAAAAAAAAAAAAA;toutes les lignes
+web_page;data;3;wp_rec_start_date;date;0;0.0;36;2000-01-09;2000-12-25;2000-08-14;toutes les lignes
+web_page;data;4;wp_rec_end_date;(vide);60;100.0;0;;;;toutes les lignes
+web_page;data;5;wp_creation_date_sk;entier;0;0.0;60;764;105025;103908;toutes les lignes
+web_page;data;6;wp_access_date_sk;entier;0;0.0;60;22445;109285;107243;toutes les lignes
+web_page;data;7;wp_autogen_flag;entier;0;0.0;2;0;1;0;toutes les lignes
+web_page;data;8;wp_customer_sk;entier;0;0.0;60;534;97275;57966;toutes les lignes
+web_page;data;9;wp_url;texte;0;0.0;60;;;http://www.jDgp6pYGC9UBr6t3N4eNKgz66QFWyeH1DvSTGhtMwDGoLjyzm;toutes les lignes
+web_page;data;10;wp_type;texte;0;0.0;8;;;review;toutes les lignes
+web_page;data;11;wp_char_count;entier;0;0.0;59;610;7968;2405;toutes les lignes
+web_page;data;12;wp_link_count;entier;0;0.0;22;2;25;10;toutes les lignes
+web_page;data;13;wp_image_count;entier;0;0.0;7;1;7;7;toutes les lignes
+web_page;data;14;wp_max_ad_count;entier;0;0.0;5;0;4;3;toutes les lignes
+web_returns;data;1;wr_returned_date_sk;entier;0;0.0;2492;36915;39523;38952;toutes les lignes
+web_returns;data;2;wr_returned_time_sk;entier;0;0.0;30996;0;86393;68126;toutes les lignes
+web_returns;data;3;wr_item_sk;entier;0;0.0;12601;1;17818;9590;toutes les lignes
+web_returns;data;4;wr_refunded_customer_sk;entier;0;0.0;6437;2;98989;52948;toutes les lignes
+web_returns;data;5;wr_refunded_cdemo_sk;entier;40;0.1;6424;226;1920652;893223;toutes les lignes
+web_returns;data;6;wr_refunded_hdemo_sk;entier;19;0.05;4285;1;7196;2020;toutes les lignes
+web_returns;data;7;wr_refunded_addr_sk;entier;42;0.11;6012;9;49499;6942;toutes les lignes
+web_returns;data;8;wr_returning_customer_sk;entier;0;0.0;6437;2;98989;52948;toutes les lignes
+web_returns;data;9;wr_returning_cdemo_sk;entier;63;0.16;6422;226;1920652;893223;toutes les lignes
+web_returns;data;10;wr_returning_hdemo_sk;entier;33;0.09;4285;1;7196;2020;toutes les lignes
+web_returns;data;11;wr_returning_addr_sk;entier;57;0.15;6010;9;49499;6942;toutes les lignes
+web_returns;data;12;wr_web_page_sk;entier;10;0.03;60;0;59;32;toutes les lignes
+web_returns;data;13;wr_reason_sk;entier;7;0.02;35;0;34;13;toutes les lignes
+web_returns;data;14;wr_order_number;entier;0;0.0;8910;6;89092;63444;toutes les lignes
+web_returns;data;15;wr_return_quantity;entier;0;0.0;100;1;100;33;toutes les lignes
+web_returns;data;16;wr_return_amt;decimal;0;0.0;31025;0;21944.16;626.01;toutes les lignes
+web_returns;data;17;wr_return_tax;decimal;0;0.0;13473;0;1603.38;25.04;toutes les lignes
+web_returns;data;18;wr_return_amt_inc_tax;decimal;0;0.0;33563;0;23041.37;651.05;toutes les lignes
+web_returns;data;19;wr_fee;decimal;0;0.0;9735;0.5;100;18.74;toutes les lignes
+web_returns;data;20;wr_return_ship_cost;decimal;0;0.0;33640;0;22251.64;958.40;toutes les lignes
+web_returns;data;21;wr_refunded_cash;decimal;0;0.0;28703;0;17605.44;244.14;toutes les lignes
+web_returns;data;22;wr_reversed_charge;decimal;0;0.0;23037;0;13448.48;286.40;toutes les lignes
+web_returns;data;23;wr_account_credit;decimal;0;0.0;22664;0;14338.32;95.47;toutes les lignes
+web_returns;data;24;wr_net_loss;decimal;0;0.0;34439;0;23511.98;1008.48;toutes les lignes
+web_sales;data;1;ws_sold_date_sk;entier;0;0.0;1808;36890;38697;36890;toutes les lignes
+web_sales;data;2;ws_sold_time_sk;entier;0;0.0;55563;0;86398;26789;toutes les lignes
+web_sales;data;3;ws_ship_date_sk;entier;0;0.0;1927;36891;38817;36993;toutes les lignes
+web_sales;data;4;ws_item_sk;entier;0;0.0;17820;0;17819;794;toutes les lignes
+web_sales;data;5;ws_bill_customer_sk;entier;0;0.0;37367;2;98998;85457;toutes les lignes
+web_sales;data;6;ws_bill_cdemo_sk;entier;309;0.05;36985;18;1920793;380790;toutes les lignes
+web_sales;data;7;ws_bill_hdemo_sk;entier;288;0.04;7152;0;7199;2436;toutes les lignes
+web_sales;data;8;ws_bill_addr_sk;entier;272;0.04;26208;0;49499;42649;toutes les lignes
+web_sales;data;9;ws_ship_customer_sk;entier;0;0.0;39377;2;98998;29934;toutes les lignes
+web_sales;data;10;ws_ship_cdemo_sk;entier;492;0.07;38952;18;1920793;1583844;toutes les lignes
+web_sales;data;11;ws_ship_hdemo_sk;entier;495;0.07;7166;0;7199;5251;toutes les lignes
+web_sales;data;12;ws_ship_addr_sk;entier;398;0.06;27154;0;49499;525;toutes les lignes
+web_sales;data;13;ws_web_page_sk;entier;164;0.02;60;0;59;2;toutes les lignes
+web_sales;data;14;ws_web_site_sk;entier;154;0.02;30;0;29;14;toutes les lignes
+web_sales;data;15;ws_ship_mode_sk;entier;170;0.03;20;0;19;1;toutes les lignes
+web_sales;data;16;ws_warehouse_sk;entier;158;0.02;5;0;4;3;toutes les lignes
+web_sales;data;17;ws_promo_sk;entier;121;0.02;300;0;299;120;toutes les lignes
+web_sales;data;18;ws_order_number;entier;0;0.0;89100;0;89099;0;toutes les lignes
+web_sales;data;19;ws_quantity;entier;0;0.0;100;1;100;93;toutes les lignes
+web_sales;data;20;ws_wholesale_cost;decimal;0;0.0;9901;1;100;32.62;toutes les lignes
+web_sales;data;21;ws_list_price;decimal;0;0.0;28932;1.03;299.82;81.22;toutes les lignes
+web_sales;data;22;ws_sales_price;decimal;0;0.0;24334;0;299.67;59.29;toutes les lignes
+web_sales;data;23;ws_ext_discount_amt;decimal;0;0.0;273369;0;29682.18;2039.49;toutes les lignes
+web_sales;data;24;ws_ext_sales_price;decimal;0;0.0;272379;0;28808.01;5513.97;toutes les lignes
+web_sales;data;25;ws_ext_wholesale_cost;decimal;0;0.0;264108;1.01;9998;3033.66;toutes les lignes
+web_sales;data;26;ws_ext_list_price;decimal;0;0.0;371439;1.28;29858;7553.46;toutes les lignes
+web_sales;data;27;ws_ext_tax;decimal;0;0.0;65792;0;2421.72;330.84;toutes les lignes
+web_sales;data;28;ws_coupon_amt;decimal;0;0.0;93607;0;27569.64;0.00;toutes les lignes
+web_sales;data;29;ws_ext_ship_cost;decimal;0;0.0;277674;0;14216.37;1661.76;toutes les lignes
+web_sales;data;30;ws_net_paid;decimal;0;0.0;289544;0;28808.01;5513.97;toutes les lignes
+web_sales;data;31;ws_net_paid_inc_tax;decimal;0;0.0;351954;0;30248.41;5844.81;toutes les lignes
+web_sales;data;32;ws_net_paid_inc_ship;decimal;0;0.0;436619;0;38975.5;7175.73;toutes les lignes
+web_sales;data;33;ws_net_paid_inc_ship_tax;decimal;0;0.0;441575;0;41246.72;7506.57;toutes les lignes
+web_sales;data;34;ws_net_profit;decimal;0;0.0;322066;-9894.06;18977.31;2480.31;toutes les lignes
+web_site;data;1;web_site_sk;entier;0;0.0;30;0;29;0;toutes les lignes
+web_site;data;2;web_site_id;texte;0;0.0;30;;;AAAAAAAAAAAAAAAA;toutes les lignes
+web_site;data;3;web_rec_start_date;date;0;0.0;18;2000-04-09;2003-11-17;2002-01-03;toutes les lignes
+web_site;data;4;web_rec_end_date;(vide);30;100.0;0;;;;toutes les lignes
+web_site;data;5;web_name;texte;0;0.0;5;;;site_0;toutes les lignes
+web_site;data;6;web_open_date_sk;entier;0;0.0;30;132;108774;12694;toutes les lignes
+web_site;data;7;web_close_date_sk;entier;0;0.0;30;14930;109009;77464;toutes les lignes
+web_site;data;8;web_class;texte;0;0.0;1;;;Unknown;toutes les lignes
+web_site;data;9;web_manager;texte;0;0.0;30;;;Robert Stewart;toutes les lignes
+web_site;data;10;web_mkt_id;entier;0;0.0;6;1;6;1;toutes les lignes
+web_site;data;11;web_mkt_class;texte;0;0.0;30;;;even ruthless multipliers should have to mai;toutes les lignes
+web_site;data;12;web_mkt_desc;texte;0;0.0;30;;;ruthless bold notornis doubt: closely quiet hockey players b;toutes les lignes
+web_site;data;13;web_market_manager;texte;0;0.0;30;;;James Feliciano;toutes les lignes
+web_site;data;14;web_company_id;entier;0;0.0;6;1;6;3;toutes les lignes
+web_site;data;15;web_company_name;texte;0;0.0;9;;;bar;toutes les lignes
+web_site;data;16;web_street_number;entier;0;0.0;29;17;968;625;toutes les lignes
+web_site;data;17;web_street_name;texte;0;0.0;28;;;1st;toutes les lignes
+web_site;data;18;web_street_type;texte;0;0.0;15;;;Lane;toutes les lignes
+web_site;data;19;web_suite_number;texte;0;0.0;30;;;FGa6;toutes les lignes
+web_site;data;20;web_city;texte;0;0.0;30;;;Bolton;toutes les lignes
+web_site;data;21;web_county;texte;0;0.0;28;;;Cumberland County;toutes les lignes
+web_site;data;22;web_state;texte;0;0.0;19;;;NJ;toutes les lignes
+web_site;data;23;web_zip;entier;0;0.0;30;12092;96546;68675;toutes les lignes
+web_site;data;24;web_country;texte;0;0.0;1;;;United States;toutes les lignes
+web_site;data;25;web_gmt_offset;entier;0;0.0;3;-7;-5;-5;toutes les lignes
+web_site;data;26;web_tax_percentage;decimal;0;0.0;10;0.01;0.11;0.04;toutes les lignes
+customer;data_refresh;1;c_customer_sk;entier;0;0.0;1000;99000;99999;99000;toutes les lignes
+customer;data_refresh;2;c_customer_id;texte;0;0.0;1000;;;AAAAAAAAAAAAFQLS;toutes les lignes
+customer;data_refresh;3;c_current_cdemo_sk;entier;0;0.0;1000;7171;1919420;1743789;toutes les lignes
+customer;data_refresh;4;c_current_hdemo_sk;entier;0;0.0;943;13;7182;2912;toutes les lignes
+customer;data_refresh;5;c_current_addr_sk;entier;0;0.0;988;23;49997;15817;toutes les lignes
+customer;data_refresh;6;c_first_shipto_date_sk;entier;0;0.0;999;300;109511;12124;toutes les lignes
+customer;data_refresh;7;c_first_sales_date_sk;entier;0;0.0;996;119;109471;46820;toutes les lignes
+customer;data_refresh;8;c_salutation;texte;0;0.0;6;;;Mr.;toutes les lignes
+customer;data_refresh;9;c_first_name;texte;0;0.0;503;;;Michael;toutes les lignes
+customer;data_refresh;10;c_last_name;texte;0;0.0;650;;;Broyles;toutes les lignes
+customer;data_refresh;11;c_preferred_cust_flag;texte;0;0.0;2;;;N;toutes les lignes
+customer;data_refresh;12;c_birth_day;entier;0;0.0;31;1;31;30;toutes les lignes
+customer;data_refresh;13;c_birth_month;entier;0;0.0;12;1;12;8;toutes les lignes
+customer;data_refresh;14;c_birth_year;entier;0;0.0;69;1924;1992;1961;toutes les lignes
+customer;data_refresh;15;c_birth_country;texte;0;0.0;212;;;LATVIA;toutes les lignes
+customer;data_refresh;16;c_login;texte/entier;0;0.0;955;1;87;vtJOqYQQJ7;toutes les lignes
+customer;data_refresh;17;c_email_address;texte;0;0.0;1000;;;Michael.Broyles@peacemail.com;toutes les lignes
+customer;data_refresh;18;c_last_review_date;texte/entier;0;0.0;954;0;82;0ka0ymX;toutes les lignes
+customer_address;data_refresh;1;ca_address_sk;entier;0;0.0;500;49500;49999;49500;toutes les lignes
+customer_address;data_refresh;2;ca_address_id;texte;0;0.0;500;;;AAAAAAAAAAAACVFW;toutes les lignes
+customer_address;data_refresh;3;ca_street_number;entier;0;0.0;397;1;1000;575;toutes les lignes
+customer_address;data_refresh;4;ca_street_name;texte;0;0.0;325;;;Pine;toutes les lignes
+customer_address;data_refresh;5;ca_street_type;texte;0;0.0;20;;;Pkwy;toutes les lignes
+customer_address;data_refresh;6;ca_suite_number;texte/entier;0;0.0;482;0;6;JcbRPPJch;toutes les lignes
+customer_address;data_refresh;7;ca_city;texte;0;0.0;368;;;Decatur;toutes les lignes
+customer_address;data_refresh;8;ca_county;texte;0;0.0;384;;;Meade County;toutes les lignes
+customer_address;data_refresh;9;ca_state;texte;0;0.0;48;;;KS;toutes les lignes
+customer_address;data_refresh;10;ca_zip;entier;0;0.0;499;10072;99759;70585;toutes les lignes
+customer_address;data_refresh;11;ca_country;texte;0;0.0;1;;;United States;toutes les lignes
+customer_address;data_refresh;12;ca_gmt_offset;entier;0;0.0;6;-10;-5;-6;toutes les lignes
+customer_address;data_refresh;13;ca_location_type;texte;0;0.0;3;;;condo;toutes les lignes
+inventory;data_refresh;1;inv_date_sk;entier;0;0.0;non calcule;38696;38710;38696;200000 premieres lignes
+inventory;data_refresh;2;inv_item_sk;entier;0;0.0;non calcule;0;17999;17100;200000 premieres lignes
+inventory;data_refresh;3;inv_warehouse_sk;entier;0;0.0;non calcule;0;4;1;200000 premieres lignes
+inventory;data_refresh;4;inv_quantity_on_hand;entier;63;0.03;non calcule;0;1000;24;200000 premieres lignes
+item;data_refresh;1;i_item_sk;entier;0;0.0;180;17820;17999;17820;toutes les lignes
+item;data_refresh;2;i_item_id;texte;0;0.0;180;;;AAAAAAAAAAAABAJK;toutes les lignes
+item;data_refresh;3;i_rec_start_date;date;0;0.0;142;2000-01-05;2000-12-31;2000-07-09;toutes les lignes
+item;data_refresh;4;i_rec_end_date;(vide);180;100.0;0;;;;toutes les lignes
+item;data_refresh;5;i_item_desc;texte;0;0.0;180;;;regular somas past the fluffy braids engage upon the thin id;toutes les lignes
+item;data_refresh;6;i_current_price;decimal;0;0.0;178;0.19;99.85;74.53;toutes les lignes
+item;data_refresh;7;i_wholesale_cost;decimal;0;0.0;178;0.21;87.29;47.52;toutes les lignes
+item;data_refresh;8;i_brand_id;entier;0;0.0;180;1015113;9959565;3413837;toutes les lignes
+item;data_refresh;9;i_brand;texte/entier;0;0.0;180;1;3;FAmZ5OQp19b6YnHEIGowTI;toutes les lignes
+item;data_refresh;10;i_class_id;entier;0;0.0;15;1;15;10;toutes les lignes
+item;data_refresh;11;i_class;texte;0;0.0;38;;;Country;toutes les lignes
+item;data_refresh;12;i_category_id;entier;0;0.0;9;1;9;2;toutes les lignes
+item;data_refresh;13;i_category;texte;0;0.0;9;;;Music;toutes les lignes
+item;data_refresh;14;i_manufact_id;entier;0;0.0;158;2;1000;91;toutes les lignes
+item;data_refresh;15;i_manufact;texte;0;0.0;180;;;7aJWxd7IChKqW4JLUki5m0wrvRn8YHTM0xZNoWu;toutes les lignes
+item;data_refresh;16;i_size;texte;0;0.0;7;;;extra large;toutes les lignes
+item;data_refresh;17;i_formulation;texte/entier;0;0.0;179;70;70;UbhvWihafwtRfWepd;toutes les lignes
+item;data_refresh;18;i_color;texte;0;0.0;83;;;cyan;toutes les lignes
+item;data_refresh;19;i_units;texte;0;0.0;21;;;Oz;toutes les lignes
+item;data_refresh;20;i_container;texte;0;0.0;1;;;Unknown;toutes les lignes
+item;data_refresh;21;i_manager_id;entier;0;0.0;84;1;100;57;toutes les lignes
+item;data_refresh;22;i_product_name;texte;0;0.0;180;;;8MJdS2aYdSydZ9Zw6llsXatytb6AUrj42owNPSpbbr0ARL;toutes les lignes
+item_marketprices;data_refresh;1;imp_sk;entier;0;0.0;900;89100;89999;89100;toutes les lignes
+item_marketprices;data_refresh;2;imp_item_sk;entier;0;0.0;882;7;17997;9103;toutes les lignes
+item_marketprices;data_refresh;3;imp_competitor;texte;0;0.0;583;;;AAAAAAAAAAAAABII;toutes les lignes
+item_marketprices;data_refresh;4;imp_competitor_price;decimal;0;0.0;862;0.12;99.93;72.13;toutes les lignes
+item_marketprices;data_refresh;5;imp_start_date;entier;0;0.0;19;38697;38715;38697;toutes les lignes
+item_marketprices;data_refresh;6;imp_end_date;entier;0;0.0;20;38698;38717;38717;toutes les lignes
+product_reviews;data_refresh;1;pr_review_sk;entier;0;0.0;909;89991;90899;89991;toutes les lignes
+product_reviews;data_refresh;2;pr_review_date;date;0;0.0;720;2001-01-05;2006-01-01;2001-04-30;toutes les lignes
+product_reviews;data_refresh;3;pr_review_time;heure;0;0.0;858;00:01:59;23:59:17;17:36:54;toutes les lignes
+product_reviews;data_refresh;4;pr_review_rating;entier;0;0.0;5;1;5;5;toutes les lignes
+product_reviews;data_refresh;5;pr_item_sk;entier;0;0.0;685;2;17985;679;toutes les lignes
+product_reviews;data_refresh;6;pr_user_sk;entier;0;0.0;846;48;99834;7611;toutes les lignes
+product_reviews;data_refresh;7;pr_order_sk;entier;0;0.0;909;93;89968;55550;toutes les lignes
+product_reviews;data_refresh;8;pr_review_content;texte;0;0.0;0;;;My acid reflux onset by my pregnancy.At first tried it and d;toutes les lignes
+store_returns;data_refresh;1;sr_returned_date_sk;entier;0;0.0;89;37125;39233;37587;toutes les lignes
+store_returns;data_refresh;2;sr_return_time_sk;entier;0;0.0;425;138;86396;32662;toutes les lignes
+store_returns;data_refresh;3;sr_item_sk;entier;0;0.0;361;78;17937;10095;toutes les lignes
+store_returns;data_refresh;4;sr_customer_sk;entier;0;0.0;89;1273;97967;1273;toutes les lignes
+store_returns;data_refresh;5;sr_cdemo_sk;entier;0;0.0;89;24440;1887950;1878036;toutes les lignes
+store_returns;data_refresh;6;sr_hdemo_sk;entier;0;0.0;89;166;7182;6392;toutes les lignes
+store_returns;data_refresh;7;sr_addr_sk;entier;0;0.0;89;1047;49893;38601;toutes les lignes
+store_returns;data_refresh;8;sr_store_sk;entier;0;0.0;12;0;11;5;toutes les lignes
+store_returns;data_refresh;9;sr_reason_sk;entier;0;0.0;35;0;34;27;toutes les lignes
+store_returns;data_refresh;10;sr_ticket_number;entier;0;0.0;90;245;88624;3483;toutes les lignes
+store_returns;data_refresh;11;sr_return_quantity;entier;0;0.0;82;1;94;17;toutes les lignes
+store_returns;data_refresh;12;sr_return_amt;decimal;0;0.0;422;0;9991.2;151.64;toutes les lignes
+store_returns;data_refresh;13;sr_return_tax;decimal;0;0.0;377;0;799.3;13.65;toutes les lignes
+store_returns;data_refresh;14;sr_return_amt_inc_tax;decimal;0;0.0;424;0;10790.5;165.29;toutes les lignes
+store_returns;data_refresh;15;sr_fee;decimal;0;0.0;411;0.86;99.6;73.86;toutes les lignes
+store_returns;data_refresh;16;sr_return_ship_cost;decimal;0;0.0;426;2.26;8817.44;392.93;toutes les lignes
+store_returns;data_refresh;17;sr_refunded_cash;decimal;0;0.0;423;0;6993.84;122.83;toutes les lignes
+store_returns;data_refresh;18;sr_reversed_charge;decimal;0;0.0;415;0;4390.85;17.86;toutes les lignes
+store_returns;data_refresh;19;sr_store_credit;decimal;0;0.0;414;0;2732.33;10.95;toutes les lignes
+store_returns;data_refresh;20;sr_net_loss;decimal;0;0.0;425;4.76;9188.68;420.23;toutes les lignes
+store_sales;data_refresh;1;ss_sold_date_sk;entier;0;0.0;19;38697;38715;38697;toutes les lignes
+store_sales;data_refresh;2;ss_sold_time_sk;entier;0;0.0;896;80;86215;21281;toutes les lignes
+store_sales;data_refresh;3;ss_item_sk;entier;0;0.0;3536;3;17989;12731;toutes les lignes
+store_sales;data_refresh;4;ss_customer_sk;entier;0;0.0;827;66;99894;54531;toutes les lignes
+store_sales;data_refresh;5;ss_cdemo_sk;entier;12;0.18;825;1339;1920675;1475324;toutes les lignes
+store_sales;data_refresh;6;ss_hdemo_sk;entier;13;0.2;767;4;7188;178;toutes les lignes
+store_sales;data_refresh;7;ss_addr_sk;entier;14;0.21;822;22;49930;47932;toutes les lignes
+store_sales;data_refresh;8;ss_store_sk;entier;0;0.0;12;0;11;11;toutes les lignes
+store_sales;data_refresh;9;ss_promo_sk;entier;1;0.02;300;0;299;210;toutes les lignes
+store_sales;data_refresh;10;ss_ticket_number;entier;0;0.0;900;89100;89999;89100;toutes les lignes
+store_sales;data_refresh;11;ss_quantity;entier;0;0.0;100;1;100;52;toutes les lignes
+store_sales;data_refresh;12;ss_wholesale_cost;decimal;0;0.0;4806;1;99.98;49.36;toutes les lignes
+store_sales;data_refresh;13;ss_list_price;decimal;0;0.0;5503;1.07;193.97;60.22;toutes les lignes
+store_sales;data_refresh;14;ss_sales_price;decimal;0;0.0;4621;0;187.08;24.09;toutes les lignes
+store_sales;data_refresh;15;ss_ext_discount_amt;decimal;0;0.0;6369;0;16024.14;1878.76;toutes les lignes
+store_sales;data_refresh;16;ss_ext_sales_price;decimal;0;0.0;6415;0;18520.92;1252.68;toutes les lignes
+store_sales;data_refresh;17;ss_ext_wholesale_cost;decimal;0;0.0;6517;1.69;9974;2566.72;toutes les lignes
+store_sales;data_refresh;18;ss_ext_list_price;decimal;0;0.0;6535;2.38;19093.14;3131.44;toutes les lignes
+store_sales;data_refresh;19;ss_ext_tax;decimal;0;0.0;4722;0;1666.88;19.92;toutes les lignes
+store_sales;data_refresh;20;ss_coupon_amt;decimal;0;0.0;1331;0;10876.33;588.76;toutes les lignes
+store_sales;data_refresh;21;ss_net_paid;decimal;0;0.0;6442;0;18520.92;663.92;toutes les lignes
+store_sales;data_refresh;22;ss_net_paid_inc_tax;decimal;0;0.0;6483;0;20187.8;683.84;toutes les lignes
+store_sales;data_refresh;23;ss_net_profit;decimal;0;0.0;6484;-8585.28;9022.86;-1902.80;toutes les lignes
+web_clickstreams;data_refresh;1;wcs_click_date_sk;entier;0;0.0;non calcule;38697;38715;38697;200000 premieres lignes
+web_clickstreams;data_refresh;2;wcs_click_time_sk;entier;0;0.0;non calcule;2;86398;11222;200000 premieres lignes
+web_clickstreams;data_refresh;3;wcs_sales_sk;entier;62109;90.03;non calcule;89100;89999;89100;200000 premieres lignes
+web_clickstreams;data_refresh;4;wcs_item_sk;entier;0;0.0;non calcule;0;17999;9912;200000 premieres lignes
+web_clickstreams;data_refresh;5;wcs_web_page_sk;entier;2;0.0;non calcule;0;59;32;200000 premieres lignes
+web_clickstreams;data_refresh;6;wcs_user_sk;entier;29167;42.28;non calcule;9;99945;63997;200000 premieres lignes
+web_returns;data_refresh;1;wr_returned_date_sk;entier;0;0.0;365;36994;39429;38953;toutes les lignes
+web_returns;data_refresh;2;wr_returned_time_sk;entier;0;0.0;400;165;85931;75847;toutes les lignes
+web_returns;data_refresh;3;wr_item_sk;entier;0;0.0;328;19;17900;1898;toutes les lignes
+web_returns;data_refresh;4;wr_refunded_customer_sk;entier;0;0.0;90;1543;98738;77591;toutes les lignes
+web_returns;data_refresh;5;wr_refunded_cdemo_sk;entier;0;0.0;90;16857;1913824;1380176;toutes les lignes
+web_returns;data_refresh;6;wr_refunded_hdemo_sk;entier;0;0.0;88;4;7146;3351;toutes les lignes
+web_returns;data_refresh;7;wr_refunded_addr_sk;entier;0;0.0;90;266;49918;40932;toutes les lignes
+web_returns;data_refresh;8;wr_returning_customer_sk;entier;0;0.0;90;1543;98738;77591;toutes les lignes
+web_returns;data_refresh;9;wr_returning_cdemo_sk;entier;0;0.0;90;16857;1913824;1380176;toutes les lignes
+web_returns;data_refresh;10;wr_returning_hdemo_sk;entier;0;0.0;88;4;7146;3351;toutes les lignes
+web_returns;data_refresh;11;wr_returning_addr_sk;entier;0;0.0;90;266;49918;40932;toutes les lignes
+web_returns;data_refresh;12;wr_web_page_sk;entier;0;0.0;60;0;59;42;toutes les lignes
+web_returns;data_refresh;13;wr_reason_sk;entier;0;0.0;35;0;34;22;toutes les lignes
+web_returns;data_refresh;14;wr_order_number;entier;0;0.0;90;718;89967;85134;toutes les lignes
+web_returns;data_refresh;15;wr_return_quantity;entier;0;0.0;81;1;96;15;toutes les lignes
+web_returns;data_refresh;16;wr_return_amt;decimal;0;0.0;397;0;11358.72;20.70;toutes les lignes
+web_returns;data_refresh;17;wr_return_tax;decimal;0;0.0;348;0;1022.28;1.45;toutes les lignes
+web_returns;data_refresh;18;wr_return_amt_inc_tax;decimal;0;0.0;399;0;12381;22.15;toutes les lignes
+web_returns;data_refresh;19;wr_fee;decimal;0;0.0;382;0.85;99.72;9.49;toutes les lignes
+web_returns;data_refresh;20;wr_return_ship_cost;decimal;0;0.0;400;0.75;17824.64;114.05;toutes les lignes
+web_returns;data_refresh;21;wr_refunded_cash;decimal;0;0.0;399;0;9541.32;14.70;toutes les lignes
+web_returns;data_refresh;22;wr_reversed_charge;decimal;0;0.0;396;0;5415.23;5.94;toutes les lignes
+web_returns;data_refresh;23;wr_account_credit;decimal;0;0.0;390;0;4503.98;0.06;toutes les lignes
+web_returns;data_refresh;24;wr_net_loss;decimal;0;0.0;400;0.93;17824.64;116.95;toutes les lignes
+web_sales;data_refresh;1;ws_sold_date_sk;entier;0;0.0;19;38697;38715;38697;toutes les lignes
+web_sales;data_refresh;2;ws_sold_time_sk;entier;0;0.0;895;32;86315;38598;toutes les lignes
+web_sales;data_refresh;3;ws_ship_date_sk;entier;0;0.0;137;38699;38835;38806;toutes les lignes
+web_sales;data_refresh;4;ws_item_sk;entier;0;0.0;3692;0;17998;17861;toutes les lignes
+web_sales;data_refresh;5;ws_bill_customer_sk;entier;0;0.0;847;9;99945;95479;toutes les lignes
+web_sales;data_refresh;6;ws_bill_cdemo_sk;entier;0;0.0;847;1099;1919911;481076;toutes les lignes
+web_sales;data_refresh;7;ws_bill_hdemo_sk;entier;13;0.19;795;3;7191;5618;toutes les lignes
+web_sales;data_refresh;8;ws_bill_addr_sk;entier;10;0.15;837;18;49937;14580;toutes les lignes
+web_sales;data_refresh;9;ws_ship_customer_sk;entier;0;0.0;854;145;99945;95479;toutes les lignes
+web_sales;data_refresh;10;ws_ship_cdemo_sk;entier;0;0.0;854;1099;1919911;481076;toutes les lignes
+web_sales;data_refresh;11;ws_ship_hdemo_sk;entier;13;0.19;803;3;7191;5618;toutes les lignes
+web_sales;data_refresh;12;ws_ship_addr_sk;entier;10;0.15;844;18;49937;14580;toutes les lignes
+web_sales;data_refresh;13;ws_web_page_sk;entier;2;0.03;60;0;59;58;toutes les lignes
+web_sales;data_refresh;14;ws_web_site_sk;entier;3;0.04;30;0;29;22;toutes les lignes
+web_sales;data_refresh;15;ws_ship_mode_sk;entier;1;0.01;20;0;19;4;toutes les lignes
+web_sales;data_refresh;16;ws_warehouse_sk;entier;2;0.03;5;0;4;1;toutes les lignes
+web_sales;data_refresh;17;ws_promo_sk;entier;2;0.03;300;0;299;118;toutes les lignes
+web_sales;data_refresh;18;ws_order_number;entier;0;0.0;900;89100;89999;89100;toutes les lignes
+web_sales;data_refresh;19;ws_quantity;entier;0;0.0;100;1;100;44;toutes les lignes
+web_sales;data_refresh;20;ws_wholesale_cost;decimal;0;0.0;5024;1.01;99.99;27.96;toutes les lignes
+web_sales;data_refresh;21;ws_list_price;decimal;0;0.0;5940;1.28;296.16;67.66;toutes les lignes
+web_sales;data_refresh;22;ws_sales_price;decimal;0;0.0;5081;0;276.11;41.27;toutes les lignes
+web_sales;data_refresh;23;ws_ext_discount_amt;decimal;0;0.0;6657;0;23960.64;1161.16;toutes les lignes
+web_sales;data_refresh;24;ws_ext_sales_price;decimal;0;0.0;6678;0;23944;1815.88;toutes les lignes
+web_sales;data_refresh;25;ws_ext_wholesale_cost;decimal;0;0.0;6753;2.14;9733.36;1230.24;toutes les lignes
+web_sales;data_refresh;26;ws_ext_list_price;decimal;0;0.0;6806;4.58;28845;2977.04;toutes les lignes
+web_sales;data_refresh;27;ws_ext_tax;decimal;0;0.0;5153;0;2035.49;63.19;toutes les lignes
+web_sales;data_refresh;28;ws_coupon_amt;decimal;0;0.0;1418;0;19178.36;762.67;toutes les lignes
+web_sales;data_refresh;29;ws_ext_ship_cost;decimal;0;0.0;6668;0;11858.68;774.03;toutes les lignes
+web_sales;data_refresh;30;ws_net_paid;decimal;0;0.0;6698;0;23944;1053.21;toutes les lignes
+web_sales;data_refresh;31;ws_net_paid_inc_tax;decimal;0;0.0;6755;0;24662.32;1116.40;toutes les lignes
+web_sales;data_refresh;32;ws_net_paid_inc_ship;decimal;0;0.0;6840;1.3;33368.64;1827.24;toutes les lignes
+web_sales;data_refresh;33;ws_net_paid_inc_ship_tax;decimal;0;0.0;6844;1.33;34086.96;1890.43;toutes les lignes
+web_sales;data_refresh;34;ws_net_profit;decimal;0;0.0;6758;-9397.56;14510;-177.03;toutes les lignes
