@@ -1,0 +1,188 @@
+{
+  "source": "/opt/nifi/conf/flow.json.gz",
+  "groupes": [
+    {
+      "groupe": "NiFi Flow / UC04 - Ingestion TPCx-BB",
+      "processeurs": [
+        {
+          "nom": "GetFile",
+          "type": "GetFile",
+          "version": "2.12.0",
+          "module": "nifi-standard-nar",
+          "etat": "ENABLED",
+          "planning": "5 sec",
+          "relations_auto_terminees": [],
+          "proprietes_renseignees": {
+            "Keep Source File": "false",
+            "Minimum File Age": "0 sec",
+            "Polling Interval": "30 sec",
+            "Input Directory": "/data/nifi/input",
+            "Batch Size": "10",
+            "Minimum File Size": "0 B",
+            "Ignore Hidden Files": "true",
+            "Recurse Subdirectories": "false",
+            "File Filter": "[^\\.].*"
+          }
+        },
+        {
+          "nom": "LogAttribute",
+          "type": "LogAttribute",
+          "version": "2.12.0",
+          "module": "nifi-standard-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [
+            "success"
+          ],
+          "proprietes_renseignees": {
+            "Log FlowFile Properties": "true",
+            "Log Level": "info",
+            "Output Format": "Line per Attribute",
+            "Log Payload": "false",
+            "Character Set": "UTF-8",
+            "Attributes to Log Regular Expression": ".*"
+          }
+        },
+        {
+          "nom": "UpdateAttribute",
+          "type": "UpdateAttribute",
+          "version": "2.12.0",
+          "module": "nifi-update-attribute-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [],
+          "proprietes_renseignees": {
+            "lot": "initial",
+            "Store State": "Do not store state",
+            "date_ingestion": "${now():format('yyyy-MM-dd HH:mm:ss')}",
+            "flux": "UC04-ingestion-enrichie",
+            "Cache Value Lookup Cache Size": "100",
+            "source": "tpcxbb",
+            "table": "${filename:substringBefore('.')}"
+          }
+        },
+        {
+          "nom": "RouteOnAttribute",
+          "type": "RouteOnAttribute",
+          "version": "2.12.0",
+          "module": "nifi-standard-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [],
+          "proprietes_renseignees": {
+            "Routing Strategy": "Route to Property name",
+            "dat": "${filename:endsWith('.dat')}"
+          }
+        },
+        {
+          "nom": "PutHDFS",
+          "type": "PutHDFS",
+          "version": "2.12.0",
+          "module": "nifi-hadoop-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [],
+          "proprietes_renseignees": {
+            "Hadoop Configuration Resources": "/opt/hadoop/etc/hadoop/core-site.xml,/opt/hadoop/etc/hadoop/hdfs-site.xml",
+            "Resource Transfer Source": "FLOWFILE_CONTENT",
+            "Compression Codec": "NONE",
+            "Writing Strategy": "writeAndRename",
+            "Ignore Locality": "false",
+            "Append Mode": "DEFAULT",
+            "Directory": "/retail-lake/raw/nifi/${table}",
+            "Conflict Resolution Strategy": "fail"
+          }
+        },
+        {
+          "nom": "PutFile",
+          "type": "PutFile",
+          "version": "2.12.0",
+          "module": "nifi-standard-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [],
+          "proprietes_renseignees": {
+            "Create Missing Directories": "true",
+            "Resource Transfer Source": "FLOWFILE_CONTENT",
+            "Directory": "/data/nifi/error",
+            "Conflict Resolution Strategy": "fail"
+          }
+        }
+      ],
+      "connexions": [
+        {
+          "de": "PutFile",
+          "vers": "LogAttribute",
+          "relations": [
+            "success"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "PutFile",
+          "vers": "LogAttribute",
+          "relations": [
+            "failure"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "PutHDFS",
+          "vers": "LogAttribute",
+          "relations": [
+            "success"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "GetFile",
+          "vers": "UpdateAttribute",
+          "relations": [
+            "success"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "PutHDFS",
+          "vers": "LogAttribute",
+          "relations": [
+            "failure"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "RouteOnAttribute",
+          "vers": "PutFile",
+          "relations": [
+            "unmatched"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "UpdateAttribute",
+          "vers": "RouteOnAttribute",
+          "relations": [
+            "success"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "RouteOnAttribute",
+          "vers": "PutHDFS",
+          "relations": [
+            "dat"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Date      : 2026-11-18 10:30:17 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ jps
+
+2417 BootstrapProcess
+1028 SecondaryNameNode
+3321 Jps
+2445 NiFi
+607 NameNode
+751 DataNode

@@ -1,0 +1,29 @@
+# UC-04 Etape 12 - Flux enrichi (avant)
+# Machine : PICOXIA-03, utilisateur Linux : abedja
+
+==================================================================
+[01] Etat initial : HDFS raw/nifi et dossier de rejets
+Date : 2026-11-18 15:31:21
+$ hdfs dfs -ls -R /retail-lake/raw/nifi; echo; ls -la /data/nifi/error
+------------------------------------------------------------------
+-rw-r--r--   1 abedja supergroup       3386 2026-11-18 14:09 /retail-lake/raw/nifi/store.dat
+
+total 8
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 .
+drwxr-xr-x 5 root   root   4096 Nov 18 10:20 ..
+(code retour : 0)
+
+==================================================================
+[02] Trois fichiers reels du kit copies dans le dossier d'entree (2 .dat attendus en HDFS, 1 .csv attendu en rejet)
+Date : 2026-11-18 15:31:24
+$ cp $KIT/data/reason/reason.dat $KIT/data/ship_mode/ship_mode.dat $KIT/data/item_marketprices/item_marketprices_audit.csv /data/nifi/input/ && ls -l /data/nifi/input && sha256sum /data/nifi/input/*
+------------------------------------------------------------------
+total 12
+-rwxr-xr-x 1 abedja abedja  273 Nov 18 15:31 item_marketprices_audit.csv
+-rwxr-xr-x 1 abedja abedja 3105 Nov 18 15:31 reason.dat
+-rwxr-xr-x 1 abedja abedja 1220 Nov 18 15:31 ship_mode.dat
+3465c2360f4b5eb6e36c7c2a54de2aef1f80a9526520e2bf08cb9f689e1dbce4  /data/nifi/input/item_marketprices_audit.csv
+d5edc45cb1e76afde3b7c0718cdd5d5d45e5f1d720fb940b36db0cd4dcf6b091  /data/nifi/input/reason.dat
+8c48d71b318dbab1c048fd2b9fd5e6a6cba087ce07940537472bb0d5d5540125  /data/nifi/input/ship_mode.dat
+(code retour : 0)
+

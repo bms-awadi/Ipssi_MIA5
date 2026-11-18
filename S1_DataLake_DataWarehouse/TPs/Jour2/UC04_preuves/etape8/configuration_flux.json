@@ -1,0 +1,90 @@
+{
+  "source": "/opt/nifi/conf/flow.json.gz",
+  "groupes": [
+    {
+      "groupe": "NiFi Flow / UC04 - Ingestion TPCx-BB",
+      "processeurs": [
+        {
+          "nom": "GetFile",
+          "type": "GetFile",
+          "version": "2.12.0",
+          "module": "nifi-standard-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [],
+          "proprietes_renseignees": {
+            "Keep Source File": "false",
+            "Minimum File Age": "0 sec",
+            "Polling Interval": "30 sec",
+            "Input Directory": "/data/nifi/input",
+            "Batch Size": "10",
+            "Minimum File Size": "0 B",
+            "Ignore Hidden Files": "true",
+            "Recurse Subdirectories": "false",
+            "File Filter": "[^\\.].*"
+          }
+        },
+        {
+          "nom": "LogAttribute",
+          "type": "LogAttribute",
+          "version": "2.12.0",
+          "module": "nifi-standard-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [
+            "success"
+          ],
+          "proprietes_renseignees": {
+            "Log FlowFile Properties": "true",
+            "Log Level": "info",
+            "Output Format": "Line per Attribute",
+            "Log Payload": "false",
+            "Character Set": "UTF-8",
+            "Attributes to Log Regular Expression": ".*"
+          }
+        },
+        {
+          "nom": "PutHDFS",
+          "type": "PutHDFS",
+          "version": "2.12.0",
+          "module": "nifi-hadoop-nar",
+          "etat": "ENABLED",
+          "planning": "0 sec",
+          "relations_auto_terminees": [
+            "success"
+          ],
+          "proprietes_renseignees": {
+            "Hadoop Configuration Resources": "/opt/hadoop/etc/hadoop/core-site.xml,/opt/hadoop/etc/hadoop/hdfs-site.xml",
+            "Resource Transfer Source": "FLOWFILE_CONTENT",
+            "Compression Codec": "NONE",
+            "Writing Strategy": "writeAndRename",
+            "Ignore Locality": "false",
+            "Append Mode": "DEFAULT",
+            "Directory": "/retail-lake/raw/nifi",
+            "Conflict Resolution Strategy": "fail"
+          }
+        }
+      ],
+      "connexions": [
+        {
+          "de": "PutHDFS",
+          "vers": "LogAttribute",
+          "relations": [
+            "failure"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        },
+        {
+          "de": "GetFile",
+          "vers": "PutHDFS",
+          "relations": [
+            "success"
+          ],
+          "seuil_objets": 10000,
+          "seuil_taille": "1 GB"
+        }
+      ]
+    }
+  ]
+}

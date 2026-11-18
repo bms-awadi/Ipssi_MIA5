@@ -1,0 +1,213 @@
+# UC-03 Etape 2 - Journal des commandes HDFS
+# Machine : PICOXIA-03 (Ubuntu 22.04.5 LTS), utilisateur Linux : abedja, Hadoop 3.5.0
+
+==================================================================
+[01] Etat general du systeme HDFS
+Date : 2026-11-18 10:40:23
+$ hdfs dfsadmin -report | sed -n '1,8p'
+------------------------------------------------------------------
+Configured Capacity: 1081101176832 (1006.85 GB)
+Present Capacity: 1014001799168 (944.36 GB)
+DFS Remaining: 1014001770496 (944.36 GB)
+DFS Used: 28672 (28 KB)
+DFS Used%: 0.00%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+(code retour : 0)
+
+==================================================================
+[02] Mode sans echec
+Date : 2026-11-18 10:40:25
+$ hdfs dfsadmin -safemode get
+------------------------------------------------------------------
+Safe mode is OFF
+(code retour : 0)
+
+==================================================================
+[03] Controle de coherence du systeme de fichiers
+Date : 2026-11-18 10:40:27
+$ hdfs fsck / | tail -n 14
+------------------------------------------------------------------
+Connecting to namenode via http://localhost:9870/fsck?ugi=abedja&path=%2F
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+ Blocks queued for replication:	0
+FSCK ended at Wed Nov 18 10:40:28 CET 2026 in 3 milliseconds
+
+
+The filesystem under path '/' is HEALTHY
+(code retour : 0)
+
+==================================================================
+[04] DataNodes vivants
+Date : 2026-11-18 10:40:29
+$ hdfs dfsadmin -report -live | sed -n '/Live datanodes/,$p' | sed -n '1,16p'
+------------------------------------------------------------------
+Live datanodes (1):
+
+Name: 127.0.0.1:9866 (localhost)
+Hostname: PICOXIA-03.localdomain
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 28672 (28 KB)
+Non DFS Used: 12107055104 (11.28 GB)
+DFS Remaining: 1014001737728 (944.36 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 93.79%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+(code retour : 0)
+
+==================================================================
+[05] DataNodes morts
+Date : 2026-11-18 10:40:30
+$ hdfs dfsadmin -report -dead | grep -E 'Dead datanodes'
+------------------------------------------------------------------
+Dead datanodes (0):
+(code retour : 0)
+
+==================================================================
+[06] Topologie (rack de chaque DataNode)
+Date : 2026-11-18 10:40:32
+$ hdfs dfsadmin -printTopology
+------------------------------------------------------------------
+Rack: /default-rack
+   127.0.0.1:9866 (localhost) In Service
+
+(code retour : 0)
+
+==================================================================
+[07] Adresse du NameNode
+Date : 2026-11-18 10:40:33
+$ hdfs getconf -namenodes
+------------------------------------------------------------------
+localhost
+(code retour : 0)
+
+==================================================================
+[08] Contenu de la racine (avant creation)
+Date : 2026-11-18 10:40:34
+$ hdfs dfs -ls /
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[09] Creation du repertoire de travail du projet
+Date : 2026-11-18 10:40:35
+$ hdfs dfs -mkdir -p /retail-lake
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[10] Contenu de la racine (apres creation)
+Date : 2026-11-18 10:40:37
+$ hdfs dfs -ls /
+------------------------------------------------------------------
+Found 1 items
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:40 /retail-lake
+(code retour : 0)
+
+==================================================================
+[11] Contenu du repertoire de travail
+Date : 2026-11-18 10:40:38
+$ hdfs dfs -ls /retail-lake
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[12] Proprietaire et droits du repertoire de travail
+Date : 2026-11-18 10:40:40
+$ hdfs dfs -ls -d /retail-lake
+------------------------------------------------------------------
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:40 /retail-lake
+(code retour : 0)
+
+==================================================================
+[13] Detail des droits (ACL)
+Date : 2026-11-18 10:40:41
+$ hdfs dfs -getfacl /retail-lake
+------------------------------------------------------------------
+# file: /retail-lake
+# owner: abedja
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+(code retour : 0)
+
+==================================================================
+[14] Statistiques du repertoire (type, droits, proprietaire, date)
+Date : 2026-11-18 10:40:43
+$ hdfs dfs -stat 'type=%F droits=%A proprietaire=%u groupe=%g modifie=%y' /retail-lake
+------------------------------------------------------------------
+type=directory droits=rwxr-xr-x proprietaire=abedja groupe=supergroup modifie=2026-11-18 10:40:37
+(code retour : 0)
+
+==================================================================
+[15] Test volontaire : ecriture par un autre utilisateur (doit etre refusee)
+Date : 2026-11-18 10:40:44
+$ HADOOP_USER_NAME=invite hdfs dfs -mkdir /retail-lake/test_invite
+------------------------------------------------------------------
+mkdir: Permission denied: user=invite, access=WRITE, inode="/retail-lake":abedja:supergroup:drwxr-xr-x
+(code retour : 1)
+
+==================================================================
+[16] Verification : le dossier de test n'a pas ete cree
+Date : 2026-11-18 10:40:46
+$ hdfs dfs -test -e /retail-lake/test_invite && echo 'present' || echo 'absent'
+------------------------------------------------------------------
+absent
+(code retour : 0)
+
+==================================================================
+[17] Taille du repertoire de travail
+Date : 2026-11-18 10:40:47
+$ hdfs dfs -du -h /retail-lake
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[18] Taille totale (resume)
+Date : 2026-11-18 10:40:49
+$ hdfs dfs -du -s -h /retail-lake
+------------------------------------------------------------------
+0  0  /retail-lake
+(code retour : 0)
+
+==================================================================
+[19] Nombre de dossiers, fichiers et octets
+Date : 2026-11-18 10:40:50
+$ hdfs dfs -count -h /retail-lake
+------------------------------------------------------------------
+           1            0                  0 /retail-lake
+(code retour : 0)
+
+==================================================================
+[20] Espace disponible dans HDFS
+Date : 2026-11-18 10:40:52
+$ hdfs dfs -df -h /
+------------------------------------------------------------------
+Filesystem                 Size  Used  Available  Use%
+hdfs://localhost:9000  1006.9 G  28 K    944.4 G    0%
+(code retour : 0)
+
+==================================================================
+[21] Test volontaire : chemin inexistant (doit echouer)
+Date : 2026-11-18 10:40:53
+$ hdfs dfs -ls /retail-lake/inexistant
+------------------------------------------------------------------
+ls: `/retail-lake/inexistant': No such file or directory
+(code retour : 1)
+

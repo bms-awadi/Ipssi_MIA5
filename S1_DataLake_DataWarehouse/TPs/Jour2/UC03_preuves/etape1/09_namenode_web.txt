@@ -1,0 +1,26 @@
+# Date      : 2026-11-18 10:30:28 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ curl -s 'http://localhost:9870/jmx?qry=Hadoop:service=NameNode,name=NameNodeStatus' ; echo; curl -s 'http://localhost:9870/jmx?qry=Hadoop:service=NameNode,name=FSNamesystemState' | grep -E 'NumLiveDataNodes|NumDeadDataNodes|FSState|CapacityTotal"|BlocksTotal|FilesTotal'
+
+{
+  "beans" : [ {
+    "name" : "Hadoop:service=NameNode,name=NameNodeStatus",
+    "modelerType" : "org.apache.hadoop.hdfs.server.namenode.NameNode",
+    "State" : "active",
+    "SecurityEnabled" : false,
+    "LastHATransitionTime" : 0,
+    "SlowPeersReport" : null,
+    "SlowDisksReport" : null,
+    "NNRole" : "NameNode",
+    "HostAndPort" : "localhost:9000",
+    "BytesWithFutureGenerationStamps" : 0
+  } ]
+}
+    "FilesTotal" : 1,
+    "BlocksTotal" : 0,
+    "CapacityTotal" : 1081101176832,
+    "NumLiveDataNodes" : 1,
+    "NumDeadDataNodes" : 0,
+    "ProvidedCapacityTotal" : 0,
+    "FSState" : "Operational",

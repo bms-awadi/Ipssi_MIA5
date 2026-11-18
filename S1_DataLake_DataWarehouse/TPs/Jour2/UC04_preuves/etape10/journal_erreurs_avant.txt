@@ -1,0 +1,30 @@
+# UC-04 Etape 10 - Erreurs controlees (avant)
+# Machine : PICOXIA-03, utilisateur Linux : abedja
+
+==================================================================
+[01] Test 1 : le dossier qui sera indique dans GetFile n'existe pas
+Date : 2026-11-18 14:20:11
+$ ls -ld /data/nifi/dossier_inexistant
+------------------------------------------------------------------
+ls: cannot access '/data/nifi/dossier_inexistant': No such file or directory
+(code retour : 2)
+
+==================================================================
+[02] Test 2 : fichier deja present dans HDFS (depose a l'etape 9)
+Date : 2026-11-18 14:20:11
+$ hdfs dfs -ls /retail-lake/raw/nifi; hdfs dfs -cat /retail-lake/raw/nifi/store.dat | sha256sum
+------------------------------------------------------------------
+Found 1 items
+-rw-r--r--   1 abedja supergroup       3386 2026-11-18 14:09 /retail-lake/raw/nifi/store.dat
+a936bc38692bdddc222cf86d08ed9d0feb761af26769212d789cf6729d1808ef  -
+(code retour : 0)
+
+==================================================================
+[03] Test 2 : nouvelle copie de travail du meme fichier dans le dossier d'entree
+Date : 2026-11-18 14:20:14
+$ cp $KIT/data/store/store.dat /data/nifi/input/ && ls -l /data/nifi/input
+------------------------------------------------------------------
+total 4
+-rwxr-xr-x 1 abedja abedja 3386 Nov 18 14:20 store.dat
+(code retour : 0)
+

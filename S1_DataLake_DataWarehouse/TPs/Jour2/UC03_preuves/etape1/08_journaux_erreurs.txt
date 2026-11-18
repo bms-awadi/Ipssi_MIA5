@@ -1,0 +1,20 @@
+# Date      : 2026-11-18 10:30:27 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ for f in $HADOOP_HOME/logs/*.log; do echo "--- $(basename $f)"; grep -cE ' (ERROR|FATAL) ' $f | sed 's/^/lignes ERROR ou FATAL : /'; grep -E ' (WARN|ERROR|FATAL) ' $f | cut -c1-200 | sort -u -k5 | head -5; done
+
+--- hadoop-abedja-datanode-PICOXIA-03.log
+lignes ERROR ou FATAL : 0
+2026-11-17 14:14:10,318 WARN org.apache.hadoop.hdfs.server.datanode.web.DatanodeHttpServer: Got null for restCsrfPreventionFilter - will not do any filtering.
+2026-11-17 14:14:10,089 WARN org.apache.hadoop.security.authentication.server.AuthenticationFilter: Unable to initialize FileSignerSecretProvider, falling back to use random secrets. Reason: Could not
+2026-11-17 14:14:11,176 WARN org.apache.hadoop.hdfs.server.datanode.DirectoryScanner: dfs.datanode.directoryscan.throttle.limit.ms.per.sec set to value above 1000 ms/sec. Assuming default value of -1
+2026-11-17 14:14:11,105 WARN org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: dfsUsed file missing in /home/abedja/hadoop-data/datanode/current/BP-2127700736-127.0.1.1-179492119191
+--- hadoop-abedja-namenode-PICOXIA-03.log
+lignes ERROR ou FATAL : 0
+2026-11-17 14:14:08,891 WARN org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Only one image storage directory (dfs.namenode.name.dir) configured. Beware of data loss due to lack of redundant stor
+2026-11-17 14:14:08,891 WARN org.apache.hadoop.hdfs.server.namenode.FSNamesystem: Only one namespace edits storage directory (dfs.namenode.edits.dir) configured. Beware of data loss due to lack of red
+2026-11-17 14:14:07,354 WARN org.apache.hadoop.security.authentication.server.AuthenticationFilter: Unable to initialize FileSignerSecretProvider, falling back to use random secrets. Reason: Could not
+--- hadoop-abedja-secondarynamenode-PICOXIA-03.log
+lignes ERROR ou FATAL : 0
+2026-11-17 14:15:13,751 WARN org.apache.hadoop.hdfs.server.namenode.SecondaryNameNode: Checkpoint done. New Image Size: 401
+2026-11-17 14:14:13,185 WARN org.apache.hadoop.security.authentication.server.AuthenticationFilter: Unable to initialize FileSignerSecretProvider, falling back to use random secrets. Reason: Could not

@@ -1,0 +1,104 @@
+# UC-03 Etape 3 - Creation de l'arborescence du Data Lake
+# Machine : PICOXIA-03 (Ubuntu 22.04.5 LTS), utilisateur Linux : abedja, Hadoop 3.5.0
+
+==================================================================
+[01] Etat avant creation
+Date : 2026-11-18 10:42:47
+$ hdfs dfs -ls -R /retail-lake
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[02] Zone RAW : copie exacte des fichiers livres, par lot, et depots NiFi (UC-04)
+Date : 2026-11-18 10:42:48
+$ hdfs dfs -mkdir -p /retail-lake/raw/tpcxbb/initial /retail-lake/raw/tpcxbb/refresh /retail-lake/raw/nifi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[03] Zone BRONZE : fichiers ranges par table et par lot
+Date : 2026-11-18 10:42:50
+$ hdfs dfs -mkdir -p /retail-lake/bronze/tpcxbb
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[04] Zones SILVER et GOLD (alimentees au Jour 3)
+Date : 2026-11-18 10:42:51
+$ hdfs dfs -mkdir -p /retail-lake/silver /retail-lake/gold
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[05] Zone QUALITY : resultats des controles et lignes rejetees
+Date : 2026-11-18 10:42:53
+$ hdfs dfs -mkdir -p /retail-lake/quality/controles /retail-lake/quality/rejets
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[06] Zone LOGS : journaux et manifestes d'ingestion
+Date : 2026-11-18 10:42:54
+$ hdfs dfs -mkdir -p /retail-lake/logs/ingestion
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[07] Arborescence obtenue (liste recursive)
+Date : 2026-11-18 10:42:56
+$ hdfs dfs -ls -R /retail-lake
+------------------------------------------------------------------
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/bronze
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/bronze/tpcxbb
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/gold
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/logs
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/logs/ingestion
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/quality
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/quality/controles
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/quality/rejets
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/nifi
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb/initial
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb/refresh
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/silver
+(code retour : 0)
+
+==================================================================
+[08] Vue en arbre
+Date : 2026-11-18 10:42:57
+$ hdfs dfs -ls -R /retail-lake | awk '{print $8}' | sed -e 's#^/retail-lake##' -e 's#[^/]*/#   #g' | sed '1i /retail-lake'
+------------------------------------------------------------------
+/retail-lake
+   bronze
+      tpcxbb
+   gold
+   logs
+      ingestion
+   quality
+      controles
+      rejets
+   raw
+      nifi
+      tpcxbb
+         initial
+         refresh
+   silver
+(code retour : 0)
+
+==================================================================
+[09] Nombre de dossiers et de fichiers
+Date : 2026-11-18 10:42:59
+$ hdfs dfs -count /retail-lake
+------------------------------------------------------------------
+          15            0                  0 /retail-lake
+(code retour : 0)
+
+==================================================================
+[10] Relance de la creation (doit etre sans effet ni erreur)
+Date : 2026-11-18 10:43:00
+$ hdfs dfs -mkdir -p /retail-lake/raw/tpcxbb/initial && hdfs dfs -count /retail-lake
+------------------------------------------------------------------
+          15            0                  0 /retail-lake
+(code retour : 0)
+

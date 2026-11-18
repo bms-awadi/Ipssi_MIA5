@@ -1,0 +1,22 @@
+# UC-04 Etape 9 - Controles avant l'execution du flux
+# Machine : PICOXIA-03, utilisateur Linux : abedja
+
+==================================================================
+[01] Fichier de test present dans le dossier d'entree
+Date : 2026-11-18 12:59:28
+$ ls -l /data/nifi/input; sha256sum /data/nifi/input/*
+------------------------------------------------------------------
+total 4
+-rwxr-xr-x 1 abedja abedja 3386 Nov 18 11:27 store.dat
+a936bc38692bdddc222cf86d08ed9d0feb761af26769212d789cf6729d1808ef  /data/nifi/input/store.dat
+(code retour : 0)
+
+==================================================================
+[02] Destination HDFS existante et vide
+Date : 2026-11-18 12:59:28
+$ hdfs dfs -ls -d /retail-lake/raw/nifi; hdfs dfs -count /retail-lake/raw/nifi
+------------------------------------------------------------------
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/nifi
+           1            0                  0 /retail-lake/raw/nifi
+(code retour : 0)
+

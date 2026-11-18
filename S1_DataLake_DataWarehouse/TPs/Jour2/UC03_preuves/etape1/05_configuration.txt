@@ -1,0 +1,47 @@
+# Date      : 2026-11-18 10:30:21 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ echo '--- core-site.xml'; cat $HADOOP_CONF_DIR/core-site.xml; echo; echo '--- hdfs-site.xml'; cat $HADOOP_CONF_DIR/hdfs-site.xml; echo; echo '--- JAVA_HOME (hadoop-env.sh)'; grep '^export JAVA_HOME' $HADOOP_CONF_DIR/hadoop-env.sh; echo; echo '--- valeurs effectives'; for k in fs.defaultFS dfs.replication dfs.blocksize dfs.namenode.name.dir dfs.datanode.data.dir dfs.namenode.http-address dfs.datanode.address; do printf '%-28s %s\n' $k "$(hdfs getconf -confKey $k)"; done; echo; echo '--- NameNode(s) declares'; hdfs getconf -namenodes; echo '--- SecondaryNameNode'; hdfs getconf -secondaryNameNodes
+
+--- core-site.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
+</configuration>
+
+--- hdfs-site.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///home/abedja/hadoop-data/namenode</value>
+  </property>
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///home/abedja/hadoop-data/datanode</value>
+  </property>
+</configuration>
+
+--- JAVA_HOME (hadoop-env.sh)
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+--- valeurs effectives
+fs.defaultFS                 hdfs://localhost:9000
+dfs.replication              1
+dfs.blocksize                134217728
+dfs.namenode.name.dir        file:///home/abedja/hadoop-data/namenode
+dfs.datanode.data.dir        file:///home/abedja/hadoop-data/datanode
+dfs.namenode.http-address    0.0.0.0:9870
+dfs.datanode.address         0.0.0.0:9866
+
+--- NameNode(s) declares
+localhost
+--- SecondaryNameNode
+0.0.0.0

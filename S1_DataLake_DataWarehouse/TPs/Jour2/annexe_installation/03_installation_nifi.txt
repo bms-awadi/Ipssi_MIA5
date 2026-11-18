@@ -1,0 +1,38 @@
+=== Date
+Wed Nov 18 10:11:44 CET 2026
+=== Archive NiFi
+nifi-2.12.0-bin.zip: OK
+=== Installation
+drwxrwxr-x 8 abedja abedja 4096 Sep 10 19:06 /opt/nifi
+LICENSE
+NOTICE
+README
+bin
+conf
+docs
+extensions
+lib
+python
+=== Modules Hadoop ajoutés
+total 74536
+-rw-r--r-- 1 abedja abedja 59465063 Sep 10 22:04 nifi-hadoop-libraries-nar-2.12.0.nar
+-rw-r--r-- 1 abedja abedja 16855536 Sep 10 22:00 nifi-hadoop-nar-2.12.0.nar
+nifi-hadoop-nar-2.12.0.nar: OK
+nifi-hadoop-libraries-nar-2.12.0.nar: OK
+=== Démarrage NiFi
+Wed Nov 18 10:20:43 CET 2026
+java.arg.2=-Xms1g
+java.arg.3=-Xmx1g
+java.arg.preferIPv4Stack=-Djava.net.preferIPv4Stack=true
+2026-11-18 10:20:44,634 INFO [main] org.apache.nifi.bootstrap.Command Application Process [1598] Command Status [SUCCESS] HTTP 200
+2026-11-18 10:20:44,636 INFO [main] org.apache.nifi.bootstrap.Command Status: UP
+2259 Jps
+1028 SecondaryNameNode
+1562 BootstrapProcess
+1598 NiFi
+607 NameNode
+751 DataNode
+=== Dossiers locaux NiFi
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 /data/nifi/archive
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 /data/nifi/error
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 /data/nifi/input

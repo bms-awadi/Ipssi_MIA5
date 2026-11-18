@@ -1,0 +1,70 @@
+# UC-04 Etape 12 - Flux enrichi (apres)
+# Machine : PICOXIA-03, utilisateur Linux : abedja
+
+==================================================================
+[01] Dossier d'entree vide (les 3 fichiers ont ete lus)
+Date : 2026-11-18 15:35:09
+$ echo -n 'fichiers restants : '; find /data/nifi/input -type f | wc -l
+------------------------------------------------------------------
+fichiers restants : 0
+(code retour : 0)
+
+==================================================================
+[02] HDFS : les .dat ranges par table sous raw/nifi
+Date : 2026-11-18 15:35:09
+$ hdfs dfs -ls -R /retail-lake/raw/nifi
+------------------------------------------------------------------
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 15:33 /retail-lake/raw/nifi/reason
+-rw-r--r--   1 abedja supergroup       3105 2026-11-18 15:33 /retail-lake/raw/nifi/reason/reason.dat
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 15:33 /retail-lake/raw/nifi/ship_mode
+-rw-r--r--   1 abedja supergroup       1220 2026-11-18 15:33 /retail-lake/raw/nifi/ship_mode/ship_mode.dat
+-rw-r--r--   1 abedja supergroup       3386 2026-11-18 14:09 /retail-lake/raw/nifi/store.dat
+(code retour : 0)
+
+==================================================================
+[03] HDFS : integrite des .dat deposes par NiFi
+Date : 2026-11-18 15:35:11
+$ for t in reason ship_mode; do printf '%-10s HDFS %s  kit %s\n' $t "$(hdfs dfs -cat /retail-lake/raw/nifi/$t/$t.dat | sha256sum | cut -c1-16)" "$(sha256sum $KIT/data/$t/$t.dat | cut -c1-16)"; done
+------------------------------------------------------------------
+reason     HDFS d5edc45cb1e76afd  kit d5edc45cb1e76afd
+ship_mode  HDFS 8c48d71b318dbab1  kit 8c48d71b318dbab1
+(code retour : 0)
+
+==================================================================
+[04] Rejets : le .csv est dans /data/nifi/error et pas dans HDFS
+Date : 2026-11-18 15:35:14
+$ ls -l /data/nifi/error; echo -n 'SHA-256 rejet : '; sha256sum /data/nifi/error/item_marketprices_audit.csv | cut -c1-16; echo -n 'SHA-256 kit   : '; sha256sum $KIT/data/item_marketprices/item_marketprices_audit.csv | cut -c1-16; echo -n 'present dans HDFS : '; hdfs dfs -ls -R /retail-lake/raw/nifi | grep -c audit || true
+------------------------------------------------------------------
+total 4
+-rw-r--r-- 1 abedja abedja 273 Nov 18 15:33 item_marketprices_audit.csv
+SHA-256 rejet : 3465c2360f4b5eb6
+SHA-256 kit   : 3465c2360f4b5eb6
+present dans HDFS : 0
+(code retour : 0)
+
+==================================================================
+[05] Le fichier de l'etape 9 est inchange
+Date : 2026-11-18 15:35:16
+$ hdfs dfs -stat 'ecrit=%y taille=%b' /retail-lake/raw/nifi/store.dat
+------------------------------------------------------------------
+ecrit=2026-11-18 14:09:33 taille=3386
+(code retour : 0)
+
+==================================================================
+[06] Journal d'ingestion : attributs ecrits par LogAttribute pour les 3 FlowFiles
+Date : 2026-11-18 15:35:17
+$ python3 "/home/abedja/tp2/scripts/uc04/etape12_journal_ingestion.py" '2026-11-18 15:31:21' '/home/abedja/tp2/preuves/UC04/etape12/journal_ingestion_logattribute.csv'
+------------------------------------------------------------------
+2026-11-18 15:33:04 | item_marketprices_audit.csv  | route=unmatched | table=item_marketprices_audit lot=initial source=tpcxbb | date_ingestion=2026-11-18 15:33:04 | hdfs=-
+2026-11-18 15:33:04 | reason.dat                   | route=dat       | table=reason lot=initial source=tpcxbb | date_ingestion=2026-11-18 15:33:04 | hdfs=/retail-lake/raw/nifi/reason
+2026-11-18 15:33:04 | ship_mode.dat                | route=dat       | table=ship_mode lot=initial source=tpcxbb | date_ingestion=2026-11-18 15:33:04 | hdfs=/retail-lake/raw/nifi/ship_mode
+(code retour : 0)
+
+==================================================================
+[07] Erreurs ou avertissements de NiFi pendant le test
+Date : 2026-11-18 15:35:17
+$ cat /opt/nifi/logs/nifi-app*.log | awk -v d='2026-11-18 15:31:21' 'substr($0,1,19) >= d' | grep -cE ' (ERROR|WARN) ' | sed 's/^/lignes ERROR ou WARN : /'
+------------------------------------------------------------------
+lignes ERROR ou WARN : 0
+(code retour : 0)
+

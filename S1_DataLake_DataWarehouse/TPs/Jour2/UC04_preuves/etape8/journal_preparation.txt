@@ -1,0 +1,71 @@
+# UC-04 - Preparation du flux GetFile vers PutHDFS
+# Machine : PICOXIA-03, utilisateur Linux : abedja
+
+==================================================================
+[01] Dossiers locaux de NiFi (crees avec sudo, proprietaire abedja)
+Date : 2026-11-18 11:27:23
+$ ls -ld /data /data/nifi /data/nifi/input /data/nifi/archive /data/nifi/error
+------------------------------------------------------------------
+drwxr-xr-x 3 root   root   4096 Nov 18 10:20 /data
+drwxr-xr-x 5 root   root   4096 Nov 18 10:20 /data/nifi
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 /data/nifi/archive
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 /data/nifi/error
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 10:20 /data/nifi/input
+(code retour : 0)
+
+==================================================================
+[02] Fichier choisi pour le premier test : store.dat du lot initial (petit fichier reel du kit)
+Date : 2026-11-18 11:27:23
+$ ls -l "$SRCF"; awk 'END{print NR " lignes"}' "$SRCF"; sha256sum "$SRCF"
+------------------------------------------------------------------
+-rwxr-xr-x 1 abedja abedja 3386 Nov 18 10:25 /home/abedja/kit_tpcxbb/data/store/store.dat
+12 lignes
+a936bc38692bdddc222cf86d08ed9d0feb761af26769212d789cf6729d1808ef  /home/abedja/kit_tpcxbb/data/store/store.dat
+(code retour : 0)
+
+==================================================================
+[03] Copie de travail dans le dossier d'entree (l'original du kit n'est pas touche)
+Date : 2026-11-18 11:27:23
+$ cp "$SRCF" /data/nifi/input/ && ls -l /data/nifi/input && sha256sum /data/nifi/input/store.dat
+------------------------------------------------------------------
+total 4
+-rwxr-xr-x 1 abedja abedja 3386 Nov 18 11:27 store.dat
+a936bc38692bdddc222cf86d08ed9d0feb761af26769212d789cf6729d1808ef  /data/nifi/input/store.dat
+(code retour : 0)
+
+==================================================================
+[04] Le dossier d'entree ne contient que le fichier de test
+Date : 2026-11-18 11:27:23
+$ find /data/nifi/input -type f | wc -l
+------------------------------------------------------------------
+1
+(code retour : 0)
+
+==================================================================
+[05] NiFi (compte abedja) peut lire et supprimer dans le dossier d'entree
+Date : 2026-11-18 11:27:23
+$ ps -o user= -p $(pgrep -f 'org.apache.nifi.NiFi' | head -1); [ -r /data/nifi/input/store.dat ] && echo 'lecture : oui'; [ -w /data/nifi/input ] && echo 'ecriture dans le dossier (suppression apres lecture) : oui'
+------------------------------------------------------------------
+abedja
+lecture : oui
+ecriture dans le dossier (suppression apres lecture) : oui
+(code retour : 0)
+
+==================================================================
+[06] Destination HDFS distincte de l'UC-03 : /retail-lake/raw/nifi
+Date : 2026-11-18 11:27:24
+$ hdfs dfs -mkdir -p /retail-lake/raw/nifi && hdfs dfs -ls -d /retail-lake/raw/nifi && hdfs dfs -count /retail-lake/raw/nifi
+------------------------------------------------------------------
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/nifi
+           1            0                  0 /retail-lake/raw/nifi
+(code retour : 0)
+
+==================================================================
+[07] Fichiers de configuration Hadoop a donner a PutHDFS
+Date : 2026-11-18 11:27:29
+$ ls -l /opt/hadoop/etc/hadoop/core-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
+------------------------------------------------------------------
+-rw-r--r-- 1 abedja abedja 170 Nov 17 14:11 /opt/hadoop/etc/hadoop/core-site.xml
+-rw-r--r-- 1 abedja abedja 405 Nov 17 14:11 /opt/hadoop/etc/hadoop/hdfs-site.xml
+(code retour : 0)
+

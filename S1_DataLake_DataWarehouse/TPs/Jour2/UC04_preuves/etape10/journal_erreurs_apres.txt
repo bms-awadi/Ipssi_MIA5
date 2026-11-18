@@ -1,0 +1,67 @@
+# UC-04 Etape 10 - Erreurs controlees (apres)
+# Machine : PICOXIA-03, utilisateur Linux : abedja
+
+==================================================================
+[01] Erreurs et avertissements de NiFi depuis le debut des tests (2026-11-18 14:20:11)
+Date : 2026-11-18 14:35:22
+$ cat /opt/nifi/logs/nifi-app*.log | awk -v d='2026-11-18 14:20:11' 'substr($0,1,19) >= d' | grep -E ' (ERROR|WARN) ' | grep -vi password | cut -c1-400
+------------------------------------------------------------------
+2026-11-18 14:27:33,051 WARN [Timer-Driven Process Thread-9] o.apache.nifi.processors.hadoop.PutHDFS PutHDFS[id=ee5b193f-01a1-1000-c9dc-45fa22407ecf] penalizing StandardFlowFileRecord[uuid=42a5afe1-9532-47b5-bbad-dc4f5f77e02e,claim=StandardContentClaim [resourceClaim=StandardResourceClaim[id=1795007373454-1, container=default, section=1], offset=3386, length=3386],offset=0,name=store.dat,size=3386
+(code retour : 0)
+
+==================================================================
+[02] Attributs du FlowFile en echec journalises par LogAttribute
+Date : 2026-11-18 14:35:22
+$ cat /opt/nifi/logs/nifi-app*.log | awk -v d='2026-11-18 14:20:11' 'substr($0,1,19) >= d' | grep -A 30 'LogAttribute\[' | grep -E 'LogAttribute|filename|path|absolute.path|uuid|file.size|Key:|Value:|---' | head -40 | cut -c1-200
+------------------------------------------------------------------
+2026-11-18 14:33:42,239 INFO [NiFi Web Server-167] o.a.n.c.s.StandardProcessScheduler Starting LogAttribute[id=ee69d009-01a1-1000-b72c-d6dac3220dd8]
+2026-11-18 14:33:42,240 INFO [NiFi Web Server-167] o.a.n.controller.StandardProcessorNode Desired State for LogAttribute[id=ee69d009-01a1-1000-b72c-d6dac3220dd8] now set to RUNNING
+2026-11-18 14:33:42,255 INFO [Timer-Driven Process Thread-8] o.a.n.c.s.TimerDrivenSchedulingAgent Scheduled LogAttribute[id=ee69d009-01a1-1000-b72c-d6dac3220dd8] to run with 1 threads
+2026-11-18 14:33:42,296 INFO [Timer-Driven Process Thread-10] o.a.n.processors.standard.LogAttribute LogAttribute[id=ee69d009-01a1-1000-b72c-d6dac3220dd8] logging for FlowFile StandardFlowFileRecord[u
+Key: 'entryDate'
+Key: 'lineageStartDate'
+Key: 'fileSize'
+Key: 'absolute.path'
+Key: 'file.creationTime'
+Key: 'file.group'
+Key: 'file.lastAccessTime'
+Key: 'file.lastModifiedTime'
+Key: 'file.owner'
+Key: 'file.permissions'
+Key: 'filename'
+Key: 'path'
+Key: 'uuid'
+(code retour : 0)
+
+==================================================================
+[03] Dossier d'entree : la copie a ete lue par GetFile
+Date : 2026-11-18 14:35:22
+$ ls -la /data/nifi/input; echo -n 'fichiers restants : '; find /data/nifi/input -type f | wc -l
+------------------------------------------------------------------
+total 8
+drwxr-xr-x 2 abedja abedja 4096 Nov 18 14:27 .
+drwxr-xr-x 5 root   root   4096 Nov 18 10:20 ..
+fichiers restants : 0
+(code retour : 0)
+
+==================================================================
+[04] HDFS : le fichier de l'etape 9 n'a pas ete ecrase (meme date, meme empreinte)
+Date : 2026-11-18 14:35:22
+$ hdfs dfs -ls /retail-lake/raw/nifi; hdfs dfs -stat 'ecrit=%y' /retail-lake/raw/nifi/store.dat; hdfs dfs -cat /retail-lake/raw/nifi/store.dat | sha256sum
+------------------------------------------------------------------
+Found 1 items
+-rw-r--r--   1 abedja supergroup       3386 2026-11-18 14:09 /retail-lake/raw/nifi/store.dat
+ecrit=2026-11-18 14:09:33
+a936bc38692bdddc222cf86d08ed9d0feb761af26769212d789cf6729d1808ef  -
+(code retour : 0)
+
+==================================================================
+[05] GetFile a retrouve son dossier d'origine (configuration enregistree)
+Date : 2026-11-18 14:35:27
+$ python3 -c "import gzip,json; f=json.load(gzip.open('/opt/nifi/conf/flow.json.gz')); g=[x for x in f['rootGroup']['processGroups'] if x['name'].startswith('UC04')][0]; [print(p['name'], p['scheduledState'], p['properties'].get('Input Directory') or '') for p in g['processors']]"
+------------------------------------------------------------------
+GetFile ENABLED /data/nifi/input
+LogAttribute RUNNING 
+PutHDFS RUNNING 
+(code retour : 0)
+

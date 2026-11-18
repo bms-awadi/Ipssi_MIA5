@@ -1,0 +1,11 @@
+# Date      : 2026-11-18 10:30:28 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+
+dfs.permissions.enabled            true
+dfs.permissions.superusergroup     supergroup
+hadoop.security.authentication     simple
+dfs.namenode.checkpoint.period     3600
+
+$ hdfs dfs -ls -d /
+drwxr-xr-x   - abedja supergroup          0 1970-01-01 01:00 /

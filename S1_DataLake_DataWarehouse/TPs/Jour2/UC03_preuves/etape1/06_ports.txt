@@ -1,0 +1,11 @@
+# Date      : 2026-11-18 10:30:27 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ ss -ltnp 2>/dev/null | grep -E ':(9000|9870|9864|9866|9867|9868)\b' | awk '{print $4, $6}'
+
+127.0.0.1:9000 users:(("java",pid=607,fd=357))
+0.0.0.0:9870 users:(("java",pid=607,fd=342))
+0.0.0.0:9868 users:(("java",pid=1028,fd=338))
+0.0.0.0:9866 users:(("java",pid=751,fd=337))
+0.0.0.0:9867 users:(("java",pid=751,fd=475))
+0.0.0.0:9864 users:(("java",pid=751,fd=474))

@@ -1,0 +1,6 @@
+# Date      : 2026-11-18 10:30:19 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ hdfs dfsadmin -safemode get
+
+Safe mode is OFF

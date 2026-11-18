@@ -1,0 +1,75 @@
+=== Date
+Tue Nov 17 14:16:38 CET 2026
+=== Configuration
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
+</configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///home/abedja/hadoop-data/namenode</value>
+  </property>
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///home/abedja/hadoop-data/datanode</value>
+  </property>
+</configuration>
+=== Processus (jps)
+5056 DataNode
+5320 SecondaryNameNode
+5611 Jps
+4910 NameNode
+=== Rapport HDFS
+Configured Capacity: 1081101176832 (1006.85 GB)
+Present Capacity: 1017295470592 (947.43 GB)
+DFS Remaining: 1017295446016 (947.43 GB)
+DFS Used: 24576 (24 KB)
+DFS Used%: 0.00%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Badly Distributed Blocks: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Badly Distributed Blocks: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (1):
+
+Name: 127.0.0.1:9866 (localhost)
+Hostname: PICOXIA-03.localdomain
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 24576 (24 KB)
+Non DFS Used: 8813350912 (8.21 GB)
+DFS Remaining: 1017295446016 (947.43 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 94.10%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Tue Nov 17 14:16:38 CET 2026
+Last Block Report: Tue Nov 17 14:14:11 CET 2026
+Num of Blocks: 0
+
+

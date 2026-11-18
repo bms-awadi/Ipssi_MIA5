@@ -1,0 +1,185 @@
+# UC-04 Etape 6 - Decouverte de l'environnement NiFi
+# Machine : PICOXIA-03 (Ubuntu 22.04.5 LTS), utilisateur Linux : abedja
+# Aucun mot de passe ni cle n'est affiche dans ce journal.
+
+==================================================================
+[01] Version de NiFi
+Date : 2026-11-18 11:25:10
+$ ls $N/lib | grep -E '^nifi-(api|framework-api|runtime)-' ; grep -m1 -oE 'NiFi [0-9.]+|Apache NiFi[^,]*2\.[0-9.]+' $N/logs/nifi-app.log | head -1
+------------------------------------------------------------------
+nifi-api-2.12.0.jar
+nifi-framework-api-2.12.0.jar
+nifi-runtime-2.12.0.jar
+(code retour : 0)
+
+==================================================================
+[02] Etat du service (Java 21)
+Date : 2026-11-18 11:25:10
+$ $N/bin/nifi.sh status 2>&1 | grep -E 'Status|Command Status' | sed 's/^.*INFO \[main\] //'; echo; jps -l | grep -iE 'nifi|bootstrap'
+------------------------------------------------------------------
+org.apache.nifi.bootstrap.Command Application Process [2445] Command Status [SUCCESS] HTTP 200
+org.apache.nifi.bootstrap.Command Status: UP
+
+2417 org.apache.nifi.bootstrap.BootstrapProcess
+2445 org.apache.nifi.NiFi
+(code retour : 0)
+
+==================================================================
+[03] Demarrage de l'application (journal)
+Date : 2026-11-18 11:25:11
+$ cat $N/logs/nifi-app*.log | grep -E 'Started Application|Flow Controller started' | tail -2 | cut -c1-160
+------------------------------------------------------------------
+2026-11-18 10:23:50,611 INFO [main] o.a.n.w.c.ApplicationStartupContextListener Flow Controller started successfully.
+2026-11-18 10:23:51,840 INFO [main] org.apache.nifi.runtime.Application Started Application in 11.996 seconds (11996464309 ns)
+(code retour : 0)
+
+==================================================================
+[04] Memoire allouee a NiFi (bootstrap.conf)
+Date : 2026-11-18 11:25:11
+$ grep -E '^java.arg.(2|3)=|preferIPv4' $N/conf/bootstrap.conf
+------------------------------------------------------------------
+java.arg.2=-Xms1g
+java.arg.3=-Xmx1g
+java.arg.preferIPv4Stack=-Djava.net.preferIPv4Stack=true
+(code retour : 0)
+
+==================================================================
+[05] Adresse d'acces a l'interface
+Date : 2026-11-18 11:25:11
+$ grep -E '^nifi.web.https?.(host|port)=' $P; echo; ss -ltnp 2>/dev/null | grep -E ':8443' | awk '{print $4}'; curl -sk -o /dev/null -w 'https://localhost:8443/nifi -> HTTP %{http_code}\n' https://localhost:8443/nifi/
+------------------------------------------------------------------
+nifi.web.http.host=
+nifi.web.http.port=
+nifi.web.https.host=localhost
+nifi.web.https.port=8443
+
+127.0.0.1:8443
+https://localhost:8443/nifi -> HTTP 200
+(code retour : 0)
+
+==================================================================
+[06] Securite : HTTPS, certificat et authentification
+Date : 2026-11-18 11:25:11
+$ grep -E '^nifi.security.(keystoreType|truststoreType)=|^nifi.security.user.(login.identity.provider|authorizer)=|^nifi.web.https.network.interface' $P; echo; ls -l $N/conf | grep -E 'keystore|truststore|login-identity|authorizers'; echo; echo 'Certificat du serveur :'; echo | openssl s_client -connect localhost:8443 2>/dev/null | openssl x509 -noout -subject -issuer -dates 2>/dev/null
+------------------------------------------------------------------
+nifi.web.https.network.interface.default=
+nifi.security.keystoreType=PKCS12
+nifi.security.truststoreType=PKCS12
+nifi.security.user.authorizer=single-user-authorizer
+nifi.security.user.login.identity.provider=single-user-provider
+
+-rw-r--r-- 1 abedja abedja 19243 Sep 10 19:06 authorizers.xml
+-rw-r--r-- 1 abedja abedja  4366 Nov 18 10:14 keystore.p12
+-rw-r--r-- 1 abedja abedja  7263 Nov 18 10:23 login-identity-providers.xml
+-rw-r--r-- 1 abedja abedja  1734 Nov 18 10:14 truststore.p12
+
+Certificat du serveur :
+subject=CN = localhost
+issuer=CN = localhost
+notBefore=Nov 18 09:14:51 2026 GMT
+notAfter=Jan 17 09:14:51 2027 GMT
+(code retour : 0)
+
+==================================================================
+[07] Securite : fournisseur d'identite configure
+Date : 2026-11-18 11:25:11
+$ grep -oE '<identifier>[^<]+</identifier>|<class>[^<]+</class>' $N/conf/login-identity-providers.xml | head -4; grep -oE '<class>[^<]+</class>' $N/conf/authorizers.xml | sort -u
+------------------------------------------------------------------
+<identifier>single-user-provider</identifier>
+<class>org.apache.nifi.authentication.single.user.SingleUserLoginIdentityProvider</class>
+<identifier>ldap-provider</identifier>
+<class>org.apache.nifi.ldap.LdapProvider</class>
+<class>org.apache.nifi.authorization.CompositeConfigurableUserGroupProvider</class>
+<class>org.apache.nifi.authorization.CompositeUserGroupProvider</class>
+<class>org.apache.nifi.authorization.FileAccessPolicyProvider</class>
+<class>org.apache.nifi.authorization.FileUserGroupProvider</class>
+<class>org.apache.nifi.authorization.StandardManagedAuthorizer</class>
+<class>org.apache.nifi.authorization.single.user.SingleUserAuthorizer</class>
+<class>org.apache.nifi.ldap.tenants.LdapUserGroupProvider</class>
+(code retour : 0)
+
+==================================================================
+[08] Depots internes de NiFi (FlowFile, contenu, provenance)
+Date : 2026-11-18 11:25:11
+$ grep -E '^nifi.(flowfile|content|provenance).repository.(implementation|directory[^=]*|max.storage.time|max.storage.size)=' $P; echo; du -sh $N/*_repository 2>/dev/null
+------------------------------------------------------------------
+nifi.flowfile.repository.implementation=org.apache.nifi.controller.repository.WriteAheadFlowFileRepository
+nifi.flowfile.repository.directory=./flowfile_repository
+nifi.content.repository.implementation=org.apache.nifi.controller.repository.FileSystemRepository
+nifi.content.repository.directory.default=./content_repository
+nifi.provenance.repository.implementation=org.apache.nifi.provenance.WriteAheadProvenanceRepository
+nifi.provenance.repository.directory.default=./provenance_repository
+nifi.provenance.repository.max.storage.time=30 days
+nifi.provenance.repository.max.storage.size=10 GB
+
+8.1M	/opt/nifi/content_repository
+32K	/opt/nifi/database_repository
+32K	/opt/nifi/flowfile_repository
+12K	/opt/nifi/nar_repository
+4.0K	/opt/nifi/provenance_repository
+(code retour : 0)
+
+==================================================================
+[09] Flux enregistre (fichier de configuration du canvas)
+Date : 2026-11-18 11:25:11
+$ grep -E '^nifi.flow.configuration.file=' $P; ls -l $N/conf/flow.json.gz 2>/dev/null
+------------------------------------------------------------------
+nifi.flow.configuration.file=./conf/flow.json.gz
+-rw-r--r-- 1 abedja abedja 648 Nov 18 11:16 /opt/nifi/conf/flow.json.gz
+(code retour : 0)
+
+==================================================================
+[10] Modules (NAR) charges
+Date : 2026-11-18 11:25:11
+$ ls $N/lib/*.nar | wc -l | sed 's/^/NAR dans lib : /'; ls $N/extensions/*.nar 2>/dev/null | wc -l | sed 's/^/NAR ajoutes dans extensions : /'; ls $N/extensions
+------------------------------------------------------------------
+NAR dans lib : 119
+NAR ajoutes dans extensions : 2
+nifi-hadoop-libraries-nar-2.12.0.nar
+nifi-hadoop-nar-2.12.0.nar
+(code retour : 0)
+
+==================================================================
+[11] Composants disponibles par type (lus dans les manifestes des 121 modules)
+Date : 2026-11-18 11:25:11
+$ tail -n +2 '/home/abedja/tp2/preuves/UC04/etape6/composants_nifi.csv' | cut -d';' -f1 | sort | uniq -c | sort -rn
+------------------------------------------------------------------
+    304 PROCESSOR
+    125 CONTROLLER_SERVICE
+     10 REPORTING_TASK
+      8 PARAMETER_PROVIDER
+      5 FLOW_REGISTRY_CLIENT
+      5 FLOW_ANALYSIS_RULE
+      1 CONNECTOR
+(code retour : 0)
+
+==================================================================
+[12] Processeurs utiles au TP : presents ?
+Date : 2026-11-18 11:25:11
+$ for p in GetFile PutHDFS LogAttribute UpdateAttribute RouteOnAttribute ListFile FetchFile PutFile GetHDFS ListHDFS FetchHDFS; do printf '%-18s ' $p; grep -E '^PROCESSOR;org\.apache\.nifi\.processors\.[a-z.]+\.'$p';' '/home/abedja/tp2/preuves/UC04/etape6/composants_nifi.csv' | head -1 | cut -d';' -f3 | sed 's/^/present, module /' | grep . || echo ABSENT; done
+------------------------------------------------------------------
+GetFile            present, module nifi-standard-nar-2.12.0
+PutHDFS            present, module nifi-hadoop-nar-2.12.0
+LogAttribute       present, module nifi-standard-nar-2.12.0
+UpdateAttribute    present, module nifi-update-attribute-nar-2.12.0
+RouteOnAttribute   present, module nifi-standard-nar-2.12.0
+ListFile           present, module nifi-standard-nar-2.12.0
+FetchFile          present, module nifi-standard-nar-2.12.0
+PutFile            present, module nifi-standard-nar-2.12.0
+GetHDFS            present, module nifi-hadoop-nar-2.12.0
+ListHDFS           present, module nifi-hadoop-nar-2.12.0
+FetchHDFS          present, module nifi-hadoop-nar-2.12.0
+(code retour : 0)
+
+==================================================================
+[13] Services necessaires a l'ingestion vers HDFS
+Date : 2026-11-18 11:25:11
+$ echo -n 'NameNode localhost:9000 : '; (exec 3<>/dev/tcp/127.0.0.1/9000) 2>/dev/null && echo joignable || echo INJOIGNABLE; echo -n 'core-site.xml lisible par abedja : '; [ -r /opt/hadoop/etc/hadoop/core-site.xml ] && echo oui || echo non; echo -n 'hdfs-site.xml lisible par abedja : '; [ -r /opt/hadoop/etc/hadoop/hdfs-site.xml ] && echo oui || echo non; echo -n 'Utilisateur qui execute NiFi : '; ps -o user= -p $(pgrep -f 'org.apache.nifi.NiFi' | head -1); echo -n 'Destination HDFS /retail-lake/raw/nifi : '; /opt/hadoop/bin/hdfs dfs -ls -d /retail-lake/raw/nifi 2>/dev/null | awk '{print $1, $3, $8}'
+------------------------------------------------------------------
+NameNode localhost:9000 : joignable
+core-site.xml lisible par abedja : oui
+hdfs-site.xml lisible par abedja : oui
+Utilisateur qui execute NiFi : abedja
+Destination HDFS /retail-lake/raw/nifi : drwxr-xr-x abedja /retail-lake/raw/nifi
+(code retour : 0)
+

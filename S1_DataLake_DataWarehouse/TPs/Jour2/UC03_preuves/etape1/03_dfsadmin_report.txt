@@ -1,0 +1,49 @@
+# Date      : 2026-11-18 10:30:17 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ hdfs dfsadmin -report
+
+Configured Capacity: 1081101176832 (1006.85 GB)
+Present Capacity: 1014001967104 (944.36 GB)
+DFS Remaining: 1014001938432 (944.36 GB)
+DFS Used: 28672 (28 KB)
+DFS Used%: 0.00%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Badly Distributed Blocks: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Badly Distributed Blocks: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (1):
+
+Name: 127.0.0.1:9866 (localhost)
+Hostname: PICOXIA-03.localdomain
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 28672 (28 KB)
+Non DFS Used: 12106854400 (11.28 GB)
+DFS Remaining: 1014001938432 (944.36 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 93.79%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Wed Nov 18 10:30:17 CET 2026
+Last Block Report: Wed Nov 18 09:50:23 CET 2026
+Num of Blocks: 0
+
+

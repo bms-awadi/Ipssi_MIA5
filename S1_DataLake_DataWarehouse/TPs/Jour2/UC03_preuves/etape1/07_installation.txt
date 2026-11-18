@@ -1,0 +1,52 @@
+# Date      : 2026-11-18 10:30:27 CET
+# Machine   : PICOXIA-03 (Ubuntu 22.04.5 LTS)
+# Utilisateur : abedja
+$ echo HADOOP_HOME=$HADOOP_HOME; echo HADOOP_CONF_DIR=$HADOOP_CONF_DIR; ls $HADOOP_HOME; echo; echo '--- Java'; readlink -f /usr/bin/java; ls -d /usr/lib/jvm/*; echo; /usr/lib/jvm/java-17-openjdk-amd64/bin/java -version; /usr/lib/jvm/java-21-openjdk-amd64/bin/java -version; echo; echo '--- Python'; python3 --version; echo; echo '--- NiFi'; ls /opt/nifi/lib | grep -m1 -oE 'nifi-api-[0-9.]+' ; echo; echo '--- Systeme'; uname -srm; nproc; free -h | head -2; df -h $HOME | tail -1
+
+HADOOP_HOME=/opt/hadoop
+HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+Dockerfile
+LICENSE-binary
+LICENSE.txt
+NOTICE-binary
+NOTICE.txt
+README.txt
+bin
+compose
+etc
+include
+lib
+libexec
+licenses-binary
+logs
+sbin
+share
+
+--- Java
+/usr/lib/jvm/java-21-openjdk-amd64/bin/java
+/usr/lib/jvm/java-1.17.0-openjdk-amd64
+/usr/lib/jvm/java-1.21.0-openjdk-amd64
+/usr/lib/jvm/java-17-openjdk-amd64
+/usr/lib/jvm/java-21-openjdk-amd64
+/usr/lib/jvm/openjdk-17
+/usr/lib/jvm/openjdk-21
+
+openjdk version "17.0.21.0.3" 2026-10-24
+OpenJDK Runtime Environment (build 17.0.21.0.3+1-1-22.04.1-Ubuntu)
+OpenJDK 64-Bit Server VM (build 17.0.21.0.3+1-1-22.04.1-Ubuntu, mixed mode, sharing)
+openjdk version "21.0.13.0.3" 2026-10-24
+OpenJDK Runtime Environment (build 21.0.13.0.3+1-1-22.04.1-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-22.04.1-Ubuntu, mixed mode, sharing)
+
+--- Python
+Python 3.10.12
+
+--- NiFi
+nifi-api-2.12.0.
+
+--- Systeme
+Linux 6.6.87.2-microsoft-standard-WSL2 x86_64
+16
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       2.6Gi       8.7Gi       3.0Mi       4.2Gi        12Gi
+/dev/sdd       1007G   12G  945G   2% /

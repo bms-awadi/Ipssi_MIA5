@@ -1,0 +1,23 @@
+=== Date et compte
+Tue Nov 17 13:55:45 CET 2026
+abedja
+=== Système
+Ubuntu 22.04.5 LTS
+6.6.87.2-microsoft-standard-WSL2
+=== Java
+/usr/lib/jvm/java-1.17.0-openjdk-amd64
+/usr/lib/jvm/java-1.21.0-openjdk-amd64
+/usr/lib/jvm/java-17-openjdk-amd64
+/usr/lib/jvm/java-21-openjdk-amd64
+/usr/lib/jvm/openjdk-17
+/usr/lib/jvm/openjdk-21
+openjdk version "17.0.21.0.3" 2026-10-24
+OpenJDK Runtime Environment (build 17.0.21.0.3+1-1-22.04.1-Ubuntu)
+OpenJDK 64-Bit Server VM (build 17.0.21.0.3+1-1-22.04.1-Ubuntu, mixed mode, sharing)
+openjdk version "21.0.13.0.3" 2026-10-24
+OpenJDK Runtime Environment (build 21.0.13.0.3+1-1-22.04.1-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-22.04.1-Ubuntu, mixed mode, sharing)
+=== SSH
+active
+=== Python
+Python 3.10.12

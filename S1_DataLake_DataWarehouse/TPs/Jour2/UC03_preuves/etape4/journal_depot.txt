@@ -1,0 +1,336 @@
+# UC-03 Etape 4 - Depot des donnees TPCx-BB
+# Machine : PICOXIA-03 (Ubuntu 22.04.5 LTS), utilisateur Linux : abedja, Hadoop 3.5.0
+# Source locale : /home/abedja/tp2/kit
+
+==================================================================
+[01] Controle avant depot : nombre de fichiers, lisibilite, taille totale
+Date : 2026-11-18 10:44:52
+$ tail -n +2 '/home/abedja/tp2/preuves/UC03/etape4/controle_avant_depot.csv' | awk -F';' '{n++; if($5=="oui") r++; s+=$6} END{printf "%d fichiers, %d lisibles, %d octets\n", n, r, s}'
+------------------------------------------------------------------
+36 fichiers, 36 lisibles, 1033993587 octets
+(code retour : 0)
+
+==================================================================
+[02] Exemple detaille avant depot : store_sales.dat (lot initial)
+Date : 2026-11-18 10:44:52
+$ f="$SRC/data/store_sales/store_sales.dat"; ls -l "$f"; file "$f"; echo; echo 'Deux premieres lignes :'; head -2 "$f"; echo; echo -n 'Colonnes (separateur |) : '; head -1 "$f" | awk -F'|' '{print NF}'; echo -n 'Lignes : '; awk 'END{print NR}' "$f"
+------------------------------------------------------------------
+-rwxr-xr-x 1 abedja abedja 92764700 Nov 18 10:25 /home/abedja/tp2/kit/data/store_sales/store_sales.dat
+/home/abedja/tp2/kit/data/store_sales/store_sales.dat: ASCII text, with CRLF line terminators
+
+Deux premieres lignes :
+36890|71480|10001|44404|493944|2898|44093|10|294|0|31|18.00|30.78|23.08|238.70|715.48|558.00|954.18|21.46|0.00|715.48|736.94|157.48
+36890|71480|10000|44404|493944|2898|44093|10|279|0|54|99.21|148.82|83.34|3535.92|4500.36|5357.34|8036.28|225.02|0.00|4500.36|4725.38|-856.98
+
+Colonnes (separateur |) : 23
+Lignes : 667579
+(code retour : 0)
+
+==================================================================
+[03] Lien symbolique vers le kit (chemin sans espace pour Hadoop)
+Date : 2026-11-18 10:44:52
+$ ls -l "$KIT"; ls "$KIT"
+------------------------------------------------------------------
+lrwxrwxrwx 1 abedja abedja 20 Nov 18 10:44 /home/abedja/kit_tpcxbb -> /home/abedja/tp2/kit
+data
+data_refresh
+(code retour : 0)
+
+==================================================================
+[04] Etat de RAW avant depot (droits d'ecriture du proprietaire retablis apres le 1er essai)
+Date : 2026-11-18 10:44:52
+$ hdfs dfs -chmod -R u+w /retail-lake/raw/tpcxbb && hdfs dfs -ls -R /retail-lake/raw
+------------------------------------------------------------------
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/nifi
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb/initial
+drwxr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb/refresh
+(code retour : 0)
+
+==================================================================
+[05] Depot RAW du lot initial : copie de tout le dossier data du kit
+Date : 2026-11-18 10:44:55
+$ if hdfs dfs -test -e /retail-lake/raw/tpcxbb/initial/store_sales; then echo 'deja depose : rien a faire'; else hdfs dfs -put $KIT/data/* /retail-lake/raw/tpcxbb/initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[06] Depot RAW du lot refresh : copie de tout le dossier data_refresh du kit
+Date : 2026-11-18 10:45:07
+$ if hdfs dfs -test -e /retail-lake/raw/tpcxbb/refresh/store_sales; then echo 'deja depose : rien a faire'; else hdfs dfs -put $KIT/data_refresh/* /retail-lake/raw/tpcxbb/refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[07] Creation des dossiers BRONZE du lot initial (23 tables)
+Date : 2026-11-18 10:45:11
+$ hdfs dfs -mkdir -p /retail-lake/bronze/tpcxbb/customer/lot=initial /retail-lake/bronze/tpcxbb/customer_address/lot=initial /retail-lake/bronze/tpcxbb/customer_demographics/lot=initial /retail-lake/bronze/tpcxbb/date_dim/lot=initial /retail-lake/bronze/tpcxbb/household_demographics/lot=initial /retail-lake/bronze/tpcxbb/income_band/lot=initial /retail-lake/bronze/tpcxbb/inventory/lot=initial /retail-lake/bronze/tpcxbb/item/lot=initial /retail-lake/bronze/tpcxbb/item_marketprices/lot=initial /retail-lake/bronze/tpcxbb/product_reviews/lot=initial /retail-lake/bronze/tpcxbb/promotion/lot=initial /retail-lake/bronze/tpcxbb/reason/lot=initial /retail-lake/bronze/tpcxbb/ship_mode/lot=initial /retail-lake/bronze/tpcxbb/store/lot=initial /retail-lake/bronze/tpcxbb/store_returns/lot=initial /retail-lake/bronze/tpcxbb/store_sales/lot=initial /retail-lake/bronze/tpcxbb/time_dim/lot=initial /retail-lake/bronze/tpcxbb/warehouse/lot=initial /retail-lake/bronze/tpcxbb/web_clickstreams/lot=initial /retail-lake/bronze/tpcxbb/web_page/lot=initial /retail-lake/bronze/tpcxbb/web_returns/lot=initial /retail-lake/bronze/tpcxbb/web_sales/lot=initial /retail-lake/bronze/tpcxbb/web_site/lot=initial
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[08] BRONZE : customer, lot initial
+Date : 2026-11-18 10:45:12
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/customer/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/customer/*' /retail-lake/bronze/tpcxbb/customer/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[09] BRONZE : customer_address, lot initial
+Date : 2026-11-18 10:45:16
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/customer_address/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/customer_address/*' /retail-lake/bronze/tpcxbb/customer_address/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[10] BRONZE : customer_demographics, lot initial
+Date : 2026-11-18 10:45:19
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/customer_demographics/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/customer_demographics/*' /retail-lake/bronze/tpcxbb/customer_demographics/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[11] BRONZE : date_dim, lot initial
+Date : 2026-11-18 10:45:22
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/date_dim/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/date_dim/*' /retail-lake/bronze/tpcxbb/date_dim/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[12] BRONZE : household_demographics, lot initial
+Date : 2026-11-18 10:45:25
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/household_demographics/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/household_demographics/*' /retail-lake/bronze/tpcxbb/household_demographics/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[13] BRONZE : income_band, lot initial
+Date : 2026-11-18 10:45:28
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/income_band/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/income_band/*' /retail-lake/bronze/tpcxbb/income_band/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[14] BRONZE : inventory, lot initial
+Date : 2026-11-18 10:45:32
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/inventory/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/inventory/*' /retail-lake/bronze/tpcxbb/inventory/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[15] BRONZE : item, lot initial
+Date : 2026-11-18 10:45:37
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/item/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/item/*' /retail-lake/bronze/tpcxbb/item/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[16] BRONZE : item_marketprices, lot initial
+Date : 2026-11-18 10:45:40
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/item_marketprices/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/item_marketprices/*' /retail-lake/bronze/tpcxbb/item_marketprices/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[17] BRONZE : product_reviews, lot initial
+Date : 2026-11-18 10:45:43
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/product_reviews/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/product_reviews/*' /retail-lake/bronze/tpcxbb/product_reviews/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[18] BRONZE : promotion, lot initial
+Date : 2026-11-18 10:45:47
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/promotion/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/promotion/*' /retail-lake/bronze/tpcxbb/promotion/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[19] BRONZE : reason, lot initial
+Date : 2026-11-18 10:45:50
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/reason/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/reason/*' /retail-lake/bronze/tpcxbb/reason/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[20] BRONZE : ship_mode, lot initial
+Date : 2026-11-18 10:45:53
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/ship_mode/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/ship_mode/*' /retail-lake/bronze/tpcxbb/ship_mode/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[21] BRONZE : store, lot initial
+Date : 2026-11-18 10:45:56
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/store/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/store/*' /retail-lake/bronze/tpcxbb/store/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[22] BRONZE : store_returns, lot initial
+Date : 2026-11-18 10:45:59
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/store_returns/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/store_returns/*' /retail-lake/bronze/tpcxbb/store_returns/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[23] BRONZE : store_sales, lot initial
+Date : 2026-11-18 10:46:02
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/store_sales/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/store_sales/*' /retail-lake/bronze/tpcxbb/store_sales/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[24] BRONZE : time_dim, lot initial
+Date : 2026-11-18 10:46:06
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/time_dim/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/time_dim/*' /retail-lake/bronze/tpcxbb/time_dim/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[25] BRONZE : warehouse, lot initial
+Date : 2026-11-18 10:46:09
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/warehouse/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/warehouse/*' /retail-lake/bronze/tpcxbb/warehouse/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[26] BRONZE : web_clickstreams, lot initial
+Date : 2026-11-18 10:46:12
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_clickstreams/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/web_clickstreams/*' /retail-lake/bronze/tpcxbb/web_clickstreams/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[27] BRONZE : web_page, lot initial
+Date : 2026-11-18 10:46:16
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_page/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/web_page/*' /retail-lake/bronze/tpcxbb/web_page/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[28] BRONZE : web_returns, lot initial
+Date : 2026-11-18 10:46:19
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_returns/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/web_returns/*' /retail-lake/bronze/tpcxbb/web_returns/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[29] BRONZE : web_sales, lot initial
+Date : 2026-11-18 10:46:22
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_sales/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/web_sales/*' /retail-lake/bronze/tpcxbb/web_sales/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[30] BRONZE : web_site, lot initial
+Date : 2026-11-18 10:46:25
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_site/lot=initial | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/initial/web_site/*' /retail-lake/bronze/tpcxbb/web_site/lot=initial/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[31] Creation des dossiers BRONZE du lot refresh (11 tables)
+Date : 2026-11-18 10:46:28
+$ hdfs dfs -mkdir -p /retail-lake/bronze/tpcxbb/customer/lot=refresh /retail-lake/bronze/tpcxbb/customer_address/lot=refresh /retail-lake/bronze/tpcxbb/inventory/lot=refresh /retail-lake/bronze/tpcxbb/item/lot=refresh /retail-lake/bronze/tpcxbb/item_marketprices/lot=refresh /retail-lake/bronze/tpcxbb/product_reviews/lot=refresh /retail-lake/bronze/tpcxbb/store_returns/lot=refresh /retail-lake/bronze/tpcxbb/store_sales/lot=refresh /retail-lake/bronze/tpcxbb/web_clickstreams/lot=refresh /retail-lake/bronze/tpcxbb/web_returns/lot=refresh /retail-lake/bronze/tpcxbb/web_sales/lot=refresh
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[32] BRONZE : customer, lot refresh
+Date : 2026-11-18 10:46:30
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/customer/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/customer/*' /retail-lake/bronze/tpcxbb/customer/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[33] BRONZE : customer_address, lot refresh
+Date : 2026-11-18 10:46:33
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/customer_address/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/customer_address/*' /retail-lake/bronze/tpcxbb/customer_address/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[34] BRONZE : inventory, lot refresh
+Date : 2026-11-18 10:46:36
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/inventory/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/inventory/*' /retail-lake/bronze/tpcxbb/inventory/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[35] BRONZE : item, lot refresh
+Date : 2026-11-18 10:46:39
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/item/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/item/*' /retail-lake/bronze/tpcxbb/item/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[36] BRONZE : item_marketprices, lot refresh
+Date : 2026-11-18 10:46:42
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/item_marketprices/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/item_marketprices/*' /retail-lake/bronze/tpcxbb/item_marketprices/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[37] BRONZE : product_reviews, lot refresh
+Date : 2026-11-18 10:46:46
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/product_reviews/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/product_reviews/*' /retail-lake/bronze/tpcxbb/product_reviews/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[38] BRONZE : store_returns, lot refresh
+Date : 2026-11-18 10:46:49
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/store_returns/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/store_returns/*' /retail-lake/bronze/tpcxbb/store_returns/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[39] BRONZE : store_sales, lot refresh
+Date : 2026-11-18 10:46:52
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/store_sales/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/store_sales/*' /retail-lake/bronze/tpcxbb/store_sales/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[40] BRONZE : web_clickstreams, lot refresh
+Date : 2026-11-18 10:46:55
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_clickstreams/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/web_clickstreams/*' /retail-lake/bronze/tpcxbb/web_clickstreams/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[41] BRONZE : web_returns, lot refresh
+Date : 2026-11-18 10:46:58
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_returns/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/web_returns/*' /retail-lake/bronze/tpcxbb/web_returns/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[42] BRONZE : web_sales, lot refresh
+Date : 2026-11-18 10:47:01
+$ if [ $(hdfs dfs -count /retail-lake/bronze/tpcxbb/web_sales/lot=refresh | awk '{print $2}') -gt 0 ]; then echo 'deja range : rien a faire'; else hdfs dfs -cp '/retail-lake/raw/tpcxbb/refresh/web_sales/*' /retail-lake/bronze/tpcxbb/web_sales/lot=refresh/; fi
+------------------------------------------------------------------
+(code retour : 0)
+
+==================================================================
+[43] Enregistrement du manifeste dans HDFS (logs/ingestion)
+Date : 2026-11-18 10:47:04
+$ hdfs dfs -put - /retail-lake/logs/ingestion/manifeste_depot_20261118_104441.csv < '/home/abedja/tp2/preuves/UC03/etape4/manifeste_depot_20261118_104441.csv' && hdfs dfs -ls /retail-lake/logs/ingestion
+------------------------------------------------------------------
+Found 1 items
+-rw-r--r--   1 abedja supergroup      12377 2026-11-18 10:47 /retail-lake/logs/ingestion/manifeste_depot_20261118_104441.csv
+(code retour : 0)
+
+==================================================================
+[44] RAW en lecture seule : retrait du droit d'ecriture
+Date : 2026-11-18 10:47:07
+$ hdfs dfs -chmod -R a-w /retail-lake/raw/tpcxbb && hdfs dfs -ls -d /retail-lake/raw/tpcxbb /retail-lake/raw/tpcxbb/initial /retail-lake/raw/tpcxbb/initial/store_sales && hdfs dfs -ls /retail-lake/raw/tpcxbb/initial/store_sales
+------------------------------------------------------------------
+dr-xr-xr-x   - abedja supergroup          0 2026-11-18 10:42 /retail-lake/raw/tpcxbb
+dr-xr-xr-x   - abedja supergroup          0 2026-11-18 10:45 /retail-lake/raw/tpcxbb/initial
+dr-xr-xr-x   - abedja supergroup          0 2026-11-18 10:45 /retail-lake/raw/tpcxbb/initial/store_sales
+Found 1 items
+-r--r--r--   1 abedja supergroup   92764700 2026-11-18 10:45 /retail-lake/raw/tpcxbb/initial/store_sales/store_sales.dat
+(code retour : 0)
+

@@ -1,0 +1,4 @@
+heure_log;filename;table;lot;source;flux;date_ingestion;RouteOnAttribute.Route;absolute.path;absolute.hdfs.path;fileSize;uuid
+2026-11-18 15:33:04;item_marketprices_audit.csv;item_marketprices_audit;initial;tpcxbb;UC04-ingestion-enrichie;2026-11-18 15:33:04;unmatched;/data/nifi/input/;;273;b7f50f82-9b01-4bf7-8d67-da59a45cbb60
+2026-11-18 15:33:04;reason.dat;reason;initial;tpcxbb;UC04-ingestion-enrichie;2026-11-18 15:33:04;dat;/data/nifi/input/;/retail-lake/raw/nifi/reason;3105;38d146c3-dfbe-4fd5-97f4-4182d68e724b
+2026-11-18 15:33:04;ship_mode.dat;ship_mode;initial;tpcxbb;UC04-ingestion-enrichie;2026-11-18 15:33:04;dat;/data/nifi/input/;/retail-lake/raw/nifi/ship_mode;1220;2b078b18-4171-489a-b79a-6bf2e12147f4
