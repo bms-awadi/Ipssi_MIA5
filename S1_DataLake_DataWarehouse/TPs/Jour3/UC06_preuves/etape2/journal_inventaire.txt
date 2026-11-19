@@ -1,0 +1,231 @@
+
+=== store_sales / lot initial
+  chemin    : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store_sales/lot=initial/store_sales.dat
+  taille    : 92764700 octets (88.47 Mo)
+  lignes    : 667579 | colonnes : 23 (attendues : 23)
+  cle ss_ticket_number+ss_item_sk : 663443 valeurs distinctes pour 667579 lignes -> 4136 doublons de cle
+  fin de ligne Windows (\r) dans 'ss_net_profit' : 0 lignes
+  colonnes avec valeurs nulles : 4 sur 23
+root
+ |-- ss_sold_date_sk: integer (nullable = true)
+ |-- ss_sold_time_sk: integer (nullable = true)
+ |-- ss_item_sk: integer (nullable = true)
+ |-- ss_customer_sk: integer (nullable = true)
+ |-- ss_cdemo_sk: integer (nullable = true)
+ |-- ss_hdemo_sk: integer (nullable = true)
+ |-- ss_addr_sk: integer (nullable = true)
+ |-- ss_store_sk: integer (nullable = true)
+ |-- ss_promo_sk: integer (nullable = true)
+ |-- ss_ticket_number: integer (nullable = true)
+ |-- ss_quantity: integer (nullable = true)
+ |-- ss_wholesale_cost: double (nullable = true)
+ |-- ss_list_price: double (nullable = true)
+ |-- ss_sales_price: double (nullable = true)
+ |-- ss_ext_discount_amt: double (nullable = true)
+ |-- ss_ext_sales_price: double (nullable = true)
+ |-- ss_ext_wholesale_cost: double (nullable = true)
+ |-- ss_ext_list_price: double (nullable = true)
+ |-- ss_ext_tax: double (nullable = true)
+ |-- ss_coupon_amt: double (nullable = true)
+ |-- ss_net_paid: double (nullable = true)
+ |-- ss_net_paid_inc_tax: double (nullable = true)
+ |-- ss_net_profit: double (nullable = true)
+
++-----------+-----------+-------+--------+--------+-------------+----------------+
+|date_sk_min|date_sk_max|tickets|magasins|produits|quantites_<=0|marges_negatives|
++-----------+-----------+-------+--------+--------+-------------+----------------+
+|36890      |38697      |89100  |12      |17820   |0            |495971          |
++-----------+-----------+-------+--------+--------+-------------+----------------+
+
+
+=== store_sales / lot refresh
+  chemin    : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store_sales/lot=refresh/store_sales.dat
+  taille    : 922171 octets (0.88 Mo)
+  lignes    : 6632 | colonnes : 23 (attendues : 23)
+  cle ss_ticket_number+ss_item_sk : 6586 valeurs distinctes pour 6632 lignes -> 46 doublons de cle
+  fin de ligne Windows (\r) dans 'ss_net_profit' : 0 lignes
+  colonnes avec valeurs nulles : 4 sur 23
+root
+ |-- ss_sold_date_sk: integer (nullable = true)
+ |-- ss_sold_time_sk: integer (nullable = true)
+ |-- ss_item_sk: integer (nullable = true)
+ |-- ss_customer_sk: integer (nullable = true)
+ |-- ss_cdemo_sk: integer (nullable = true)
+ |-- ss_hdemo_sk: integer (nullable = true)
+ |-- ss_addr_sk: integer (nullable = true)
+ |-- ss_store_sk: integer (nullable = true)
+ |-- ss_promo_sk: integer (nullable = true)
+ |-- ss_ticket_number: integer (nullable = true)
+ |-- ss_quantity: integer (nullable = true)
+ |-- ss_wholesale_cost: double (nullable = true)
+ |-- ss_list_price: double (nullable = true)
+ |-- ss_sales_price: double (nullable = true)
+ |-- ss_ext_discount_amt: double (nullable = true)
+ |-- ss_ext_sales_price: double (nullable = true)
+ |-- ss_ext_wholesale_cost: double (nullable = true)
+ |-- ss_ext_list_price: double (nullable = true)
+ |-- ss_ext_tax: double (nullable = true)
+ |-- ss_coupon_amt: double (nullable = true)
+ |-- ss_net_paid: double (nullable = true)
+ |-- ss_net_paid_inc_tax: double (nullable = true)
+ |-- ss_net_profit: double (nullable = true)
+
++-----------+-----------+-------+--------+--------+-------------+----------------+
+|date_sk_min|date_sk_max|tickets|magasins|produits|quantites_<=0|marges_negatives|
++-----------+-----------+-------+--------+--------+-------------+----------------+
+|38697      |38715      |900    |12      |3536    |0            |4918            |
++-----------+-----------+-------+--------+--------+-------------+----------------+
+
+
+=== item / lot initial
+  chemin    : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/item/lot=initial/item.dat
+  taille    : 6799286 octets (6.48 Mo)
+  lignes    : 17820 | colonnes : 22 (attendues : 22)
+  cle i_item_sk : 17820 valeurs distinctes pour 17820 lignes -> unique
+  fin de ligne Windows (\r) dans 'i_product_name' : 0 lignes
+  colonnes avec valeurs nulles : 4 sur 22
+root
+ |-- i_item_sk: integer (nullable = true)
+ |-- i_item_id: string (nullable = true)
+ |-- i_rec_start_date: date (nullable = true)
+ |-- i_rec_end_date: string (nullable = true)
+ |-- i_item_desc: string (nullable = true)
+ |-- i_current_price: double (nullable = true)
+ |-- i_wholesale_cost: double (nullable = true)
+ |-- i_brand_id: integer (nullable = true)
+ |-- i_brand: string (nullable = true)
+ |-- i_class_id: integer (nullable = true)
+ |-- i_class: string (nullable = true)
+ |-- i_category_id: integer (nullable = true)
+ |-- i_category: string (nullable = true)
+ |-- i_manufact_id: integer (nullable = true)
+ |-- i_manufact: string (nullable = true)
+ |-- i_size: string (nullable = true)
+ |-- i_formulation: string (nullable = true)
+ |-- i_color: string (nullable = true)
+ |-- i_units: string (nullable = true)
+ |-- i_container: string (nullable = true)
+ |-- i_manager_id: integer (nullable = true)
+ |-- i_product_name: string (nullable = true)
+
+
+=== item / lot refresh
+  chemin    : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/item/lot=refresh/item.dat
+  taille    : 69173 octets (0.07 Mo)
+  lignes    : 180 | colonnes : 22 (attendues : 22)
+  cle i_item_sk : 180 valeurs distinctes pour 180 lignes -> unique
+  fin de ligne Windows (\r) dans 'i_product_name' : 0 lignes
+  colonnes avec valeurs nulles : 1 sur 22
+root
+ |-- i_item_sk: integer (nullable = true)
+ |-- i_item_id: string (nullable = true)
+ |-- i_rec_start_date: date (nullable = true)
+ |-- i_rec_end_date: string (nullable = true)
+ |-- i_item_desc: string (nullable = true)
+ |-- i_current_price: double (nullable = true)
+ |-- i_wholesale_cost: double (nullable = true)
+ |-- i_brand_id: integer (nullable = true)
+ |-- i_brand: string (nullable = true)
+ |-- i_class_id: integer (nullable = true)
+ |-- i_class: string (nullable = true)
+ |-- i_category_id: integer (nullable = true)
+ |-- i_category: string (nullable = true)
+ |-- i_manufact_id: integer (nullable = true)
+ |-- i_manufact: string (nullable = true)
+ |-- i_size: string (nullable = true)
+ |-- i_formulation: string (nullable = true)
+ |-- i_color: string (nullable = true)
+ |-- i_units: string (nullable = true)
+ |-- i_container: string (nullable = true)
+ |-- i_manager_id: integer (nullable = true)
+ |-- i_product_name: string (nullable = true)
+
+
+=== store / lot initial
+  chemin    : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store/lot=initial/store.dat
+  taille    : 3386 octets (0.00 Mo)
+  lignes    : 12 | colonnes : 29 (attendues : 29)
+  cle s_store_sk : 12 valeurs distinctes pour 12 lignes -> unique
+  fin de ligne Windows (\r) dans 's_tax_precentage' : 0 lignes
+  colonnes avec valeurs nulles : 1 sur 29
+root
+ |-- s_store_sk: integer (nullable = true)
+ |-- s_store_id: string (nullable = true)
+ |-- s_rec_start_date: date (nullable = true)
+ |-- s_rec_end_date: string (nullable = true)
+ |-- s_closed_date_sk: integer (nullable = true)
+ |-- s_store_name: string (nullable = true)
+ |-- s_number_employees: integer (nullable = true)
+ |-- s_floor_space: integer (nullable = true)
+ |-- s_hours: string (nullable = true)
+ |-- s_manager: string (nullable = true)
+ |-- s_market_id: integer (nullable = true)
+ |-- s_geography_class: string (nullable = true)
+ |-- s_market_desc: string (nullable = true)
+ |-- s_market_manager: string (nullable = true)
+ |-- s_division_id: integer (nullable = true)
+ |-- s_division_name: string (nullable = true)
+ |-- s_company_id: integer (nullable = true)
+ |-- s_company_name: string (nullable = true)
+ |-- s_street_number: integer (nullable = true)
+ |-- s_street_name: string (nullable = true)
+ |-- s_street_type: string (nullable = true)
+ |-- s_suite_number: string (nullable = true)
+ |-- s_city: string (nullable = true)
+ |-- s_county: string (nullable = true)
+ |-- s_state: string (nullable = true)
+ |-- s_zip: integer (nullable = true)
+ |-- s_country: string (nullable = true)
+ |-- s_gmt_offset: integer (nullable = true)
+ |-- s_tax_precentage: double (nullable = true)
+
+
+=== store / lot refresh : absent de Bronze
+
+=== date_dim / lot initial
+  chemin    : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/date_dim/lot=initial/date_dim.dat
+  taille    : 15395800 octets (14.68 Mo)
+  lignes    : 109573 | colonnes : 28 (attendues : 28)
+  cle d_date_sk : 109573 valeurs distinctes pour 109573 lignes -> unique
+  fin de ligne Windows (\r) dans 'd_current_year' : 0 lignes
+  colonnes avec valeurs nulles : 0 sur 28
+root
+ |-- d_date_sk: integer (nullable = true)
+ |-- d_date_id: string (nullable = true)
+ |-- d_date: date (nullable = true)
+ |-- d_month_seq: integer (nullable = true)
+ |-- d_week_seq: integer (nullable = true)
+ |-- d_quarter_seq: integer (nullable = true)
+ |-- d_year: integer (nullable = true)
+ |-- d_dow: integer (nullable = true)
+ |-- d_moy: integer (nullable = true)
+ |-- d_dom: integer (nullable = true)
+ |-- d_qoy: integer (nullable = true)
+ |-- d_fy_year: integer (nullable = true)
+ |-- d_fy_quarter_seq: integer (nullable = true)
+ |-- d_fy_week_seq: integer (nullable = true)
+ |-- d_day_name: string (nullable = true)
+ |-- d_quarter_name: string (nullable = true)
+ |-- d_holiday: string (nullable = true)
+ |-- d_weekend: string (nullable = true)
+ |-- d_following_holiday: string (nullable = true)
+ |-- d_first_dom: integer (nullable = true)
+ |-- d_last_dom: integer (nullable = true)
+ |-- d_same_day_ly: integer (nullable = true)
+ |-- d_same_day_lq: integer (nullable = true)
+ |-- d_current_day: string (nullable = true)
+ |-- d_current_week: string (nullable = true)
+ |-- d_current_month: string (nullable = true)
+ |-- d_current_quarter: string (nullable = true)
+ |-- d_current_year: string (nullable = true)
+
++-----------+-----------+
+|min(d_date)|max(d_date)|
++-----------+-----------+
+| 1900-01-01| 2199-12-31|
++-----------+-----------+
+
+
+=== date_dim / lot refresh : absent de Bronze
+
+Fichiers ecrits : /home/abedja/retail-intelligence/tp3/UC06_preuves/etape2

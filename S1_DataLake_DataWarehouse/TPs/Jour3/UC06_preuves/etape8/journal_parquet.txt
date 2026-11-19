@@ -1,0 +1,60 @@
+Date d'execution : 2026-11-19 11:34:26
+
+=== 1. Relecture d'un resultat Gold en Parquet
+root
+ |-- magasin_sk: integer (nullable = true)
+ |-- magasin: string (nullable = true)
+ |-- ville: string (nullable = true)
+ |-- etat: string (nullable = true)
+ |-- annee: integer (nullable = true)
+ |-- mois: integer (nullable = true)
+ |-- annee_mois: string (nullable = true)
+ |-- chiffre_affaires: decimal(17,2) (nullable = true)
+ |-- quantite: long (nullable = true)
+ |-- nb_tickets: long (nullable = true)
+ |-- nb_lignes: long (nullable = true)
+ |-- marge: decimal(17,2) (nullable = true)
+ |-- remise: decimal(17,2) (nullable = true)
+ |-- montant_catalogue: decimal(17,2) (nullable = true)
+ |-- panier_moyen: decimal(18,2) (nullable = true)
+ |-- taux_remise: decimal(24,2) (nullable = true)
+ |-- taux_marge: decimal(24,2) (nullable = true)
+ |-- ca_meme_mois_n_1: decimal(17,2) (nullable = true)
+ |-- evolution_ca_pct: decimal(25,2) (nullable = true)
+
+  chemin : hdfs://localhost:9000/retail-lake/gold/kpi_ventes_magasin_mois
+  lignes relues : 720 (attendu 720 = 12 magasins x 60 mois)
+  valeurs exploitables : CA nul ou vide = 0 | panier vide = 0
++----------+--------+----------------+------------+----------+
+|annee_mois| magasin|chiffre_affaires|panier_moyen|taux_marge|
++----------+--------+----------------+------------+----------+
+|   2001-01|  Forest|      1543731.88|    13907.49|    -54.86|
+|   2001-01|Hillside|      1749652.48|    13563.20|    -43.14|
+|   2001-01|Sherwood|      1612097.24|    14266.35|    -40.14|
++----------+--------+----------------+------------+----------+
+only showing top 3 rows
+=== 2. Comparaison des formats sur les memes donnees
+  jeu de test : 667579 lignes, 23 colonnes | CA de reference 1277224004.61
+  csv        87.83 Mo | ecriture   4.2 s | lecture complete   1.5 s | somme de 2 colonnes   0.9 s | montants en double, quantite en int | CA relu = reference : True (1277224004.610001)
+  json      336.75 Mo | ecriture   1.3 s | lecture complete   1.3 s | somme de 2 colonnes   0.9 s | montants en double, quantite en bigint | CA relu = reference : True (1277224004.6099985)
+  parquet    39.14 Mo | ecriture   1.8 s | lecture complete   0.5 s | somme de 2 colonnes   0.2 s | montants en decimal(7,2), quantite en int | CA relu = reference : True (1277224004.61)
+
+=== 3. Ce que Parquet garde : schema relu sans aucune option
+root
+ |-- ss_sold_date_sk: integer (nullable = true)
+ |-- ss_quantity: integer (nullable = true)
+ |-- ss_ext_sales_price: decimal(7,2) (nullable = true)
+ |-- ss_net_profit: decimal(7,2) (nullable = true)
+
+=== et ce que CSV perd : schema relu avec inferSchema
+root
+ |-- ss_sold_date_sk: integer (nullable = true)
+ |-- ss_quantity: integer (nullable = true)
+ |-- ss_ext_sales_price: double (nullable = true)
+ |-- ss_net_profit: double (nullable = true)
+
+=== 4. Taille de la cle de ligne SHA-256 dans silver/store_sales
+  23 colonnes metier : 39.14 Mo | avec ss_ligne_id et provenance : 81.24 Mo
+
+  dossier temporaire supprime : True
+Preuves : /home/abedja/retail-intelligence/tp3/UC06_preuves/etape8

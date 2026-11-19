@@ -1,0 +1,18 @@
+Waiting for /retail-lake/logs/traitements/silver_20261118_153139.json/part-00000 ... done
+--- silver
+Status: HEALTHY
+ Under-replicated blocks:	0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+--- quality/rejets
+Status: HEALTHY
+ Under-replicated blocks:	0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+--- logs/traitements
+Status: HEALTHY
+ Under-replicated blocks:	0 (0.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+
+177.8 M  177.8 M  /retail-lake/silver

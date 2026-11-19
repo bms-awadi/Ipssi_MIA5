@@ -1,0 +1,71 @@
+
+=== item : 18000 lignes en entree (lots reunis), 18000 conservees, 0 rejetees
+   par lot : {'initial': 17820, 'refresh': 180}
+   aucun motif de rejet declenche
+
+=== store : 12 lignes en entree (lots reunis), 12 conservees, 0 rejetees
+   par lot : {'initial': 12}
+   aucun motif de rejet declenche
+   colonnes retirees (N15) : ['s_closed_date_sk'] | colonnes restantes : 31
+
+=== date_dim : 109573 lignes en entree (lots reunis), 109573 conservees, 0 rejetees
+   par lot : {'initial': 109573}
+   aucun motif de rejet declenche
+   colonnes retirees (N16) : ['d_holiday'] | colonnes restantes : 30
+
+=== store_sales : 674211 lignes en entree (lots reunis), 674211 conservees, 0 rejetees
+   par lot : {'initial': 667579, 'refresh': 6632}
+   aucun motif de rejet declenche
+
+=== store_sales : effets des regles de conservation
+   ss_ligne_id_distincts     : 674211
+   lignes                    : 674211
+   N04_ss_customer_sk_vide   : 0
+   N04_ss_cdemo_sk_vide      : 250
+   N04_ss_hdemo_sk_vide      : 308
+   N04_ss_addr_sk_vide       : 462
+   N04_ss_promo_sk_vide      : 159
+   N12_prix_vente_0          : 3361
+   N12_net_paye_0            : 3995
+   N12_marge_negative        : 500889
+   N06 : cle de ligne unique : True
+
+Apercu des ventes nettoyees :
++--------------------+---------------+-----------+----------+----------------+-----------+-------+
+|         ss_ligne_id|ss_sold_date_sk|ss_store_sk|ss_item_sk|ss_ticket_number|ss_net_paid|    lot|
++--------------------+---------------+-----------+----------+----------------+-----------+-------+
+|e12dfd1df34fd732e...|          36890|          7|      4870|              20|    1013.48|initial|
+|309ff53c1b7bcca69...|          36890|          2|     10001|              12|     359.22|initial|
+|2d2019f1a8cbfa0d9...|          36890|         11|      2676|               2|     914.12|initial|
++--------------------+---------------+-----------+----------+----------------+-----------+-------+
+only showing top 3 rows
+root
+ |-- ss_ligne_id: string (nullable = true)
+ |-- ss_sold_date_sk: integer (nullable = true)
+ |-- ss_sold_time_sk: integer (nullable = true)
+ |-- ss_item_sk: integer (nullable = true)
+ |-- ss_customer_sk: integer (nullable = true)
+ |-- ss_cdemo_sk: integer (nullable = true)
+ |-- ss_hdemo_sk: integer (nullable = true)
+ |-- ss_addr_sk: integer (nullable = true)
+ |-- ss_store_sk: integer (nullable = true)
+ |-- ss_promo_sk: integer (nullable = true)
+ |-- ss_ticket_number: integer (nullable = true)
+ |-- ss_quantity: integer (nullable = true)
+ |-- ss_wholesale_cost: decimal(7,2) (nullable = true)
+ |-- ss_list_price: decimal(7,2) (nullable = true)
+ |-- ss_sales_price: decimal(7,2) (nullable = true)
+ |-- ss_ext_discount_amt: decimal(7,2) (nullable = true)
+ |-- ss_ext_sales_price: decimal(7,2) (nullable = true)
+ |-- ss_ext_wholesale_cost: decimal(7,2) (nullable = true)
+ |-- ss_ext_list_price: decimal(7,2) (nullable = true)
+ |-- ss_ext_tax: decimal(7,2) (nullable = true)
+ |-- ss_coupon_amt: decimal(7,2) (nullable = true)
+ |-- ss_net_paid: decimal(7,2) (nullable = true)
+ |-- ss_net_paid_inc_tax: decimal(7,2) (nullable = true)
+ |-- ss_net_profit: decimal(7,2) (nullable = true)
+ |-- lot: string (nullable = false)
+ |-- fichier_source: string (nullable = false)
+ |-- date_traitement: timestamp (nullable = false)
+
+Fichiers ecrits : /home/abedja/retail-intelligence/tp3/UC06_preuves/etape4

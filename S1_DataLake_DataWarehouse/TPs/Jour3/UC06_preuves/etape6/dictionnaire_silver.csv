@@ -1,0 +1,156 @@
+table;colonne;type;description
+store_sales;ss_ligne_id;string;Cle de ligne creee par le nettoyage (N06) : empreinte SHA-256 du lot et des valeurs de la ligne
+store_sales;ss_sold_date_sk;int;Cle du jour de vente (vers date_dim.d_date_sk)
+store_sales;ss_sold_time_sk;int;Cle de l'heure de vente (seconde de la journee)
+store_sales;ss_item_sk;int;Cle du produit (vers item.i_item_sk)
+store_sales;ss_customer_sk;int;Cle du client
+store_sales;ss_cdemo_sk;int;Cle du profil demographique client (peut etre vide)
+store_sales;ss_hdemo_sk;int;Cle du profil du menage (peut etre vide)
+store_sales;ss_addr_sk;int;Cle de l'adresse client (peut etre vide)
+store_sales;ss_store_sk;int;Cle du magasin (vers store.s_store_sk)
+store_sales;ss_promo_sk;int;Cle de la promotion (vide = sans promotion connue)
+store_sales;ss_ticket_number;int;Numero de ticket de caisse (plusieurs lignes par ticket)
+store_sales;ss_quantity;int;Quantite vendue (1 a 100)
+store_sales;ss_wholesale_cost;decimal(7,2);Cout unitaire d'achat
+store_sales;ss_list_price;decimal(7,2);Prix catalogue unitaire
+store_sales;ss_sales_price;decimal(7,2);Prix de vente unitaire apres remise
+store_sales;ss_ext_discount_amt;decimal(7,2);Remise totale de la ligne = catalogue - vente
+store_sales;ss_ext_sales_price;decimal(7,2);Montant de vente de la ligne = prix de vente x quantite (chiffre d'affaires)
+store_sales;ss_ext_wholesale_cost;decimal(7,2);Cout d'achat de la ligne
+store_sales;ss_ext_list_price;decimal(7,2);Montant catalogue de la ligne = prix catalogue x quantite
+store_sales;ss_ext_tax;decimal(7,2);Taxe de la ligne
+store_sales;ss_coupon_amt;decimal(7,2);Montant du coupon
+store_sales;ss_net_paid;decimal(7,2);Net paye = montant de vente - coupon
+store_sales;ss_net_paid_inc_tax;decimal(7,2);Net paye toutes taxes = net paye + taxe
+store_sales;ss_net_profit;decimal(7,2);Marge = net paye - cout d'achat (peut etre negative)
+store_sales;lot;string;Lot d'origine : initial ou refresh (N17)
+store_sales;fichier_source;string;Fichier Bronze lu (N17)
+store_sales;date_traitement;timestamp;Date et heure du traitement qui a produit la ligne (N17)
+item;i_item_sk;int;Cle du produit
+item;i_item_id;string;Identifiant metier du produit
+item;i_rec_start_date;date;Debut de validite de la fiche
+item;i_rec_end_date;date;Fin de validite (toujours vide : version courante)
+item;i_item_desc;string;
+item;i_current_price;decimal(7,2);Prix courant
+item;i_wholesale_cost;decimal(7,2);
+item;i_brand_id;int;
+item;i_brand;string;Marque (texte genere, peut etre vide)
+item;i_class_id;int;
+item;i_class;string;Classe de produit
+item;i_category_id;int;
+item;i_category;string;Categorie (9 valeurs)
+item;i_manufact_id;int;
+item;i_manufact;string;
+item;i_size;string;
+item;i_formulation;string;
+item;i_color;string;
+item;i_units;string;
+item;i_container;string;
+item;i_manager_id;int;
+item;i_product_name;string;Nom du produit (texte genere)
+item;lot;string;Lot d'origine : initial ou refresh (N17)
+item;fichier_source;string;Fichier Bronze lu (N17)
+item;date_traitement;timestamp;Date et heure du traitement qui a produit la ligne (N17)
+store;s_store_sk;int;Cle du magasin
+store;s_store_id;string;Identifiant metier du magasin
+store;s_rec_start_date;date;
+store;s_rec_end_date;date;
+store;s_store_name;string;Nom du magasin
+store;s_number_employees;int;Nombre d'employes
+store;s_floor_space;int;Surface de vente
+store;s_hours;string;
+store;s_manager;string;
+store;s_market_id;int;
+store;s_geography_class;string;
+store;s_market_desc;string;
+store;s_market_manager;string;
+store;s_division_id;int;
+store;s_division_name;string;
+store;s_company_id;int;
+store;s_company_name;string;
+store;s_street_number;string;
+store;s_street_name;string;
+store;s_street_type;string;
+store;s_suite_number;string;
+store;s_city;string;Ville
+store;s_county;string;
+store;s_state;string;Etat (code a 2 lettres)
+store;s_zip;string;Code postal (texte, conserve les zeros)
+store;s_country;string;
+store;s_gmt_offset;decimal(5,2);
+store;s_tax_precentage;decimal(5,2);
+store;lot;string;Lot d'origine : initial ou refresh (N17)
+store;fichier_source;string;Fichier Bronze lu (N17)
+store;date_traitement;timestamp;Date et heure du traitement qui a produit la ligne (N17)
+date_dim;d_date_sk;int;Cle du jour = nombre de jours depuis le 01/01/1900
+date_dim;d_date_id;string;
+date_dim;d_date;date;Date du jour
+date_dim;d_month_seq;int;
+date_dim;d_week_seq;int;
+date_dim;d_quarter_seq;int;
+date_dim;d_year;int;Annee
+date_dim;d_dow;int;Jour de la semaine (0 = dimanche)
+date_dim;d_moy;int;Mois (1 a 12)
+date_dim;d_dom;int;
+date_dim;d_qoy;int;Trimestre (1 a 4)
+date_dim;d_fy_year;int;
+date_dim;d_fy_quarter_seq;int;
+date_dim;d_fy_week_seq;int;
+date_dim;d_day_name;string;Nom du jour (anglais)
+date_dim;d_quarter_name;string;
+date_dim;d_weekend;string;Y si samedi ou dimanche
+date_dim;d_following_holiday;string;
+date_dim;d_first_dom;int;
+date_dim;d_last_dom;int;
+date_dim;d_same_day_ly;int;
+date_dim;d_same_day_lq;int;
+date_dim;d_current_day;string;
+date_dim;d_current_week;string;
+date_dim;d_current_month;string;
+date_dim;d_current_quarter;string;
+date_dim;d_current_year;string;
+date_dim;lot;string;Lot d'origine : initial ou refresh (N17)
+date_dim;fichier_source;string;Fichier Bronze lu (N17)
+date_dim;date_traitement;timestamp;Date et heure du traitement qui a produit la ligne (N17)
+ventes_detaillees;magasin_sk;int;Cle du magasin
+ventes_detaillees;produit_sk;int;Cle du produit
+ventes_detaillees;date_sk;int;Cle du jour
+ventes_detaillees;ligne_id;string;Cle de ligne (= ss_ligne_id de silver/store_sales, qui garde la provenance complete)
+ventes_detaillees;ticket;int;Numero de ticket
+ventes_detaillees;heure_sk;int;Cle de l'heure
+ventes_detaillees;client_sk;int;Cle du client
+ventes_detaillees;promotion_sk;int;Cle de la promotion
+ventes_detaillees;quantite;int;Quantite vendue
+ventes_detaillees;prix_catalogue_unitaire;decimal(7,2);Prix catalogue unitaire
+ventes_detaillees;prix_vente_unitaire;decimal(7,2);Prix de vente unitaire
+ventes_detaillees;cout_unitaire;decimal(7,2);Cout unitaire d'achat
+ventes_detaillees;montant_catalogue;decimal(7,2);Prix catalogue x quantite
+ventes_detaillees;remise;decimal(7,2);Montant catalogue - chiffre d'affaires
+ventes_detaillees;chiffre_affaires;decimal(7,2);Montant apres remise, hors taxe (definition du CA du Jour 1)
+ventes_detaillees;coupon;decimal(7,2);Montant du coupon
+ventes_detaillees;net_paye;decimal(7,2);Chiffre d'affaires - coupon
+ventes_detaillees;taxe;decimal(7,2);Taxe
+ventes_detaillees;net_paye_ttc;decimal(7,2);Net paye + taxe
+ventes_detaillees;cout;decimal(7,2);Cout d'achat de la ligne
+ventes_detaillees;marge;decimal(7,2);Net paye - cout (peut etre negative)
+ventes_detaillees;lot;string;Lot d'origine : initial ou refresh
+ventes_detaillees;avec_promotion;boolean;Vrai si une promotion est renseignee
+ventes_detaillees;vente_gratuite;boolean;Vrai si le chiffre d'affaires est nul
+ventes_detaillees;taux_remise_ligne;decimal(14,2);Remise / montant catalogue x 100
+ventes_detaillees;date_vente;date;Date de la vente
+ventes_detaillees;annee;int;Annee (partition)
+ventes_detaillees;mois;int;Mois
+ventes_detaillees;trimestre;int;Trimestre
+ventes_detaillees;annee_mois;string;Mois au format AAAA-MM
+ventes_detaillees;jour_semaine;string;Nom du jour
+ventes_detaillees;week_end;boolean;Vrai le samedi et le dimanche
+ventes_detaillees;produit_id;string;Identifiant metier du produit
+ventes_detaillees;categorie;string;Categorie du produit
+ventes_detaillees;classe;string;Classe du produit
+ventes_detaillees;marque;string;Marque (Inconnu si vide)
+ventes_detaillees;prix_courant;decimal(7,2);Prix courant du produit
+ventes_detaillees;magasin_id;string;Identifiant metier du magasin
+ventes_detaillees;magasin;string;Nom du magasin
+ventes_detaillees;ville;string;Ville du magasin
+ventes_detaillees;etat;string;Etat du magasin
+ventes_detaillees;employes;int;Nombre d'employes du magasin

@@ -1,0 +1,9 @@
+root
+ |-- date_sk: integer (nullable = true)
+ |-- date: date (nullable = true)
+ |-- annee: integer (nullable = true)
+ |-- mois: integer (nullable = true)
+ |-- trimestre: integer (nullable = true)
+ |-- annee_mois: string (nullable = true)
+ |-- jour_semaine: string (nullable = true)
+ |-- week_end: boolean (nullable = true)

@@ -1,0 +1,14 @@
+cas teste                        resultat     motifs obtenus
+aucun (ligne valide)             conservee    -  OK
+type_invalide:ss_quantity        rejetee      type_invalide:ss_quantity, obligatoire_vide:ss_quantity  OK
+obligatoire_vide:ss_store_sk     rejetee      obligatoire_vide:ss_store_sk  OK
+produit_inconnu                  rejetee      produit_inconnu  OK
+magasin_inconnu                  rejetee      magasin_inconnu  OK
+date_inconnue                    rejetee      date_inconnue  OK
+date_hors_periode                rejetee      date_hors_periode  OK
+identifiant_negatif              rejetee      identifiant_negatif  OK
+quantite_invalide                rejetee      quantite_invalide, calcul_incoherent  OK
+montant_negatif                  rejetee      montant_negatif  OK
+calcul_incoherent                rejetee      calcul_incoherent  OK
+
+11 cas sur 11 conformes

@@ -1,0 +1,25 @@
+Version Spark : 4.2.1
+Java utilise  : /usr/lib/jvm/java-21-openjdk-amd64
++---------+----------------+
+|  magasin|chiffre_affaires|
++---------+----------------+
+|Magasin A|          1200.0|
+|Magasin B|           850.0|
+|Magasin C|          1600.0|
++---------+----------------+
+
+Lecture HDFS OK : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store/lot=initial/store.dat
+Lignes : 12 | colonnes : 29
++---+----------------+----------+----+-----+--------+
+|_c0|_c1             |_c2       |_c3 |_c4  |_c5     |
++---+----------------+----------+----+-----+--------+
+|0  |AAAAAAAAAAAAAAAA|2000-08-02|NULL|71238|Forest  |
+|1  |AAAAAAAAAAAAAAAB|2000-07-03|NULL|18994|Hillside|
+|2  |AAAAAAAAAAAAAAAC|2000-09-01|NULL|8900 |Sherwood|
++---+----------------+----------+----+-----+--------+
+only showing top 3 rows
+root
+ |-- magasin: string (nullable = true)
+ |-- chiffre_affaires: double (nullable = true)
+
+Parquet relu : 3 lignes depuis /home/abedja/retail-intelligence/tp3/data/output/test_parquet

@@ -1,0 +1,11 @@
+jeu;lignes_ecrites;lignes_relues;colonnes;schema_identique
+dim_date;1826;1826;8;True
+dim_produit;18000;18000;6;True
+dim_magasin;12;12;7;True
+fait_ventes;674211;674211;18;True
+kpi_ventes_magasin_mois;720;720;19;True
+kpi_ventes_categorie_mois;540;540;15;True
+integrite fait_ventes->dim_date;0;;;True
+integrite fait_ventes->dim_produit;0;;;True
+integrite fait_ventes->dim_magasin;0;;;True
+coherence CA Silver = Gold;1290066342.21;;;True

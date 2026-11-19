@@ -1,0 +1,28 @@
+ecrit : hdfs://localhost:9000/retail-lake/silver/store_sales (674211 lignes, partitions par lot)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/store_sales (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/item (18000 lignes)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/item (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/store (12 lignes)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/store (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/date_dim (109573 lignes)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/date_dim (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/ventes_detaillees (674211 lignes, partitions par annee)
+
+=== Controles apres ecriture (relecture depuis HDFS)
+  store_sales        _SUCCESS=True | 400 fichiers parquet, 96.34 Mo | lignes 674211/674211 | 27 colonnes, schema identique=True | cle ss_ligne_id unique=True | partitions lot=['initial', 'refresh']
+  item               _SUCCESS=True | 200 fichiers parquet, 5.57 Mo | lignes 18000/18000 | 25 colonnes, schema identique=True | cle i_item_sk unique=True
+  store              _SUCCESS=True | 1 fichiers parquet, 0.01 Mo | lignes 12/12 | 31 colonnes, schema identique=True | cle s_store_sk unique=True
+  date_dim           _SUCCESS=True | 4 fichiers parquet, 3.48 Mo | lignes 109573/109573 | 30 colonnes, schema identique=True | cle d_date_sk unique=True
+  ventes_detaillees  _SUCCESS=True | 1000 fichiers parquet, 128.07 Mo | lignes 674211/674211 | 42 colonnes, schema identique=True | cle ligne_id unique=True | partitions annee=[2001, 2002, 2003, 2004, 2005]
+
+  coherence : CA store_sales 1290066342.21 = CA ventes_detaillees 1290066342.21 : True ; quantites 34089501 = 34089501 : True
+  lecture d'une seule partition (annee=2005) : 133467 lignes
++----------------+----------+-------+----------------+----------------+-------+-----+
+|        ligne_id|date_vente|magasin|       categorie|chiffre_affaires|    lot|annee|
++----------------+----------+-------+----------------+----------------+-------+-----+
+|3cbe7e0182b26...|2001-01-01|  Egypt|Clothing & Ac...|         4417.98|initial| 2001|
+|0cbf038ba4939...|2001-01-01|  Egypt|           Books|         5379.84|initial| 2001|
+|4542a45742b85...|2001-01-01|Bedford|           Music|         3102.30|initial| 2001|
++----------------+----------+-------+----------------+----------------+-------+-----+
+only showing top 3 rows
+journal d'execution ecrit : hdfs://localhost:9000/retail-lake/logs/traitements/silver_20261118_150805.json

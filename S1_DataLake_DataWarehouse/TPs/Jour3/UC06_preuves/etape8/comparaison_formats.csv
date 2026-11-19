@@ -1,0 +1,6 @@
+format;octets;ecriture_s;lecture_complete_s;lecture_2_colonnes_s;types_relus;ca_relu_ok
+Bronze .dat (texte |, origine);92764700;;;;texte (sans en-tete, aucun type);
+csv;92097464;4.2;1.5;0.9;montants en double, quantite en int;True
+json;353103873;1.3;1.3;0.9;montants en double, quantite en bigint;True
+parquet;41042563;1.8;0.5;0.2;montants en decimal(7,2), quantite en int;True
+parquet avec ss_ligne_id + provenance;85191120;;;;identiques;

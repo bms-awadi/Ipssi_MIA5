@@ -1,0 +1,35 @@
+0 silver/date_dim
+3651807 silver/date_dim/part-00000-93a57cd9-7f7a-4e3d-9051-048e27eef236-c000.snappy.parquet
+0 silver/item
+3589924 silver/item/part-00000-405428b8-c967-4e8b-87fc-0af762ad9ebc-c000.snappy.parquet
+0 silver/store
+12141 silver/store/part-00000-2db441a4-df2c-4ed9-8f0c-a311eee9ea11-c000.snappy.parquet
+0 silver/store_sales
+0 silver/store_sales/lot=initial
+85187650 silver/store_sales/lot=initial/part-00000-2898e1b6-a034-44da-b107-08872c62ad2d.c000.snappy.parquet
+0 silver/store_sales/lot=refresh
+862364 silver/store_sales/lot=refresh/part-00001-2898e1b6-a034-44da-b107-08872c62ad2d.c000.snappy.parquet
+0 silver/ventes_detaillees
+0 silver/ventes_detaillees/annee=2001
+18629011 silver/ventes_detaillees/annee=2001/part-00002-f622f808-c926-402b-ade6-36bafed21079.c000.snappy.parquet
+0 silver/ventes_detaillees/annee=2002
+18654428 silver/ventes_detaillees/annee=2002/part-00004-f622f808-c926-402b-ade6-36bafed21079.c000.snappy.parquet
+0 silver/ventes_detaillees/annee=2003
+18592517 silver/ventes_detaillees/annee=2003/part-00000-f622f808-c926-402b-ade6-36bafed21079.c000.snappy.parquet
+0 silver/ventes_detaillees/annee=2004
+18792580 silver/ventes_detaillees/annee=2004/part-00001-f622f808-c926-402b-ade6-36bafed21079.c000.snappy.parquet
+0 silver/ventes_detaillees/annee=2005
+18456287 silver/ventes_detaillees/annee=2005/part-00003-f622f808-c926-402b-ade6-36bafed21079.c000.snappy.parquet
+0 quality/rejets/date_dim
+3198 quality/rejets/date_dim/part-00000-3e85a0e6-f123-49db-9bd6-85f4be7aa155-c000.snappy.parquet
+0 quality/rejets/item
+2704 quality/rejets/item/part-00000-97514b0e-e8c8-4dd7-bc8b-16f5154cf057-c000.snappy.parquet
+0 quality/rejets/store
+3445 quality/rejets/store/part-00000-dddf3143-8a08-4b16-9e07-cabcde9a2f57-c000.snappy.parquet
+0 quality/rejets/store_sales
+3153 quality/rejets/store_sales/part-00000-1cac0481-0f4a-4cf7-8bbc-fcf56e6a8abe-c000.snappy.parquet
+0 logs/traitements/silver_20261119_112905.json
+2039 logs/traitements/silver_20261119_112905.json/part-00000
+
+177.8 M  177.8 M  /retail-lake/silver
+986.1 M  986.1 M  /retail-lake/bronze

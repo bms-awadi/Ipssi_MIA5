@@ -1,0 +1,28 @@
+ecrit : hdfs://localhost:9000/retail-lake/silver/store_sales (674211 lignes, partitions par lot)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/store_sales (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/item (18000 lignes)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/item (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/store (12 lignes)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/store (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/date_dim (109573 lignes)
+ecrit : hdfs://localhost:9000/retail-lake/quality/rejets/date_dim (0 lignes rejetees)
+ecrit : hdfs://localhost:9000/retail-lake/silver/ventes_detaillees (674211 lignes, partitions par annee)
+
+=== Controles apres ecriture (relecture depuis HDFS)
+  store_sales        _SUCCESS=True | 2 fichiers parquet, 82.06 Mo | lignes 674211/674211 | 27 colonnes, schema identique=True | cle ss_ligne_id unique=True | partitions lot=['initial', 'refresh']
+  item               _SUCCESS=True | 1 fichiers parquet, 3.42 Mo | lignes 18000/18000 | 25 colonnes, schema identique=True | cle i_item_sk unique=True
+  store              _SUCCESS=True | 1 fichiers parquet, 0.01 Mo | lignes 12/12 | 31 colonnes, schema identique=True | cle s_store_sk unique=True
+  date_dim           _SUCCESS=True | 1 fichiers parquet, 3.48 Mo | lignes 109573/109573 | 30 colonnes, schema identique=True | cle d_date_sk unique=True
+  ventes_detaillees  _SUCCESS=True | 5 fichiers parquet, 88.81 Mo | lignes 674211/674211 | 42 colonnes, schema identique=True | cle ligne_id unique=True | partitions annee=[2001, 2002, 2003, 2004, 2005]
+
+  coherence : CA store_sales 1290066342.21 = CA ventes_detaillees 1290066342.21 : True ; quantites 34089501 = 34089501 : True
+  lecture d'une seule partition (annee=2005) : 133467 lignes
++----------------+----------+----------+---------+----------------+-------+-----+
+|        ligne_id|date_vente|   magasin|categorie|chiffre_affaires|    lot|annee|
++----------------+----------+----------+---------+----------------+-------+-----+
+|d30cf673ab128...|2001-01-01|Bloomfield|    Music|         2296.48|initial| 2001|
+|6e809fb62f355...|2001-01-01|Germantown|    Music|         7504.20|initial| 2001|
+|5bf23bed73e8c...|2001-01-01|   Bedford|    Books|         4221.72|initial| 2001|
++----------------+----------+----------+---------+----------------+-------+-----+
+only showing top 3 rows
+journal d'execution ecrit : hdfs://localhost:9000/retail-lake/logs/traitements/silver_20261119_112905.json

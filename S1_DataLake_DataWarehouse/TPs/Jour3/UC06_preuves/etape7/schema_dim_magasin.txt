@@ -1,0 +1,8 @@
+root
+ |-- magasin_sk: integer (nullable = true)
+ |-- magasin_id: string (nullable = true)
+ |-- magasin: string (nullable = true)
+ |-- ville: string (nullable = true)
+ |-- etat: string (nullable = true)
+ |-- employes: integer (nullable = true)
+ |-- surface: integer (nullable = true)

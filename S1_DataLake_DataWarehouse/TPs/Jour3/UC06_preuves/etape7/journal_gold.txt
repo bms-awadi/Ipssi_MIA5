@@ -1,0 +1,59 @@
+Date d'execution : 2026-11-19 11:33:57 | sortie : hdfs://localhost:9000/retail-lake/gold
+  dim_date                      1826 lignes relues / 1826 ecrites, 8 colonnes
+  dim_produit                  18000 lignes relues / 18000 ecrites, 6 colonnes
+  dim_magasin                     12 lignes relues / 12 ecrites, 7 colonnes
+  fait_ventes                 674211 lignes relues / 674211 ecrites, 18 colonnes
+  kpi_ventes_magasin_mois        720 lignes relues / 720 ecrites, 19 colonnes
+  kpi_ventes_categorie_mois      540 lignes relues / 540 ecrites, 15 colonnes
+
+=== Controles du modele en etoile
+  fait_ventes.date_sk -> dim_date.date_sk : 0 ventes orphelines | cle unique dans dim_date : True
+  fait_ventes.produit_sk -> dim_produit.produit_sk : 0 ventes orphelines | cle unique dans dim_produit : True
+  fait_ventes.magasin_sk -> dim_magasin.magasin_sk : 0 ventes orphelines | cle unique dans dim_magasin : True
+  CA Silver 1290066342.21 | fait_ventes 1290066342.21 | kpi magasin x mois 1290066342.21 | kpi categorie x mois 1290066342.21 | egal : True
+  dim_date : Row(min(date)=datetime.date(2001, 1, 1), max(date)=datetime.date(2005, 12, 31)) (1826 jours)
+
+=== Apercu des indicateurs
++------------+------------+----------------+----------+------------+-----------+----------+----------------+----------------+
+|     magasin|       ville|chiffre_affaires|nb_tickets|panier_moyen|taux_remise|taux_marge|ca_meme_mois_n_1|evolution_ca_pct|
++------------+------------+----------------+----------+------------+-----------+----------+----------------+----------------+
+|      Forest|    Post Oak|      2007721.24|       141|    14239.16|      50.19|    -45.57|      1639896.13|           22.43|
+|  Germantown|      Pierce|      1988331.14|       134|    14838.29|      50.07|    -43.99|      1828091.96|            8.77|
+|      Avalon|Cold Springs|      1915614.74|       142|    13490.24|      51.00|    -45.12|      1722042.71|           11.24|
+|     Pioneer|      Austin|      1882090.52|       127|    14819.61|      50.16|    -41.63|      2202994.98|          -14.57|
+|     Buffalo|   Lewisburg|      1874171.93|       126|    14874.38|      51.05|    -48.31|      2309235.58|          -18.84|
+|       Egypt|     Redland|      1873847.63|       129|    14525.95|      49.52|    -41.00|      2023962.10|           -7.42|
+|    Hillside|   Jerusalem|      1835211.93|       127|    14450.49|      49.29|    -41.56|      1504714.42|           21.96|
+|  Bloomfield|  Union Hill|      1834853.98|       127|    14447.67|      49.34|    -43.00|      1794821.29|            2.23|
+|    Sherwood|Mount Vernon|      1824491.35|       117|    15593.94|      47.97|    -39.57|      1799652.43|            1.38|
+|     Elmwood|    Lakeside|      1756855.95|       124|    14168.19|      49.28|    -41.46|      1900558.47|           -7.56|
+|Williamstown|  State Line|      1539216.92|       119|    12934.60|      50.40|    -43.39|      2058737.00|          -25.23|
+|     Bedford|       Lyons|      1472077.54|       114|    12912.96|      52.02|    -48.02|      1781866.29|          -17.39|
++------------+------------+----------------+----------+------------+-----------+----------+----------------+----------------+
+
+  lignes sans evolution (2001, pas d'annee precedente) : 144
++-----+------------+---------------------+
+|annee|          ca|evolution_moyenne_pct|
++-----+------------+---------------------+
+| 2001|258159395.33|                 NULL|
+| 2002|256977671.52|                 0.61|
+| 2003|259060054.76|                 1.85|
+| 2004|260029656.73|                 1.25|
+| 2005|255839563.87|                -0.78|
++-----+------------+---------------------+
+
++------------------------+----------------+--------+----------+----------------+
+|categorie               |chiffre_affaires|quantite|taux_marge|part_ca_mois_pct|
++------------------------+----------------+--------+----------+----------------+
+|Music                   |9774181.79      |256995  |-44.36    |44.83           |
+|Books                   |6189549.52      |164115  |-42.29    |28.39           |
+|Movies & TV             |1314694.01      |34270   |-39.43    |6.03            |
+|Electronics             |1119677.20      |30039   |-42.85    |5.14            |
+|Clothing & Accessories  |919738.81       |23079   |-40.01    |4.22            |
+|Home & Kitchen          |867725.52       |22316   |-41.26    |3.98            |
+|Toys & Games            |577413.23       |15957   |-56.05    |2.65            |
+|Sports & Outdoors       |566980.28       |16598   |-50.31    |2.60            |
+|Tools & Home Improvement|474524.51       |12348   |-42.28    |2.18            |
++------------------------+----------------+--------+----------+----------------+
+
+Preuves : /home/abedja/retail-intelligence/tp3/UC06_preuves/etape7

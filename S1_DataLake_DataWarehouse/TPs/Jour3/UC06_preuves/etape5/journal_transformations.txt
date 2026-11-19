@@ -1,0 +1,115 @@
+=== 1. Preparation : renommage et colonnes calculees
+root
+ |-- ligne_id: string (nullable = true)
+ |-- ticket: integer (nullable = true)
+ |-- date_sk: integer (nullable = true)
+ |-- heure_sk: integer (nullable = true)
+ |-- magasin_sk: integer (nullable = true)
+ |-- produit_sk: integer (nullable = true)
+ |-- client_sk: integer (nullable = true)
+ |-- promotion_sk: integer (nullable = true)
+ |-- quantite: integer (nullable = true)
+ |-- prix_catalogue_unitaire: decimal(7,2) (nullable = true)
+ |-- prix_vente_unitaire: decimal(7,2) (nullable = true)
+ |-- cout_unitaire: decimal(7,2) (nullable = true)
+ |-- montant_catalogue: decimal(7,2) (nullable = true)
+ |-- remise: decimal(7,2) (nullable = true)
+ |-- chiffre_affaires: decimal(7,2) (nullable = true)
+ |-- coupon: decimal(7,2) (nullable = true)
+ |-- net_paye: decimal(7,2) (nullable = true)
+ |-- taxe: decimal(7,2) (nullable = true)
+ |-- net_paye_ttc: decimal(7,2) (nullable = true)
+ |-- cout: decimal(7,2) (nullable = true)
+ |-- marge: decimal(7,2) (nullable = true)
+ |-- lot: string (nullable = false)
+ |-- avec_promotion: boolean (nullable = false)
+ |-- vente_gratuite: boolean (nullable = true)
+ |-- taux_remise_ligne: decimal(14,2) (nullable = true)
+
++------------------------+---------------------+----------------+---------------+---------------+
+|remise != catalogue - CA|lignes_avec_promotion|lignes_gratuites|taux_remise_min|taux_remise_max|
++------------------------+---------------------+----------------+---------------+---------------+
+|0                       |674052               |3361            |0.00           |100.00         |
++------------------------+---------------------+----------------+---------------+---------------+
+
+=== 2. Granularite du ticket : un ticket = un magasin et un jour ?
++-------+----------------------+-------------------+--------------------+----------+----------+----------+
+|tickets|tickets_multi_magasins|tickets_multi_jours|tickets_multi_heures|lignes_min|lignes_moy|lignes_max|
++-------+----------------------+-------------------+--------------------+----------+----------+----------+
+|  90000|                     0|                  0|                   0|         1|      7.49|        14|
++-------+----------------------+-------------------+--------------------+----------+----------+----------+
+
+=== 3. Jointures verifiees
+  dates     cle date_sk     | dimension 109573 lignes, cle unique : True | ventes avant 674211 apres 674211 | non rapprochees 0
+  produits  cle produit_sk  | dimension 18000 lignes, cle unique : True | ventes avant 674211 apres 674211 | non rapprochees 0
+  magasins  cle magasin_sk  | dimension 12 lignes, cle unique : True | ventes avant 674211 apres 674211 | non rapprochees 0
+  colonnes de la table detaillee : 42
++----------------+----------+----------+------------+----------------+--------+----------------+--------+-------+
+|        ligne_id|date_vente|   magasin|       ville|       categorie|quantite|chiffre_affaires|   marge|    lot|
++----------------+----------+----------+------------+----------------+--------+----------------+--------+-------+
+|d30cf673ab128...|2001-01-01|Bloomfield|  Union Hill|           Music|      31|         2296.48|  696.26|initial|
+|6e809fb62f355...|2001-01-01|Germantown|      Pierce|           Music|      90|         7504.20|  307.80|initial|
+|5bf23bed73e8c...|2001-01-01|   Bedford|       Lyons|           Books|      81|         4221.72|  229.23|initial|
+|e0fffb75866f5...|2001-01-02|   Buffalo|   Lewisburg|           Music|      35|          714.70|-2085.30|initial|
+|8481e75caaadb...|2001-01-02|    Avalon|Cold Springs|Clothing & Ac...|      30|         1062.00|   71.70|initial|
++----------------+----------+----------+------------+----------------+--------+----------------+--------+-------+
+only showing top 5 rows
+=== 4. Agregation par magasin et par mois
+  lignes (magasins x mois) : 720 | magasins : 12 | mois : 60
++----------+--------+------------+----------------+--------+----------+------------+-----------+----------+
+|annee_mois| magasin|       ville|chiffre_affaires|quantite|nb_tickets|panier_moyen|taux_remise|taux_marge|
++----------+--------+------------+----------------+--------+----------+------------+-----------+----------+
+|   2001-01|  Forest|    Post Oak|      1543731.88|   44609|       111|    13907.49|      52.96|    -54.86|
+|   2001-01|Hillside|   Jerusalem|      1749652.48|   47121|       129|    13563.20|      49.47|    -43.14|
+|   2001-01|Sherwood|Mount Vernon|      1612097.24|   42102|       113|    14266.35|      49.04|    -40.14|
+|   2001-01| Pioneer|      Austin|      1827181.80|   49402|       133|    13738.21|      48.68|    -40.31|
+|   2001-01| Elmwood|    Lakeside|      1812412.63|   48855|       133|    13627.16|      50.73|    -43.85|
++----------+--------+------------+----------------+--------+----------+------------+-----------+----------+
+only showing top 5 rows
+=== 5. Agregation par categorie et par mois
+  lignes (categories x mois) : 540
++------------------------+------------+--------+
+|categorie               |ca_total    |quantite|
++------------------------+------------+--------+
+|Music                   |583186372.47|15389404|
+|Books                   |344348416.31|9108677 |
+|Movies & TV             |83815845.09 |2208104 |
+|Clothing & Accessories  |63296262.83 |1651094 |
+|Electronics             |62242772.43 |1647695 |
+|Home & Kitchen          |46412354.40 |1239862 |
+|Sports & Outdoors       |45872549.26 |1216747 |
+|Toys & Games            |30792823.20 |819874  |
+|Tools & Home Improvement|30098946.22 |808044  |
++------------------------+------------+--------+
+
+=== 6. Controles de conservation des totaux (detail = agregats)
+  CA       detail 1290066342.21 | magasin x mois 1290066342.21 | categorie x mois 1290066342.21 | egal : True
+  quantite detail 34089501 | magasin x mois 34089501 | categorie x mois 34089501 | egal : True
+  marge    detail -557960740.33 | magasin x mois -557960740.33 | categorie x mois -557960740.33 | egal : True
+  tickets distincts : 90000 | somme des tickets par magasin x mois : 90000
+=== 7. Decembre 2005 : apport du lot refresh
++-------+------+---------------+---------------+-----------+
+|    lot|lignes|min(date_vente)|max(date_vente)|         ca|
++-------+------+---------------+---------------+-----------+
+|initial|  4760|     2005-12-01|     2005-12-13| 8962147.27|
+|refresh|  6632|     2005-12-13|     2005-12-31|12842337.60|
++-------+------+---------------+---------------+-----------+
+
++----+-----------+
+|mois|    ca_2005|
++----+-----------+
+|   1|21623214.70|
+|   2|20013820.37|
+|   3|21573606.56|
+|   4|20922390.75|
+|   5|21512530.34|
+|   6|20618203.30|
+|   7|22392156.71|
+|   8|21735421.33|
+|   9|20810846.78|
+|  10|21442552.96|
+|  11|21390335.20|
+|  12|21804484.87|
++----+-----------+
+
+Fichiers ecrits : /home/abedja/retail-intelligence/tp3/UC06_preuves/etape5

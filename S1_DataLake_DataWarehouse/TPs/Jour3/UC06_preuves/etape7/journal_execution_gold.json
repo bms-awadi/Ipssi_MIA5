@@ -1,0 +1,79 @@
+{
+  "traitement": "07_produire_gold.py",
+  "debut": "2026-11-19T11:33:57",
+  "fin": "2026-11-19T11:34:16",
+  "entree": "hdfs://localhost:9000/retail-lake/silver",
+  "sortie": "hdfs://localhost:9000/retail-lake/gold",
+  "jeux": [
+    {
+      "jeu": "dim_date",
+      "lignes_ecrites": 1826,
+      "lignes_relues": 1826,
+      "colonnes": 8,
+      "schema_identique": true
+    },
+    {
+      "jeu": "dim_produit",
+      "lignes_ecrites": 18000,
+      "lignes_relues": 18000,
+      "colonnes": 6,
+      "schema_identique": true
+    },
+    {
+      "jeu": "dim_magasin",
+      "lignes_ecrites": 12,
+      "lignes_relues": 12,
+      "colonnes": 7,
+      "schema_identique": true
+    },
+    {
+      "jeu": "fait_ventes",
+      "lignes_ecrites": 674211,
+      "lignes_relues": 674211,
+      "colonnes": 18,
+      "schema_identique": true
+    },
+    {
+      "jeu": "kpi_ventes_magasin_mois",
+      "lignes_ecrites": 720,
+      "lignes_relues": 720,
+      "colonnes": 19,
+      "schema_identique": true
+    },
+    {
+      "jeu": "kpi_ventes_categorie_mois",
+      "lignes_ecrites": 540,
+      "lignes_relues": 540,
+      "colonnes": 15,
+      "schema_identique": true
+    },
+    {
+      "jeu": "integrite fait_ventes->dim_date",
+      "lignes_ecrites": 0,
+      "lignes_relues": "",
+      "colonnes": "",
+      "schema_identique": true
+    },
+    {
+      "jeu": "integrite fait_ventes->dim_produit",
+      "lignes_ecrites": 0,
+      "lignes_relues": "",
+      "colonnes": "",
+      "schema_identique": true
+    },
+    {
+      "jeu": "integrite fait_ventes->dim_magasin",
+      "lignes_ecrites": 0,
+      "lignes_relues": "",
+      "colonnes": "",
+      "schema_identique": true
+    },
+    {
+      "jeu": "coherence CA Silver = Gold",
+      "lignes_ecrites": "1290066342.21",
+      "lignes_relues": "",
+      "colonnes": "",
+      "schema_identique": true
+    }
+  ]
+}

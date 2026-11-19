@@ -1,0 +1,84 @@
+======================================================================
+UC-06 Etape 1 - Verification de l'environnement
+Date : 2026-11-19 11:05:12
+======================================================================
+
+[1] Python
+  version   : 3.10.12
+  executable: /home/abedja/retail-intelligence/tp3/.venv/bin/python
+  systeme   : Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35
+
+[2] Session Spark creee en 4.7 s
+  PySpark           : 4.2.1
+  Spark             : 4.2.1
+  Java (JVM Spark)  : 21.0.13.0.3 - /usr/lib/jvm/java-21-openjdk-amd64
+  Client Hadoop     : 3.5.0
+  Mode (master)     : local[*]
+  Parallelisme      : 16 coeurs
+  Memoire driver    : 4g
+  Fuseau horaire    : Europe/Paris
+  Interface Spark   : http://10.255.255.254:4040
+
+[3] Chemins utilises (config.py)
+  BRONZE       : hdfs://localhost:9000/retail-lake/bronze/tpcxbb
+  SILVER       : hdfs://localhost:9000/retail-lake/silver
+  GOLD         : hdfs://localhost:9000/retail-lake/gold
+  QUALITY      : hdfs://localhost:9000/retail-lake/quality
+  OUTPUT_LOCAL : /home/abedja/retail-intelligence/tp3/data/output
+  KIT_LOCAL    : /home/abedja/kit_tpcxbb
+
+[4] Lecture d'un fichier reel dans HDFS (zone Bronze)
+  fichier : hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store/lot=initial/store.dat
+  lignes  : 12 | colonnes : 29
+  schema (types proposes par inferSchema, a valider a l'etape 3) :
+root
+ |-- _c0: integer (nullable = true)
+ |-- _c1: string (nullable = true)
+ |-- _c2: date (nullable = true)
+ |-- _c3: string (nullable = true)
+ |-- _c4: integer (nullable = true)
+ |-- _c5: string (nullable = true)
+ |-- _c6: integer (nullable = true)
+ |-- _c7: integer (nullable = true)
+ |-- _c8: string (nullable = true)
+ |-- _c9: string (nullable = true)
+ |-- _c10: integer (nullable = true)
+ |-- _c11: string (nullable = true)
+ |-- _c12: string (nullable = true)
+ |-- _c13: string (nullable = true)
+ |-- _c14: integer (nullable = true)
+ |-- _c15: string (nullable = true)
+ |-- _c16: integer (nullable = true)
+ |-- _c17: string (nullable = true)
+ |-- _c18: integer (nullable = true)
+ |-- _c19: string (nullable = true)
+ |-- _c20: string (nullable = true)
+ |-- _c21: string (nullable = true)
+ |-- _c22: string (nullable = true)
+ |-- _c23: string (nullable = true)
+ |-- _c24: string (nullable = true)
+ |-- _c25: integer (nullable = true)
+ |-- _c26: string (nullable = true)
+ |-- _c27: integer (nullable = true)
+ |-- _c28: double (nullable = true)
+
++---+----------------+----------+----+-----+--------+---+-------+
+|_c0|_c1             |_c2       |_c3 |_c4  |_c5     |_c6|_c7    |
++---+----------------+----------+----+-----+--------+---+-------+
+|0  |AAAAAAAAAAAAAAAA|2000-08-02|NULL|71238|Forest  |217|8891512|
+|1  |AAAAAAAAAAAAAAAB|2000-07-03|NULL|18994|Hillside|244|8751339|
+|2  |AAAAAAAAAAAAAAAC|2000-09-01|NULL|8900 |Sherwood|266|5913334|
++---+----------------+----------+----+-----+--------+---+-------+
+only showing top 3 rows
+[5] Ecriture et relecture d'un resultat de test
+  local  : /home/abedja/retail-intelligence/tp3/data/output/test_etape1 -> 12 relu
+  HDFS   : hdfs://localhost:9000/tmp/uc06_test_etape1 -> 12 relu
+  test HDFS supprime apres verification : True
+
+[6] Zones de sortie presentes dans HDFS
+  hdfs://localhost:9000/retail-lake/silver                existe : True
+  hdfs://localhost:9000/retail-lake/gold                  existe : True
+  hdfs://localhost:9000/retail-lake/quality/rejets        existe : True
+  hdfs://localhost:9000/retail-lake/quality/controles     existe : True
+
+Verification terminee.

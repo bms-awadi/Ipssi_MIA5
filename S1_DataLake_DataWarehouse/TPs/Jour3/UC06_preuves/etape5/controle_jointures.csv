@@ -1,0 +1,4 @@
+dimension;cle;lignes_dimension;cle_unique_dimension;lignes_avant;lignes_apres;non_rapprochees;relation
+dates;date_sk;109573;True;674211;674211;0;ventes.ss_sold_date_sk = date_dim.d_date_sk : plusieurs ventes par jour, un jour par vente (N vers 1)
+produits;produit_sk;18000;True;674211;674211;0;ventes.ss_item_sk = item.i_item_sk : plusieurs ventes par produit, un produit par vente (N vers 1)
+magasins;magasin_sk;12;True;674211;674211;0;ventes.ss_store_sk = store.s_store_sk : plusieurs ventes par magasin, un magasin par vente (N vers 1)

@@ -1,0 +1,6 @@
+table;chemin;fichier_succes;fichiers_parquet;octets;lignes_attendues;lignes_relues;lignes_ok;colonnes;schema_identique;cle;cle_unique;partitions
+store_sales;hdfs://localhost:9000/retail-lake/silver/store_sales;True;2;86050014;674211;674211;True;27;True;ss_ligne_id;True;initial|refresh
+item;hdfs://localhost:9000/retail-lake/silver/item;True;1;3589924;18000;18000;True;25;True;i_item_sk;True;
+store;hdfs://localhost:9000/retail-lake/silver/store;True;1;12141;12;12;True;31;True;s_store_sk;True;
+date_dim;hdfs://localhost:9000/retail-lake/silver/date_dim;True;1;3651807;109573;109573;True;30;True;d_date_sk;True;
+ventes_detaillees;hdfs://localhost:9000/retail-lake/silver/ventes_detaillees;True;5;93124823;674211;674211;True;42;True;ligne_id;True;2001|2002|2003|2004|2005

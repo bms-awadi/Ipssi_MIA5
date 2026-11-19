@@ -1,0 +1,65 @@
+Date d'execution : 2026-11-19 11:36:40
+
+=== 1. Organisation des traitements (ordre d'execution)
+  module   config.py              parametres et chemins, session Spark     present
+  module   schemas.py             schemas et types cibles                  present
+  module   nettoyage.py           regles de nettoyage                      present
+  module   transformations.py     renommage, jointures, agregations        present
+  module   gold.py                definition des jeux Gold                 present
+  module   dictionnaire.py        description des colonnes                 present
+  etape    00_test_spark.py
+  etape    01_verif_environnement.py
+  etape    02_inventaire_sources.py
+  etape    04_appliquer_nettoyage.py
+  etape    05_transformations.py
+  etape    06_produire_silver.py
+  etape    07_produire_gold.py
+  etape    08_formats_parquet.py
+  etape    09_controles_qualite.py
+  etape    10_verifier_chaine.py
+
+=== 2. Sorties attendues dans HDFS
+  bronze (entree)                  36 fichiers    986.09 Mo  
+  silver/store_sales                3 fichiers     82.06 Mo  674211
+  silver/item                       2 fichiers      3.42 Mo  18000
+  silver/store                      2 fichiers      0.01 Mo  12
+  silver/date_dim                   2 fichiers      3.48 Mo  109573
+  silver/ventes_detaillees          6 fichiers     88.81 Mo  674211
+  gold/dim_date                     2 fichiers      0.02 Mo  1826
+  gold/dim_produit                  2 fichiers      0.76 Mo  18000
+  gold/dim_magasin                  2 fichiers      0.00 Mo  12
+  gold/fait_ventes                  6 fichiers     67.15 Mo  674211
+  gold/kpi_ventes_magasin_mois      2 fichiers      0.04 Mo  720
+  gold/kpi_ventes_categorie_mois    2 fichiers      0.03 Mo  540
+  quality/rejets                    8 fichiers      0.01 Mo  
+  quality/controles                 2 fichiers      0.00 Mo  
+  logs/traitements                  4 fichiers      0.00 Mo  
+
+=== 3. Journaux d'execution
+   gold_20261119_113357.json
+   silver_20261119_112905.json
+   etape 1 : journal_test_spark.txt, journal_verif_environnement.txt
+   etape 2 : journal_inventaire.txt
+   etape 3 : notebook ou aucune
+   etape 4 : journal_nettoyage.txt, journal_test_regles.txt
+   etape 5 : journal_transformations.txt
+   etape 6 : journal_execution_silver.json, journal_silver.txt
+   etape 7 : journal_execution_gold.json, journal_gold.txt
+   etape 8 : journal_parquet.txt
+   etape 9 : journal_qualite.txt
+
+=== 4. Parametres centralises dans config.py
+  HDFS         = hdfs://localhost:9000
+  BRONZE       = hdfs://localhost:9000/retail-lake/bronze/tpcxbb
+  SILVER       = hdfs://localhost:9000/retail-lake/silver
+  GOLD         = hdfs://localhost:9000/retail-lake/gold
+  QUALITY      = hdfs://localhost:9000/retail-lake/quality
+  REJETS       = hdfs://localhost:9000/retail-lake/quality/rejets
+  CONTROLES    = hdfs://localhost:9000/retail-lake/quality/controles
+  OUTPUT_LOCAL = /home/abedja/retail-intelligence/tp3/data/output
+  KIT_LOCAL    = /home/abedja/kit_tpcxbb
+
+=== 5. Test des regles de rejet (test_nettoyage.py)
+   11 cas sur 11 conformes
+
+Verification : aucun probleme

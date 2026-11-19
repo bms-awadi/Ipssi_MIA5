@@ -1,0 +1,33 @@
+--- silver
+/retail-lake/silver/date_dim/part-00000-73e3fe01-e002-4510-a63d-7de26d375680-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743527_2703. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/item/part-00000-8e63fc17-0ffc-4f51-8c76-3738afb58abe-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743523_2699. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/store/part-00000-4d1591b8-c71c-40f8-9156-06d73886b41c-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743525_2701. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/store_sales/lot=initial/part-00000-b278d06c-d80d-463d-b2d6-83b3fb9f5787.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743521_2697. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/store_sales/lot=refresh/part-00001-b278d06c-d80d-463d-b2d6-83b3fb9f5787.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743520_2696. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/ventes_detaillees/annee=2001/part-00002-42e995c0-92a9-43d3-942d-c4d17a335c43.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743533_2709. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/ventes_detaillees/annee=2002/part-00004-42e995c0-92a9-43d3-942d-c4d17a335c43.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743529_2705. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/ventes_detaillees/annee=2003/part-00000-42e995c0-92a9-43d3-942d-c4d17a335c43.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743532_2708. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/ventes_detaillees/annee=2004/part-00001-42e995c0-92a9-43d3-942d-c4d17a335c43.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743531_2707. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/silver/ventes_detaillees/annee=2005/part-00003-42e995c0-92a9-43d3-942d-c4d17a335c43.c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743530_2706. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+Status: HEALTHY
+ Under-replicated blocks:	10 (100.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+--- quality/rejets
+/retail-lake/quality/rejets/date_dim/part-00000-60de4c8d-6ff5-4788-98ca-c665b611d438-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743528_2704. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/quality/rejets/item/part-00000-8a6a46c9-54be-408c-be6b-b36c61666fd1-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743524_2700. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/quality/rejets/store/part-00000-ae54dd61-b35a-499f-a01a-803da94f96da-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743526_2702. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/quality/rejets/store_sales/part-00000-be345c24-867b-4f3c-a5e1-43f90fc450bd-c000.snappy.parquet:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743522_2698. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+Status: HEALTHY
+ Under-replicated blocks:	4 (100.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+--- logs/traitements
+/retail-lake/logs/traitements/silver_20261118_150805.json/part-00000:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743519_2695. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+/retail-lake/logs/traitements/silver_20261118_151104.json/part-00000:  Under replicated BP-1136022543-127.0.1.1-1794913997575:blk_1073743534_2710. Target Replicas is 3 but found 1 live replica(s), 0 decommissioned replica(s), 0 decommissioning replica(s).
+Status: HEALTHY
+ Under-replicated blocks:	2 (100.0 %)
+ Default replication factor:	1
+ Average block replication:	1.0
+
+177.8 M  533.4 M  /retail-lake/silver

@@ -1,0 +1,7 @@
+table;lot;chemin_hdfs;format;taille_octets;lignes;colonnes;cle_candidate;unicite_cle;granularite;lignes_avec_cr_final;colonnes_avec_nulls
+store_sales;initial;hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store_sales/lot=initial/store_sales.dat;texte delimite |, sans en-tete;92764700;667579;23;ss_ticket_number+ss_item_sk;4136 doublons;un article d'un ticket de caisse (ticket + produit, parfois repete);0;4
+store_sales;refresh;hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store_sales/lot=refresh/store_sales.dat;texte delimite |, sans en-tete;922171;6632;23;ss_ticket_number+ss_item_sk;46 doublons;un article d'un ticket de caisse (ticket + produit, parfois repete);0;4
+item;initial;hdfs://localhost:9000/retail-lake/bronze/tpcxbb/item/lot=initial/item.dat;texte delimite |, sans en-tete;6799286;17820;22;i_item_sk;unique;un produit;0;4
+item;refresh;hdfs://localhost:9000/retail-lake/bronze/tpcxbb/item/lot=refresh/item.dat;texte delimite |, sans en-tete;69173;180;22;i_item_sk;unique;un produit;0;1
+store;initial;hdfs://localhost:9000/retail-lake/bronze/tpcxbb/store/lot=initial/store.dat;texte delimite |, sans en-tete;3386;12;29;s_store_sk;unique;un magasin;0;1
+date_dim;initial;hdfs://localhost:9000/retail-lake/bronze/tpcxbb/date_dim/lot=initial/date_dim.dat;texte delimite |, sans en-tete;15395800;109573;28;d_date_sk;unique;un jour calendaire;0;0

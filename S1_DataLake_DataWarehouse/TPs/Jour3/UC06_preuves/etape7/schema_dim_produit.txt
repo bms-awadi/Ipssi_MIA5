@@ -1,0 +1,7 @@
+root
+ |-- produit_sk: integer (nullable = true)
+ |-- produit_id: string (nullable = true)
+ |-- categorie: string (nullable = true)
+ |-- classe: string (nullable = true)
+ |-- marque: string (nullable = true)
+ |-- prix_courant: decimal(7,2) (nullable = true)
