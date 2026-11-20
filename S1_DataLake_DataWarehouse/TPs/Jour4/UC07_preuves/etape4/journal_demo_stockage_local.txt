@@ -1,0 +1,80 @@
+Safe mode is OFF
+UC-07 etape 4 - demonstration locale (parcours B) : HDFS dans le role d'ADLS Gen2
+Date d'execution : 2026-11-20 13:52:34 | Hadoop 3.5.0
+
+=== 1. Stockage utilise et zones existantes (equivalent des conteneurs ADLS)
+  /retail-lake/raw             41 dossiers     39 fichiers    986.1 M
+  /retail-lake/bronze          59 dossiers     36 fichiers    986.1 M
+  /retail-lake/silver          13 dossiers     15 fichiers    177.8 M
+  /retail-lake/gold            12 dossiers     16 fichiers     68.0 M
+  /retail-lake/quality          8 dossiers     10 fichiers     16.8 K
+  /retail-lake/logs             5 dossiers      5 fichiers     15.5 K
+
+=== 2. Caracteristiques attendues d'un stockage de type ADLS Gen2
+  espace de noms hierarchique : natif dans HDFS (vrais dossiers, gere par le NameNode)
+  ACL activees (dfs.namenode.acls.enabled) : true
+  replication par defaut (dfs.replication) : 1
+
+=== 3. Organisation des repertoires (modele du conteneur gold)
+  drwxr-xr-x abedja supergroup /retail-lake/_demo_uc07/gold
+  drwxr-xr-x abedja supergroup /retail-lake/_demo_uc07/gold/analyses
+  drwxr-xr-x abedja supergroup /retail-lake/_demo_uc07/gold/indicateurs
+  drwxr-xr-x abedja supergroup /retail-lake/_demo_uc07/gouvernance
+  drwxr-xr-x abedja supergroup /retail-lake/_demo_uc07/gouvernance/documentation
+
+=== 4. Depot d'un fichier de demonstration autorise
+  fichier : J3/UC06_preuves/etape7/kpi_ventes_magasin_mois.csv (indicateurs agreges, aucune donnee personnelle)
+  -rw-r--r-- 97746 octets /retail-lake/_demo_uc07/gold/indicateurs/kpi_ventes_magasin_mois.csv
+
+=== 5. Le fichier est-il accessible et intact ?
+  lignes : local 721 | relues dans HDFS 721
+  empreinte MD5 : local f9fff659e0dbe2de1eafa9a01d4ec172 | HDFS f9fff659e0dbe2de1eafa9a01d4ec172 -> identique
+  premieres lignes relues :
+    magasin_sk;magasin;ville;etat;annee;mois;annee_mois;chiffre_affaires;quantite;nb_tickets;nb_lignes;marge;remis
+    6;Bloomfield;Union Hill;IN;2001;1;2001-01;1782659.51;46926;122;926;-706645.38;1759742.80;3542402.31;14611.96;4
+    3;Pioneer;Austin;TX;2001;1;2001-01;1827181.80;49402;133;987;-736476.39;1732899.67;3560081.47;13738.21;48.68;-4
+
+=== 6. Operation sur un chemin : renommage d'un dossier entier
+  gold/indicateurs renomme en gold/indicateurs_archive : une seule operation sur le NameNode (metadonnees),
+  aucune copie des fichiers ; sans espace de noms hierarchique, il faudrait copier puis supprimer chaque objet
+  apres renommage :
+    /retail-lake/_demo_uc07/gold/analyses
+    /retail-lake/_demo_uc07/gold/indicateurs_archive
+    /retail-lake/_demo_uc07/gold/indicateurs_archive/kpi_ventes_magasin_mois.csv
+  apres retour au nom d'origine :
+    /retail-lake/_demo_uc07/gold/analyses
+    /retail-lake/_demo_uc07/gold/indicateurs
+    /retail-lake/_demo_uc07/gold/indicateurs/kpi_ventes_magasin_mois.csv
+
+=== 7. Permissions par ACL (moindre privilege)
+  regles posees : groupe analystes en lecture sur gold/indicateurs (et x sur les dossiers parents pour les parcourir) ;
+  rien sur gouvernance/ ; les autres utilisateurs n'ont aucun droit (750)
+  -- getfacl gold/indicateurs
+     # file: /retail-lake/_demo_uc07/gold/indicateurs
+     # owner: abedja
+     # group: supergroup
+     user::rwx
+     group::r-x
+     group:analystes:r-x
+     mask::r-x
+     other::---
+     default:user::rwx
+     default:group::r-x
+     default:group:analystes:r-x
+     default:mask::r-x
+     default:other::---
+     
+  -- getfacl gouvernance/documentation
+     # file: /retail-lake/_demo_uc07/gouvernance/documentation
+     # owner: abedja
+     # group: supergroup
+     user::rwx
+     group::r-x
+     other::---
+     
+
+=== 8. Chemins releves et correspondance ADLS Gen2 (compte stretailmaxmag, a creer en parcours A)
+  HDFS : hdfs://localhost:9000/retail-lake/_demo_uc07/gold/indicateurs/kpi_ventes_magasin_mois.csv
+  ADLS : abfss://gold@stretailmaxmag.dfs.core.windows.net/indicateurs/kpi_ventes_magasin_mois.csv
+  nettoyage : Deleted /retail-lake/_demo_uc07
+Fin de la demonstration : 2026-11-20 13:53:09
